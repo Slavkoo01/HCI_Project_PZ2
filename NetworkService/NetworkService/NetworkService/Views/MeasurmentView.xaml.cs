@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NetworkService
+namespace NetworkService.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MeasurmentView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MeasurmentView : UserControl
     {
-        public MainWindow()
+        public MeasurmentView()
         {
             InitializeComponent();
         }

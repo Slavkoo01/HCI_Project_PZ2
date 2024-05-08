@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkService.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NetworkService.ViewModel
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase
     {
         private int count = 15; // Inicijalna vrednost broja objekata u sistemu
                                 // ######### ZAMENITI stvarnim brojem elemenata
@@ -18,6 +19,7 @@ namespace NetworkService.ViewModel
         public MainWindowViewModel()
         {
             createListener(); //Povezivanje sa serverskom aplikacijom
+            CurrentViewModel = new DisplayViewModel();
         }
 
         private void createListener()
@@ -68,5 +70,11 @@ namespace NetworkService.ViewModel
             listeningThread.IsBackground = true;
             listeningThread.Start();
         }
+        
+        public ViewModelBase CurrentViewModel { get; }
+
+
+
+
     }
 }

@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fa5="http://schemas.fontawesome.com/icons/">
+    <!--NETOWRK ENTITIES-->
+    <Style x:Key="Entities_btn" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{StaticResource Neutral}"/>
+        <Setter Property="Width" Value="230"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <Border  x:Name="border"
+                 BorderThickness="{TemplateBinding BorderThickness}"
+                 Background="{TemplateBinding Background}"
+                 SnapsToDevicePixels="True">
+                        <StackPanel Orientation="Horizontal">
+                            <fa5:SvgAwesome x:Name="icon"
+                                    Icon="Regular_User"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Margin="25 0 0 0"
+                                    Height="30"/>
+                            <TextBlock x:Name="textBlock"
+                               Text="Entities"
+                               FontSize="20"
+                               Margin="30 -2 0 0"
+                               VerticalAlignment="Center"
+                               Foreground="{TemplateBinding Foreground}"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+    <!--NETOWRK DISPLAY-->
+    <Style x:Key="Display_btn" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{StaticResource Neutral}"/>
+        <Setter Property="Width" Value="230"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <Border  x:Name="border"
+             BorderThickness="{TemplateBinding BorderThickness}"
+             Background="{TemplateBinding Background}"
+             SnapsToDevicePixels="True">
+                        <StackPanel Orientation="Horizontal">
+                            <fa5:SvgAwesome x:Name="icon"
+                                Icon="Solid_ProjectDiagram"
+                                Foreground="{TemplateBinding Foreground}"
+                                Margin="24 0 0 0"
+                                Height="24"/>
+                            <TextBlock x:Name="textBlock"
+                           Text="Display"
+                           FontSize="20"
+                           Margin="27 -2 0 0"
+                           VerticalAlignment="Center"
+                           Foreground="{TemplateBinding Foreground}"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+    <!--NETOWRK MEASUREMENT-->
+    <Style x:Key="Measurement_btn" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{StaticResource Neutral}"/>
+        <Setter Property="Width" Value="230"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <Border  x:Name="border"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          Background="{TemplateBinding Background}"
+          SnapsToDevicePixels="True">
+                        <StackPanel Orientation="Horizontal">
+                            <fa5:SvgAwesome x:Name="icon"
+                             Icon="Regular_ChartBar"
+                             Foreground="{TemplateBinding Foreground}"
+                             Margin="25 0 0 0"
+                             Height="30"/>
+                            <TextBlock x:Name="textBlock"
+                        Text="Measurement"
+                        FontSize="20"
+                        Margin="27 -2 0 0"
+                        VerticalAlignment="Center"
+                        Foreground="{TemplateBinding Foreground}"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+</ResourceDictionary>
