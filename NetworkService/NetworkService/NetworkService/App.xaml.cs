@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+
 using NetworkService.ViewModel;
 namespace NetworkService
 {
@@ -15,10 +16,14 @@ namespace NetworkService
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+
             MainWindow = new MainWindow()
             {
                 DataContext = new MainWindowViewModel()
             };
+            
+            
+            
             MainWindow.Show();
 
             base.OnStartup(e);

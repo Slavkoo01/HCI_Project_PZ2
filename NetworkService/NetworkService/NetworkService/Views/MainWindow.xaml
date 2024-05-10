@@ -19,13 +19,27 @@
     
         <Grid>
         <Grid x:Name="BG"
-              Background="{StaticResource Background}"
-              >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+              Background="{StaticResource Background}">
+           
             
+            <!--Main Frame-->
+            <Grid PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown"
+                  Margin="75 0 0 0">
+                <ContentControl Content="{Binding CurrentViewModel}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type viewmodels:EntitiesViewModel}">
+                            <views:EntitiesView/>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:DisplayViewModel}">
+                            <views:DisplayView/>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:MeasurementViewModel}">
+                            <views:MeasurmentView/>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+                <Rectangle x:Name="mainFrmeRectangle" Fill="Black" Opacity="0.3" Visibility="Collapsed"/>
+            </Grid>
             <Grid   x:Name="SideMenu"
                     HorizontalAlignment="Left"
                     Width="75"
@@ -133,7 +147,8 @@
                                       Background="Transparent"
                                       Style="{StaticResource Entities_btn}" 
                                       Foreground="{StaticResource Neutral}"
-                                      Click="tgb_entities_Click">
+                                      Click="tgb_entities_Click"
+                                      Command="{Binding NavigateEntitiesCommand}">
                                 <Button.ToolTip>
                                     <ToolTip x:Name="tt_entities"
                                          Content="Network Entities"
@@ -163,7 +178,8 @@
                                       Background="Transparent"
                                       Style="{StaticResource Display_btn}" 
                                       Foreground="{StaticResource Neutral}"
-                                      Click="tgb_display_Click">
+                                      Click="tgb_display_Click"
+                                      Command="{Binding NavigateDisplayCommand}">
                                 <Button.ToolTip>
                                     <ToolTip x:Name="tt_display"
                                          Content="Network Display"
@@ -194,7 +210,8 @@
                                       Background="Transparent"
                                       Style="{StaticResource Measurement_btn}"                                     
                                       Foreground="{StaticResource Neutral}"
-                                      Click="tgb_mesurments_Click">
+                                      Click="tgb_mesurments_Click"
+                                      Command="{Binding NavigateMeasurementCommand}">
                                 <Button.ToolTip>
                                     <ToolTip x:Name="tt_measurments"
                                          Content="Network Display"
@@ -288,18 +305,6 @@
                 
 
 
-            </Grid>
-            <!--Main Frame-->
-            <Grid Grid.Column="1"
-                  PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown">
-                <Rectangle x:Name="mainFrmeRectangle" Fill="Black" Opacity="0.3" Visibility="Collapsed"/>
-                <ContentControl Content="{Binding CurrentViewModel}">
-                    <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type viewmodels:DisplayViewModel}">
-                            <views:DisplayView/>
-                        </DataTemplate>
-                    </ContentControl.Resources>
-                </ContentControl>
             </Grid>
         </Grid>
 

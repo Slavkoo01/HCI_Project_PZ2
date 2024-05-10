@@ -7,9 +7,38 @@
              mc:Ignorable="d" 
                   d:DesignHeight="720" d:DesignWidth="1005">
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
-        <Grid Background="AliceBlue">
-            <TextBlock Text="Entities" FontSize="50" VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Grid Height="54"
+                      Margin="0 0 0 10"
+                      Background="{StaticResource Card}">
+                <TextBlock Text="Network Entities"
+                           Style="{StaticResource FramTitle}"/>
+                </Grid>
+                <Grid Height="400"
+                      Background="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBox x:Name="IdTextBox"
+                                 Style="{StaticResource IDTextBoxStyle}"
+                                 Margin="0 15 0 25"/>
+                        <TextBox x:Name="NameTextBox"
+                                 Style="{StaticResource NameTextBoxStyle}"
+                                 Margin="0 0 0 25"/>
+                        <TextBox x:Name="IpTextBox"
+                                 Style="{StaticResource IpTextBoxStyle}"
+                                 Margin="0 0 0 25"/>
+                        <ComboBox x:Name="ServerTypeComboBox"
+                                  Margin="0 0 0 25"
+                                  Style="{StaticResource TypeComboBoxStyle}"/>
+                        <Button x:Name="SubmitButton" Content="Submit"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

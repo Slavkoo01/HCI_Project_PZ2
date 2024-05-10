@@ -3,4 +3,14 @@
     <Style x:Key="SideManuTextBlock" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource Neutral}"/>
     </Style>
+    <Style x:Key="FramTitle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Yellow}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Background" Value="{StaticResource Card}"/>
+    </Style>
+
+    
 </ResourceDictionary>

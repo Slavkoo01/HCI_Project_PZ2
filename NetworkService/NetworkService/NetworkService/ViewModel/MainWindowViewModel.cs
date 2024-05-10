@@ -1,4 +1,5 @@
-﻿using NetworkService.Views;
+﻿
+using NetworkService.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NetworkService.ViewModel
 {
@@ -15,12 +17,19 @@ namespace NetworkService.ViewModel
         private int count = 15; // Inicijalna vrednost broja objekata u sistemu
                                 // ######### ZAMENITI stvarnim brojem elemenata
                                 //           zavisno od broja entiteta u listi
-
+        EntitiesViewModel entitiesViewModel = new EntitiesViewModel();
+        DisplayViewModel displayViewModel = new DisplayViewModel(); 
+        MeasurementViewModel measurementViewModel = new MeasurementViewModel();
         public MainWindowViewModel()
         {
-            createListener(); //Povezivanje sa serverskom aplikacijom
-            CurrentViewModel = new DisplayViewModel();
+            CurrentViewModel = entitiesViewModel;
+            createListener(); //Povezivanje sa serverskom aplikacijom           
+            NavigateEntitiesCommand = new CommandBase(NavigateToEntities);
+            NavigateDisplayCommand = new CommandBase(NavigateToDisplay);
+            NavigateMeasurementCommand = new CommandBase(NavigateToMeasurements);
         }
+
+
 
         private void createListener()
         {
@@ -70,8 +79,39 @@ namespace NetworkService.ViewModel
             listeningThread.IsBackground = true;
             listeningThread.Start();
         }
-        
-        public ViewModelBase CurrentViewModel { get; }
+
+        public ICommand NavigateEntitiesCommand { get; set; }
+        public ICommand NavigateDisplayCommand { get; set; }
+        public ICommand NavigateMeasurementCommand { get; set; }
+
+        private void NavigateToEntities(object parameter)
+        {
+            CurrentViewModel = entitiesViewModel;
+        }
+
+        private void NavigateToDisplay(object parameter)
+        {
+            CurrentViewModel = displayViewModel;
+        }
+
+        private void NavigateToMeasurements(object parameter)
+        {
+            CurrentViewModel = measurementViewModel;
+        }
+
+        private ViewModelBase _currentViewModel;
+        public ViewModelBase CurrentViewModel
+        {
+            get => _currentViewModel;
+            set
+            {
+                if (_currentViewModel != value)
+                {
+                    _currentViewModel = value;
+                    OnPropertyChanged(nameof(CurrentViewModel));
+                }
+            }
+        }
 
 
 
