@@ -41,13 +41,15 @@
                                                Margin="0 0 0 25"
                                                Style="{StaticResource TypeComboBoxStyle}"
                                                Placeholder="Entity Type">
-                                <ComboBoxItem Content="File Server"/>
-                                <ComboBoxItem Content="Web Server"/>
-                                <ComboBoxItem Content="DataBase Server"/>
+                            <ComboBoxItem Content="File Server"/>
+                            <ComboBoxItem Content="Web Server"/>
+                            <ComboBoxItem Content="DataBase Server"/>
                         </custom:CustomComboBox>
+
                         <Button x:Name="SubmitButton" Content="Submit"
                                 Style="{StaticResource ButtonStyle}"/>
-                            
+                        
+
                     </StackPanel>
                     
                 </Grid>
@@ -118,6 +120,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
                                    Text="ID"
+                                   Margin="5 0 0 0"
                                    Style="{StaticResource HeaderStyle}"
                                    FontWeight="Medium"/>
                         <TextBlock Grid.Column="1"
@@ -144,7 +147,7 @@
                             ItemsSource="{Binding EntityColection}"
                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                            SelectedItem="{Binding SelectedServer}"
+                            
                             
                             SelectionMode="Extended">
                        

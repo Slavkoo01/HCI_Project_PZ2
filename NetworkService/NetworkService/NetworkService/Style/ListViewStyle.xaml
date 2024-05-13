@@ -4,6 +4,7 @@
     
         <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Brushes.xaml"/>
+        <ResourceDictionary Source="TextBlockStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="ListViewStyle" TargetType="ListView">
@@ -123,16 +124,17 @@
                     <ColumnDefinition Width="25*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
+                           Margin="5 0 0 0"
                            Text="{Binding Id}"
-                           Style="{StaticResource HeaderStyle}"
+                           Style="{StaticResource HeaderStyle}" 
                            FontWeight="Medium"/>
                 <TextBlock Grid.Column="1"
                            Text="{Binding Name}"
-                           Style="{StaticResource HeaderStyle}"
+                           Style="{StaticResource HeaderStyle}" 
                            FontWeight="Medium"/>
                 <TextBlock Grid.Column="2" 
                            Text="{Binding IpAddress}"
-                           Style="{StaticResource HeaderStyle}"
+                           Style="{StaticResource HeaderStyle}" 
                            FontWeight="Medium"/>
                 <TextBlock Grid.Column="3"
                            Text="{Binding ServerType.Type}"
@@ -152,16 +154,17 @@
                     <ColumnDefinition Width="25*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
+                       Margin="5 0 0 0"
                        Text="{Binding Id}"
                        Style="{StaticResource HeaderStyle}"
                        FontWeight="Medium"/>
                 <TextBlock Grid.Column="1"
                        Text="{Binding Name}"
-                       Style="{StaticResource HeaderStyle}"
+                       Style="{StaticResource HeaderStyle}" 
                        FontWeight="Medium"/>
                 <TextBlock Grid.Column="2" 
                        Text="{Binding IpAddress}"
-                       Style="{StaticResource HeaderStyle}"
+                       Style="{StaticResource HeaderStyle}" 
                        FontWeight="Medium"/>
                 <Image Grid.Column="3"
                        Source="{Binding ServerType.ServerTypeImage}"/>

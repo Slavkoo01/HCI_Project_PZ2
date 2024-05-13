@@ -19,105 +19,128 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="100%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="100%" Style="{StaticResource HeaderStyle}"  
                            FontSize="10"
-                           Margin="0 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                           Margin="0 -7 0 -5"
+                           VerticalAlignment="top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
                            Height="1"
-                           Width="470"
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <TextBlock Text="90%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="90%" Style="{StaticResource HeaderStyle}"  
                            FontSize="10"
-                           Margin="5 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
-                           Height="1"
-                           Width="470"
+                           Height="1" 
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <TextBlock Text="80%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="80%" Style="{StaticResource HeaderStyle}" 
                            FontSize="10"
-                           Margin="5 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
                            Height="1"
-                           Width="470"
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <TextBlock Text="70%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="70%" Style="{StaticResource HeaderStyle}" 
                            FontSize="10"
-                           Margin="5 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
                            Height="1"
-                           Width="470"
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Horizontal">
-                <TextBlock Text="60%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="60%"  Style="{StaticResource HeaderStyle}"
                            FontSize="10"
-                           Margin="5 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
                            Height="1"
-                           Width="470"
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Row="5" Orientation="Horizontal">
-                <TextBlock Text="50%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="50%" Style="{StaticResource HeaderStyle}" 
                            FontSize="10"
-                           Margin="5 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
                            Height="1"
-                           Width="470"
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Row="6" Orientation="Horizontal">
-                <TextBlock Text="40%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="40%" Style="{StaticResource HeaderStyle}" 
                            FontSize="10"
-                           Margin="5 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
                            Height="1"
-                           Width="470"
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Row="7" Orientation="Horizontal">
-                <TextBlock Text="30%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="30%" Style="{StaticResource HeaderStyle}" 
                            FontSize="10"
-                           Margin="5 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
                            Height="1"
-                           Width="470"
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Row="8" Orientation="Horizontal">
-                <TextBlock Text="20%" Style="{StaticResource HeaderStyle}"
+                <TextBlock Text="20%" Style="{StaticResource HeaderStyle}" 
                            FontSize="10"
-                           Margin="5 0 0 -5"
-                           VerticalAlignment="Bottom"/>
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
                 <Rectangle Fill="{StaticResource Neutral}"
                            Height="1"
-                           Width="470"
+                           Width="480"
                            Margin="5 0 0 0"
-                           VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Top"/>
+            </StackPanel>
+            <StackPanel Grid.Row="9" Orientation="Horizontal">
+                <TextBlock Text="10%" Style="{StaticResource HeaderStyle}" 
+                           FontSize="10"
+                            Margin="5 -7 0 -5"
+                            VerticalAlignment="Top"/>
+                <Rectangle Fill="{StaticResource Neutral}"
+                           Height="1"
+                           Width="480"
+                           Margin="5 0 0 0"
+                           VerticalAlignment="Top"/>
+            </StackPanel>
+            <StackPanel Grid.Row="10" Orientation="Horizontal">
+                <TextBlock Text="0%" Style="{StaticResource HeaderStyle}" 
+                           FontSize="10"
+                            Margin="10 -7 0 -5"
+                            VerticalAlignment="Top"/>
+                <Rectangle Fill="{StaticResource Neutral}"
+                           Height="1"
+                           Width="480"
+                           Margin="5 0 0 0"
+                           VerticalAlignment="Top"/>
             </StackPanel>
         </Grid>
     </Border>

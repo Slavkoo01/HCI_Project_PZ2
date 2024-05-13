@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
     <Style x:Key="SideManuTextBlock" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource Neutral}"/>
     </Style>
@@ -19,6 +20,5 @@
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Background" Value="Transparent"/>
     </Style>
-
 
 </ResourceDictionary>

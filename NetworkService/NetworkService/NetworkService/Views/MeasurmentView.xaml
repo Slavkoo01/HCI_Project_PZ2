@@ -32,7 +32,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel>
                         <TextBlock Text="Entities"
-                                   Style="{StaticResource HeaderStyle}"
+                                   Style="{StaticResource HeaderStyle}" 
                                    Margin="20"/>
                         <!--ListView-->
                         <Border BorderThickness="0 0 0 0"
@@ -48,19 +48,20 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0"
                                            Text="ID"
-                                           Style="{StaticResource HeaderStyle}"
+                                           Margin="5 0 0 0"
+                                           Style="{StaticResource HeaderStyle}" 
                                            FontWeight="Medium"/>
                                 <TextBlock Grid.Column="1"
                                            Text="Name"
-                                           Style="{StaticResource HeaderStyle}"
+                                           Style="{StaticResource HeaderStyle}" 
                                            FontWeight="Medium"/>
                                 <TextBlock Grid.Column="2" 
                                            Text="IpAddress"
-                                           Style="{StaticResource HeaderStyle}"
+                                           Style="{StaticResource HeaderStyle}" 
                                            FontWeight="Medium"/>
                                 <TextBlock Grid.Column="3"
                                            Text="ServerType"
-                                           Style="{StaticResource HeaderStyle}"
+                                           Style="{StaticResource HeaderStyle}" 
                                            FontWeight="Medium"/>
                             </Grid>
                         </Border>
@@ -90,8 +91,115 @@
                                              Style="{StaticResource ButtonIconStyle2}"/>
 
                 </Grid>
-                
+
             </StackPanel>
+                <!--RightSide-->
+                <Grid Grid.Column="2"
+                      Background="{StaticResource Card}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Margin="0 0 0 -50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+                    <custom:GraphLayout Grid.ColumnSpan="11"
+                                        Margin="20"/>
+                    <Rectangle Fill="{StaticResource Neutral}"
+                               Grid.Column="1"
+                               Width="60"
+                               Margin="5 0 5 77"/>
+                    <TextBlock Text="10:15"  
+                               Grid.Column="1" Style="{StaticResource HeaderStyle}"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center"
+                               Margin="0 0 0 50"
+                               FontSize="10"/>
+
+                    <Rectangle Fill="{StaticResource Neutral}"
+                               Grid.Column="3"
+                               Width="60"
+                               Margin="5 0 5 77"/>
+                    <TextBlock Text="10:15" Style="{StaticResource HeaderStyle}"  
+                               Grid.Column="3"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center"
+                               Margin="0 0 0 50"
+                               FontSize="10"/>
+
+                    <Rectangle Fill="{StaticResource Neutral}"
+                               Grid.Column="5"
+                               Width="60"
+                               Margin="5 0 5 77"/>
+                    <TextBlock Text="10:15" Style="{StaticResource HeaderStyle}" 
+                               Grid.Column="5"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center"
+                               Margin="0 0 0 50"
+                               FontSize="10"/>
+                    <Rectangle Fill="{StaticResource Neutral}"
+                               Grid.Column="7"
+                               Width="60"
+                               Margin="5 0 5 77"/>
+                    <TextBlock Text="10:15" Style="{StaticResource HeaderStyle}" 
+                               Grid.Column="7"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center"
+                               Margin="0 0 0 50"
+                               FontSize="10"/>
+                    <Rectangle Fill="{StaticResource Neutral}"
+                               Grid.Column="9"
+                               Width="60"
+                               Margin="5 0 5 77"/>
+                    <TextBlock Text="10:15" Style="{StaticResource HeaderStyle}" 
+                               Grid.Column="9"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center"
+                               Margin="0 0 0 50"
+                               FontSize="10"/>
+                </Grid>
+                
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="1">
+                    <Rectangle Fill="{StaticResource Rose}"
+                               Height="30"
+                               Width="30"
+                               Margin="45 0 10 0"/>
+                    <TextBlock Text="Over valid Value"
+                               Style="{StaticResource HeaderStyle}" 
+                               FontSize="10"
+                               FontWeight="Bold"/>
+                                
+                    <Rectangle Fill="{StaticResource Neutral}"
+                               Height="30"
+                               Width="30"
+                               Margin="70 0 10 0"/>
+                    <TextBlock Text="Under valid Value"
+                               Style="{StaticResource HeaderStyle}" 
+                               FontSize="10"
+                               FontWeight="Bold"/>
+                    
+                    <Rectangle Fill="{StaticResource Blue}"
+                               Height="30"
+                               Width="30"
+                               Margin="70 0 10 0"/>
+                    <TextBlock Text="Valid Value"
+                               Style="{StaticResource HeaderStyle}" 
+                               FontSize="10"
+                               FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
