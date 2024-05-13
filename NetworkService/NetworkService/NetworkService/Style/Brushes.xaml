@@ -3,6 +3,9 @@
 
     <SolidColorBrush x:Key="Background" Color="#222931"/>
     <Color x:Key="BackgroundC">#222931</Color>
+    
+    <SolidColorBrush x:Key="Selection" Color="#3A2A37"/>
+    <Color x:Key="SelectionC">#3A2A37</Color>
 
     <SolidColorBrush x:Key="Card" Color="#181D23"/>
     <Color x:Key="CardC">#181D23</Color>

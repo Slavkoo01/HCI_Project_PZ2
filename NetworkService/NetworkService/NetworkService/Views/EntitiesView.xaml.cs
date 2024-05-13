@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NetworkService.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,12 @@ namespace NetworkService.Views
     /// </summary>
     public partial class EntitiesView : UserControl
     {
+        private EntitiesViewModel _entityVM = new EntitiesViewModel();
         public EntitiesView()
         {
+            
             InitializeComponent();
+            DataContext = _entityVM;
         }
     }
 }

@@ -4,12 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:custom="clr-namespace:NetworkService.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1005">
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
-        <Grid Background="AliceBlue">
-            <TextBlock Text="Display" FontSize="50" VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="255"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--LeftSide-->
+            <!--Title-->
+                <StackPanel>
+                <Grid Height="55"
+                      Margin="0 0 0 0"
+                      Background="{StaticResource Card}">
+                    <TextBlock Text="Network Display"
+                               Style="{StaticResource FramTitle}"/>
+                </Grid>
+            <!--Trreview-->
+                <Grid Height="635"
+                      Margin="0 10 0 0"
+                      Background="{StaticResource Card}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <TreeView x:Name="ServerTreeview"
+                              Width="235"
+                              Background="Transparent"
+                              ItemsSource="{Binding DisplayCollection}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding ServerType}">
+                                <TextBlock Text="{Binding Name}" />
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                    <!--HelpBtn-->
+                    <custom:CustomButtonIcon x:Name="HelpButton" Content="Help"
+                                             Grid.Row="1"
+                                             HorizontalAlignment="Center"
+                                             Icon="Regular_Lightbulb"
+                                             Style="{StaticResource ButtonIconStyle2}"
+                                             Background="{StaticResource Background}"/>
+                </Grid>
+            </StackPanel>
+            <!--RightSide-->
+            <Grid Grid.Column="2"
+                  Background="{StaticResource Card}">
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

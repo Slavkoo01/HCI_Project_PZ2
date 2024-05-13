@@ -4,12 +4,94 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:custom="clr-namespace:NetworkService.CustomControls"
              mc:Ignorable="d" 
                      d:DesignHeight="720" d:DesignWidth="1005">
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
-        <Grid Background="AliceBlue">
-            <TextBlock Text="Measurement" FontSize="50" VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="425"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--LeftSide-->
+                <StackPanel>
+                <Grid Height="55"
+                      Margin="0 0 0 10"
+                      Background="{StaticResource Card}">
+            <!--Title-->
+                    <TextBlock Text="Network Measurement"
+                                Style="{StaticResource FramTitle}"/>
+                </Grid>
+            <!--Listview-->
+                <Grid Height="635"
+                      Background="{StaticResource Card}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="Entities"
+                                   Style="{StaticResource HeaderStyle}"
+                                   Margin="20"/>
+                        <!--ListView-->
+                        <Border BorderThickness="0 0 0 0"
+                                BorderBrush="{StaticResource Neutral}"
+                                Margin="11 10 15 0"
+                                Panel.ZIndex="1">
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15*" />
+                                    <ColumnDefinition Width="30*" />
+                                    <ColumnDefinition Width="30*" />
+                                    <ColumnDefinition Width="25*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="ID"
+                                           Style="{StaticResource HeaderStyle}"
+                                           FontWeight="Medium"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="Name"
+                                           Style="{StaticResource HeaderStyle}"
+                                           FontWeight="Medium"/>
+                                <TextBlock Grid.Column="2" 
+                                           Text="IpAddress"
+                                           Style="{StaticResource HeaderStyle}"
+                                           FontWeight="Medium"/>
+                                <TextBlock Grid.Column="3"
+                                           Text="ServerType"
+                                           Style="{StaticResource HeaderStyle}"
+                                           FontWeight="Medium"/>
+                            </Grid>
+                        </Border>
+                        <ListView Style="{StaticResource ListViewStyle2}"
+                                x:Name="ServerListView"
+                                Height="548"
+                                Panel.ZIndex="1000"
+                                Margin="10,0,10,20"
+                                Padding="0"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                ItemsSource="{Binding MeasurementCollection}"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                SelectedItem="{Binding SelectedServer}"
+                                ItemTemplate="{StaticResource ListViewTemplate2}"
+                                SelectionMode="Single">
+                            
+
+                        </ListView>
+                    </StackPanel>
+                    <custom:CustomButtonIcon x:Name="HelpButton" Content="Help"
+                                             Grid.Row="1"
+                                             HorizontalAlignment="Center"
+                                             Icon="Regular_Lightbulb"
+                                             Background="{StaticResource Background}"
+                                             Style="{StaticResource ButtonIconStyle2}"/>
+
+                </Grid>
+                
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

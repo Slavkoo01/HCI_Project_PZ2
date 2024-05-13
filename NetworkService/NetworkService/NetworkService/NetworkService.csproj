@@ -73,17 +73,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\CommandBase.cs" />
+    <Compile Include="CustomControls\CustomButtonIcon.cs" />
+    <Compile Include="CustomControls\CustomComboBox.cs" />
+    <Compile Include="CustomControls\CustomTextBox.cs" />
+    <Compile Include="CustomControls\GraphLayout.xaml.cs">
+      <DependentUpon>GraphLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServerTypeModel.cs" />
+    <Compile Include="Model\Server.cs" />
+    <Compile Include="ViewModel\Base\CommandBase.cs" />
     <Compile Include="ViewModel\DisplayViewModel.cs" />
     <Compile Include="ViewModel\EntitiesViewModel.cs" />
-    <Compile Include="ViewModel\ErrorViewModel.cs" />
+    <Compile Include="ViewModel\ServerViewModel.cs" />
+    <Compile Include="ViewModel\Base\ErrorViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MeasurementViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="Views\MeasurmentView.xaml.cs">
       <DependentUpon>MeasurmentView.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomControls\GraphLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\RadioButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,7 +195,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Resource Include="Assets\DataBaseServer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\FileServer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\WebServer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\tgBtn_default.png">

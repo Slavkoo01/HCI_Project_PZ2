@@ -112,5 +112,15 @@ namespace NetworkService
             tgb_display.Foreground = (SolidColorBrush)Application.Current.FindResource("Neutral");
             tgb_mesurments.Foreground = (SolidColorBrush)Application.Current.FindResource("Yellow");
         }
+
+        private void tgb_shutdown_MouseEnter(object sender, MouseEventArgs e)
+        {
+            tgb_shutdown.Foreground = (SolidColorBrush)Application.Current.FindResource("Rose");
+        }
+
+        private void tgb_shutdown_MouseLeave(object sender, MouseEventArgs e)
+        {
+            tgb_shutdown.Foreground = (SolidColorBrush)Application.Current.FindResource("Neutral");
+        }      
     }
 }

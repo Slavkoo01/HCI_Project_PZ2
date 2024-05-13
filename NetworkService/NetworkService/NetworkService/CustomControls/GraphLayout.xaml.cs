@@ -1,5 +1,4 @@
-﻿using NetworkService.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NetworkService.Views
+namespace NetworkService.CustomControls
 {
     /// <summary>
-    /// Interaction logic for MeasurmentView.xaml
+    /// Interaction logic for GraphLayout.xaml
     /// </summary>
-    public partial class MeasurmentView : UserControl
+    public partial class GraphLayout : UserControl
     {
-        private MeasurementViewModel _measurementVM = new MeasurementViewModel();
-        public MeasurmentView()
+        public GraphLayout()
         {
             InitializeComponent();
-            DataContext = _measurementVM;
         }
     }
 }

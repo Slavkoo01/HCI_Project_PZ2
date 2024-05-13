@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkService.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace NetworkService.Views
     /// </summary>
     public partial class DisplayView : UserControl
     {
+        private DisplayViewModel _displayVM = new DisplayViewModel();
         public DisplayView()
         {
+
             InitializeComponent();
+            DataContext = _displayVM;
         }
     }
 }

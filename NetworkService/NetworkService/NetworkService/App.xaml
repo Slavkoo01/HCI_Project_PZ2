@@ -13,6 +13,9 @@
                 <ResourceDictionary Source="Style/TextBlockStyle.xaml"/>
                 <ResourceDictionary Source="Style/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Style/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Style/RadioButtonStyle.xaml"/>
+                <ResourceDictionary Source="Style/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

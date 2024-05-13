@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:NetworkService.ViewModel"
         xmlns:views="clr-namespace:NetworkService.Views"
+        xmlns:custom="clr-namespace:NetworkService.CustomControls"
         
         
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
@@ -141,21 +142,19 @@
                                 Width="230"
                                 Height="50"
                                 Grid.Row="0">
-                            <Button x:Name="tgb_entities"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Left"                          
-                                      Background="Transparent"
-                                      Style="{StaticResource Entities_btn}" 
-                                      Foreground="{StaticResource Neutral}"
+                            <custom:CustomButtonIcon x:Name="tgb_entities"                          
+                                      Style="{StaticResource ButtonIconStyle}"
+                                      Icon="Regular_User"
+                                      Content="Entitiy"
                                       Click="tgb_entities_Click"
                                       Command="{Binding NavigateEntitiesCommand}">
-                                <Button.ToolTip>
+                                <custom:CustomButtonIcon.ToolTip>
                                     <ToolTip x:Name="tt_entities"
                                          Content="Network Entities"
                                          Style="{StaticResource tt_style}"/>
-                                </Button.ToolTip>
+                                </custom:CustomButtonIcon.ToolTip>
 
-                            </Button>
+                            </custom:CustomButtonIcon>
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
                                     <Style.Triggers>
@@ -172,12 +171,14 @@
                                 Width="230"
                                 Height="50"
                                 Grid.Row="1">
-                            <Button x:Name="tgb_display"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Left"                          
-                                      Background="Transparent"
-                                      Style="{StaticResource Display_btn}" 
-                                      Foreground="{StaticResource Neutral}"
+                            <custom:CustomButtonIcon x:Name="tgb_display"                          
+                                      Style="{StaticResource ButtonIconStyle}"
+                                      Icon="Solid_ProjectDiagram"
+                                      Content="Display"
+                                      IconHeight="24"
+                                      IconMargin="24 0 0 0"
+                                      TextFontSize="20"
+                                      TextMargin="27 -2 0 0"
                                       Click="tgb_display_Click"
                                       Command="{Binding NavigateDisplayCommand}">
                                 <Button.ToolTip>
@@ -186,7 +187,7 @@
                                          Style="{StaticResource tt_style}"/>
                                 </Button.ToolTip>
 
-                            </Button>
+                            </custom:CustomButtonIcon>
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
                                     <Style.Triggers>
@@ -204,12 +205,11 @@
                                 Width="230"
                                 Height="50"
                                 Grid.Row="2">
-                            <Button x:Name="tgb_mesurments"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Left"                          
-                                      Background="Transparent"
-                                      Style="{StaticResource Measurement_btn}"                                     
-                                      Foreground="{StaticResource Neutral}"
+                            <custom:CustomButtonIcon x:Name="tgb_mesurments"                         
+                                      Style="{StaticResource ButtonIconStyle}"                                     
+                                      Icon="Regular_ChartBar"
+                                      Content="Measurement"
+                                      TextMargin="27 -2 0 0"
                                       Click="tgb_mesurments_Click"
                                       Command="{Binding NavigateMeasurementCommand}">
                                 <Button.ToolTip>
@@ -218,7 +218,7 @@
                                          Style="{StaticResource tt_style}"/>
                                 </Button.ToolTip>
 
-                            </Button>
+                            </custom:CustomButtonIcon>
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
                                     <Style.Triggers>
@@ -274,20 +274,24 @@
                                 Height="50"
                                 Margin="0 0 0 -5"
                                 Grid.Row="1">
-                        <ToggleButton x:Name="tgb_shutdown"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"                          
-                                       Background="Transparent"
-                                       Style="{StaticResource ShutDown_btn}" 
-                                       Checked="tgb_shutdown_Checked"
+                            <custom:CustomButtonIcon x:Name="tgb_shutdown"                          
+
+                                       Style="{StaticResource ButtonIconStyle}"
+                                       Icon="Solid_PowerOff"
+                                       Content="Close App"
+                                       Click="tgb_shutdown_Checked"
+                                       MouseEnter="tgb_shutdown_MouseEnter"
+                                       MouseLeave="tgb_shutdown_MouseLeave"
+                                       IconMargin="23 0 0 0"
+                                       TextMargin="33 0 0 0"
                                        Foreground="{StaticResource Neutral}">
-                            <ToggleButton.ToolTip>
-                                <ToolTip x:Name="tt_shutdown"
+                                       
+                                <custom:CustomButtonIcon.ToolTip>
+                                    <ToolTip x:Name="tt_shutdown"
                                          Content="Close App"
                                          Style="{StaticResource tt_style}"/>
-                            </ToggleButton.ToolTip>
-
-                        </ToggleButton>
+                                </custom:CustomButtonIcon.ToolTip>
+                            </custom:CustomButtonIcon>
                         <StackPanel.Style>
                             <Style TargetType="StackPanel">
                                 <Style.Triggers>

@@ -80,12 +80,12 @@
                             <fa5:SvgAwesome x:Name="icon"
                                             Icon="Regular_Lightbulb"
                                             Foreground="{TemplateBinding Foreground}"
-                                            Margin="29 0 0 0"
+                                            Margin="26 0 0 0"
                                             Height="30"/>
                             <TextBlock x:Name="textBlock"
                                        Text="Toggle Help"
                                        FontSize="20"
-                                       Margin="34 -2 0 0"
+                                       Margin="37 -2 0 0"
                                        VerticalAlignment="Center"
                                        Foreground="{TemplateBinding Foreground}"/>
                         </StackPanel>
