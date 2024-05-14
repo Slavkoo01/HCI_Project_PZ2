@@ -30,6 +30,7 @@
                                     Background="{TemplateBinding Background}"
                                     Padding="{TemplateBinding Padding}"
                                     SnapsToDevicePixels="True">
+                                    
                                     <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -137,6 +138,7 @@
                            Style="{StaticResource HeaderStyle}" 
                            FontWeight="Medium"/>
                 <TextBlock Grid.Column="3"
+                           Margin="-5 0 0 0"
                            Text="{Binding ServerType.Type}"
                            Style="{StaticResource HeaderStyle}"
                            FontWeight="Medium"/>

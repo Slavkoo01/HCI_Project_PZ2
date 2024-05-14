@@ -34,8 +34,10 @@
                         <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
                     <TreeView ItemsSource="{Binding DisplayNodes}"
-                              Background="{StaticResource Card}">
-                        <TreeView.ItemTemplate>
+                              Background="{StaticResource Card}"
+                              Style="{StaticResource TreeViewStyle}">
+                        
+                            <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding ServerViewModels}">
                                 <TextBlock Text="{Binding Type}" Style="{StaticResource HeaderStyle}"
                                            FontSize="20"/>

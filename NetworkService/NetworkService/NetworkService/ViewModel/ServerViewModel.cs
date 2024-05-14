@@ -30,6 +30,10 @@ namespace NetworkService.ViewModel
             IpAddress = server.IpAddress;
             ServerType = server.ServerType;
         }
+        public ServerViewModel( )
+        {
+           
+        }
 
         public override string ToString()
         {
