@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-
+using NetworkService.Repositories;
 using NetworkService.ViewModel;
 namespace NetworkService
 {
@@ -16,7 +16,7 @@ namespace NetworkService
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-
+            XMLFiles.LoadDataFromXML();
             MainWindow = new MainWindow()
             {
                 DataContext = new MainWindowViewModel()

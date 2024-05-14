@@ -275,7 +275,7 @@
                                 Margin="0 0 0 -5"
                                 Grid.Row="1">
                             <custom:CustomButtonIcon x:Name="tgb_shutdown"                          
-
+                                       Command="{Binding CloseCommand}"
                                        Style="{StaticResource ButtonIconStyle}"
                                        Icon="Solid_PowerOff"
                                        Content="Close App"

@@ -80,9 +80,12 @@
     <Compile Include="CustomControls\GraphLayout.xaml.cs">
       <DependentUpon>GraphLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helper\GlobalVar.cs" />
+    <Compile Include="Helper\MyPath.cs" />
     <Compile Include="Model\ServerNode.cs" />
     <Compile Include="Model\ServerTypeModel.cs" />
     <Compile Include="Model\Server.cs" />
+    <Compile Include="Helper\XMLFiles.cs" />
     <Compile Include="ViewModel\Base\CommandBase.cs" />
     <Compile Include="ViewModel\DisplayViewModel.cs" />
     <Compile Include="ViewModel\EntitiesViewModel.cs" />
@@ -219,5 +222,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

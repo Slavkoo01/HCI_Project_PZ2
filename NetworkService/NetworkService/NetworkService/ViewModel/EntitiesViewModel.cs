@@ -1,4 +1,5 @@
-﻿using NetworkService.Model;
+﻿using NetworkService.Helper;
+using NetworkService.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -142,6 +143,7 @@ namespace NetworkService.ViewModel
             if (Validate())
             {
                 EntityColection.Add(new ServerViewModel(new Server(int.Parse(Id), Name, IpAddress, ServerType)));
+                GlobalVar.IsSaved = false;
             }
         }
 

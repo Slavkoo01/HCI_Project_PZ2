@@ -1,4 +1,6 @@
 ﻿
+using NetworkService.Helper;
+using NetworkService.Repositories;
 using NetworkService.Views;
 using System;
 using System.Collections.Generic;
@@ -27,6 +29,7 @@ namespace NetworkService.ViewModel
             NavigateEntitiesCommand = new CommandBase(NavigateToEntities);
             NavigateDisplayCommand = new CommandBase(NavigateToDisplay);
             NavigateMeasurementCommand = new CommandBase(NavigateToMeasurements);
+            CloseCommand = new CommandBase(Close);
         }
 
 
@@ -83,7 +86,17 @@ namespace NetworkService.ViewModel
         public ICommand NavigateEntitiesCommand { get; set; }
         public ICommand NavigateDisplayCommand { get; set; }
         public ICommand NavigateMeasurementCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
 
+        private void Close(object parameter)
+        {
+            if (!GlobalVar.IsSaved)
+            {
+                XMLFiles _serializer = new XMLFiles();
+                _serializer.SerializeObject();
+                GlobalVar.IsSaved = true;
+            }
+        }
         private void NavigateToEntities(object parameter)
         {
             CurrentViewModel = entitiesViewModel;
