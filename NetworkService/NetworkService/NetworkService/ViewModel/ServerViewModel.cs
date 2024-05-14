@@ -9,13 +9,13 @@ namespace NetworkService.ViewModel
 {
     public class ServerViewModel : ViewModelBase
     {
-        private int _id;
+        private int? _id;
         private int _value = 0;
         private string _name;
         private string _ipAddress;
         private ServerTypeModel _serverType;
 
-        public int Id { get { return _id; } set { _id = value; OnPropertyChanged(nameof(Id)); } }
+        public int? Id { get { return _id; } set { _id = value; OnPropertyChanged(nameof(Id)); } }
         public int Value { get { return _value; } set { _value = value; OnPropertyChanged(nameof(Value)); } } 
         public string Name { get { return _name; } set { _name = value; OnPropertyChanged(nameof(Name)); } }
 
@@ -32,7 +32,7 @@ namespace NetworkService.ViewModel
         }
         public ServerViewModel( )
         {
-           
+            _serverType = new ServerTypeModel();
         }
 
         public override string ToString()

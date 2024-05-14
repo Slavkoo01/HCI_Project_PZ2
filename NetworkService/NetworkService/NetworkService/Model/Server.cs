@@ -13,7 +13,7 @@ namespace NetworkService.Model
         private string _ipAddress;
         private ServerTypeModel _serverType;
 
-        public Server(int id, string name, string ipAddress, Types serverType)
+        public Server(int id, string name, string ipAddress, Types? serverType)
         {
             Id = id;
             Name = name;

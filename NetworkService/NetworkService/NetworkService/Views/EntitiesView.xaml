@@ -25,34 +25,33 @@
                       Background="{StaticResource Card}">
                     <StackPanel>
                         <custom:CustomTextBox x:Name="IdTextBox"
-                                              Text="{Binding Server.Id}"
+                                              Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
                                               Margin="0 15 0 25"
                                               Style="{StaticResource TextBoxStyle}" 
                                               Placeholder="ID"/>
 
                         <custom:CustomTextBox x:Name="NameTextBox"
-                                              Text="{Binding Server.Name}"
+                                              Text="{Binding Name}"
                                               Style="{StaticResource TextBoxStyle}"
                                               Margin="0 0 0 25"
                                               Placeholder="Name"/>
                         <custom:CustomTextBox x:Name="IpTextBox"
-                                              Text="{Binding Server.Ip}"
+                                              Text="{Binding IpAddress}"
                                               Style="{StaticResource TextBoxStyle}"
                                               Margin="0 0 0 25"
                                               Placeholder="IP"/>
                         <custom:CustomComboBox x:Name="ServerTypeComboBox"
-                                               SelectedItem="{Binding Server.ServerType.Type}"
+                                               SelectedItem="{Binding ServerType}"
                                                Margin="0 0 0 25"
                                                ItemsSource="{Binding TypeCollection}"
                                                Style="{StaticResource TypeComboBoxStyle}"
                                                Placeholder="Server Type">
-                            <ComboBoxItem Content="File Server"/>
-                            <ComboBoxItem Content="Web Server"/>
-                            <ComboBoxItem Content="DataBase Server"/>
+                           
                         </custom:CustomComboBox>
 
                         <Button x:Name="SubmitButton" Content="Submit"
-                                Style="{StaticResource ButtonStyle}"/>
+                                Style="{StaticResource ButtonStyle}"
+                                Command="{Binding SubmitCommand}"/>
 
 
                     </StackPanel>
@@ -119,12 +118,12 @@
                                        Height="35"
                                        Width="404"
                                        VerticalAlignment="Top"
+                                       ItemsSource="{Binding TypeCollection}"
                                        Margin="12 0 0 0"
+                                       SelectedItem="{Binding Server.ServerType.Type}"
                                        Style="{StaticResource TypeComboBoxStyle}"
                                        Placeholder="Server Type Filter">
-                        <ComboBoxItem Content="File Server"/>
-                        <ComboBoxItem Content="Web Server"/>
-                        <ComboBoxItem Content="DataBase Server"/>
+                        
                     </custom:CustomComboBox>
                 </Grid>
 

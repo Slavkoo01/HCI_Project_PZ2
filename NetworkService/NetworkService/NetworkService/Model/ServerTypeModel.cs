@@ -15,10 +15,10 @@ namespace NetworkService.Model
     }
     public class ServerTypeModel
     {
-        public Types Type { get; set; }
+        public Types? Type { get; set; }
         public string ServerTypeImage { get; set; }
 
-        public ServerTypeModel(Types serverType)
+        public ServerTypeModel(Types? serverType)
         {
             Type = serverType;
             switch(serverType)
@@ -33,6 +33,10 @@ namespace NetworkService.Model
                     ServerTypeImage = "/Assets/DataBaseServer.png";
                     break;
             }
+        }
+        public ServerTypeModel()
+        {
+           
         }
 
         public override string ToString()
