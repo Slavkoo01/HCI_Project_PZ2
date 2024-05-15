@@ -120,7 +120,25 @@
                                Width="60"
                                Height="{Binding SelectedServer.Value1}"
                                VerticalAlignment="Bottom"
-                               Margin="5 0 5 72"/>
+                               Margin="5 0 5 72">
+                        <Rectangle.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Height"
+                                            Duration="0:0:0.5" 
+                                            From="30"
+                                            To="{Binding SelectedServer.Value1}">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Rectangle.Triggers>
+                    </Rectangle>
                     <TextBlock Text="{Binding SelectedServer.Time1}"  
                                Grid.Column="1" Style="{StaticResource HeaderStyle}"
                                VerticalAlignment="Bottom"
