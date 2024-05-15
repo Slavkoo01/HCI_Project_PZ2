@@ -10,13 +10,18 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace NetworkService.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private int count = 15; // Inicijalna vrednost broja objekata u sistemu
+        LogWriter logger = new LogWriter("log.txt");
+        
+        private int _count = EntitiesViewModel.EntityColection.Count;
+        public int count { get { return _count; } set { _count = value; OnPropertyChanged(nameof(count)); } }
+                                // Inicijalna vrednost broja objekata u sistemu
                                 // ######### ZAMENITI stvarnim brojem elemenata
                                 //           zavisno od broja entiteta u listi
         EntitiesViewModel entitiesViewModel = new EntitiesViewModel();
@@ -69,10 +74,22 @@ namespace NetworkService.ViewModel
                         {
                             //U suprotnom, server je poslao promenu stanja nekog objekta u sistemu
                             Console.WriteLine(incomming); //Na primer: "Entitet_1:272"
+                            try
+                            {
+                            string[] parts = incomming.Split('_',':');
+                            int id = int.Parse(parts[1]);
+                            int value = int.Parse(parts[2]);
 
-                            //################ IMPLEMENTACIJA ####################
-                            // Obraditi poruku kako bi se dobile informacije o izmeni
-                            // Azuriranje potrebnih stvari u aplikaciji
+                            DateTime currentDateTime = DateTime.Now;
+                            string time = currentDateTime.ToString("HH:mm");
+                            EntitiesViewModel.EntityColection[id].NewValue(value, time);
+                              
+                            logger.AppendToLog($"{currentDateTime} - Value: {value} - {EntitiesViewModel.EntityColection[id]}");
+                            }
+                            catch(Exception)
+                            {
+                              
+                            }
 
                         }
                     }, null);

@@ -22,7 +22,7 @@ namespace NetworkService.Views
     /// </summary>
     public partial class EntitiesView : UserControl
     {
-        ListView listview;
+        
         private EntitiesViewModel _entityVM;
         public EntitiesView()
         {
@@ -39,6 +39,11 @@ namespace NetworkService.Views
             {
                 EntitiesViewModel.EntityColection.Remove(selectedItem);
             }   
+        }
+
+        private void GreaterRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

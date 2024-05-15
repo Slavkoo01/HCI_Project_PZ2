@@ -68,7 +68,6 @@
                         <ListView Style="{StaticResource ListViewStyle2}"
                                 x:Name="ServerListView"
                                 Height="475"
-                                Panel.ZIndex="1000"
                                 Margin="10,0,10,20"
                                 Padding="0"
                                 Background="Transparent"
@@ -119,8 +118,10 @@
                     <Rectangle Fill="{StaticResource Neutral}"
                                Grid.Column="1"
                                Width="60"
-                               Margin="5 0 5 77"/>
-                    <TextBlock Text="10:15"  
+                               Height="{Binding SelectedServer.Value1}"
+                               VerticalAlignment="Bottom"
+                               Margin="5 0 5 72"/>
+                    <TextBlock Text="{Binding SelectedServer.Time1}"  
                                Grid.Column="1" Style="{StaticResource HeaderStyle}"
                                VerticalAlignment="Bottom"
                                HorizontalAlignment="Center"
@@ -130,8 +131,11 @@
                     <Rectangle Fill="{StaticResource Neutral}"
                                Grid.Column="3"
                                Width="60"
-                               Margin="5 0 5 77"/>
-                    <TextBlock Text="10:15" Style="{StaticResource HeaderStyle}"  
+                               Height="{Binding SelectedServer.Value2}"
+                               VerticalAlignment="Bottom"
+                               Margin="5 0 5 72"/>
+                    <TextBlock Text="{Binding SelectedServer.Time2}" 
+                               Style="{StaticResource HeaderStyle}"  
                                Grid.Column="3"
                                VerticalAlignment="Bottom"
                                HorizontalAlignment="Center"
@@ -141,8 +145,11 @@
                     <Rectangle Fill="{StaticResource Neutral}"
                                Grid.Column="5"
                                Width="60"
-                               Margin="5 0 5 77"/>
-                    <TextBlock Text="10:15" Style="{StaticResource HeaderStyle}" 
+                               Height="{Binding SelectedServer.Value3}"
+                               VerticalAlignment="Bottom"
+                               Margin="5 0 5 72"/>
+                    <TextBlock Text="{Binding SelectedServer.Time3}"  
+                               Style="{StaticResource HeaderStyle}" 
                                Grid.Column="5"
                                VerticalAlignment="Bottom"
                                HorizontalAlignment="Center"
@@ -151,8 +158,11 @@
                     <Rectangle Fill="{StaticResource Neutral}"
                                Grid.Column="7"
                                Width="60"
-                               Margin="5 0 5 77"/>
-                    <TextBlock Text="10:15" Style="{StaticResource HeaderStyle}" 
+                               Height="{Binding SelectedServer.Value4}"
+                               VerticalAlignment="Bottom"
+                               Margin="5 0 5 72"/>
+                    <TextBlock Text="{Binding SelectedServer.Time4}"  
+                               Style="{StaticResource HeaderStyle}" 
                                Grid.Column="7"
                                VerticalAlignment="Bottom"
                                HorizontalAlignment="Center"
@@ -161,8 +171,11 @@
                     <Rectangle Fill="{StaticResource Neutral}"
                                Grid.Column="9"
                                Width="60"
-                               Margin="5 0 5 77"/>
-                    <TextBlock Text="10:15" Style="{StaticResource HeaderStyle}" 
+                               Height="{Binding SelectedServer.Value5}"
+                               VerticalAlignment="Bottom"
+                               Margin="5 0 5 72"/>
+                    <TextBlock Text="{Binding SelectedServer.Time5}" 
+                               Style="{StaticResource HeaderStyle}" 
                                Grid.Column="9"
                                VerticalAlignment="Bottom"
                                HorizontalAlignment="Center"

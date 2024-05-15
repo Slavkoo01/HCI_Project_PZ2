@@ -25,28 +25,28 @@
                       Background="{StaticResource Card}">
                     <StackPanel>
                         <custom:CustomTextBox x:Name="IdTextBox"
-                                              Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+                                              Text="{Binding Server.Id, UpdateSourceTrigger=PropertyChanged}"
                                               Margin="0 15 0 25"
                                               Style="{StaticResource TextBoxStyle}" 
                                               Placeholder="ID"/>
 
                         <custom:CustomTextBox x:Name="NameTextBox"
-                                              Text="{Binding Name}"
+                                              Text="{Binding Server.Name}"
                                               Style="{StaticResource TextBoxStyle}"
                                               Margin="0 0 0 25"
                                               Placeholder="Name"/>
                         <custom:CustomTextBox x:Name="IpTextBox"
-                                              Text="{Binding IpAddress}"
+                                              Text="{Binding Server.IpAddress}"
                                               Style="{StaticResource TextBoxStyle}"
                                               Margin="0 0 0 25"
                                               Placeholder="IP"/>
                         <custom:CustomComboBox x:Name="ServerTypeComboBox"
-                                               SelectedItem="{Binding ServerType}"
+                                               SelectedItem="{Binding Server.ServerType}"
                                                Margin="0 0 0 25"
                                                ItemsSource="{Binding TypeCollection}"
                                                Style="{StaticResource TypeComboBoxStyle}"
                                                Placeholder="Server Type">
-                           
+
                         </custom:CustomComboBox>
 
                         <Button x:Name="SubmitButton" Content="Submit"
@@ -68,8 +68,8 @@
                 <!--Filter-->
                 <Grid Background="{StaticResource Card}">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -78,20 +78,28 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="70"/>
                     </Grid.ColumnDefinitions>
-
+                    <TextBlock Text="{Binding ServerFilter.TypeFilter}"
+                               Style="{StaticResource ValidationTextBlock}" 
+                               Margin="15,14,0,0" 
+                               VerticalAlignment="Top" Grid.Row="1"/>
+                    <TextBlock Text="{Binding ServerFilter.IdFilter}"
+                               Style="{StaticResource ValidationTextBlock}" 
+                               Margin="15,18,0,0" 
+                               VerticalAlignment="Top"/>
                     <RadioButton x:Name="LesserRadioButton"
                  Grid.Column="0"
                  Content="Lesser"
-                 Margin="12,0,10,0"
+                 Margin="12,17,10,0"
                  Style="{StaticResource RadioButtonStyle}"
-                 IsChecked="{Binding IsLesserSelected, Mode=TwoWay}"/>
+                 IsChecked="{Binding ServerFilter.IsLesserSelected, Mode=TwoWay}" VerticalAlignment="Top"/>
 
                     <RadioButton x:Name="GreaterRadioButton"
                  Grid.Column="1"
                  Content="Greater"
-                 Margin="0,0,10,0"
+                 Margin="0,17,10,0"
+                 VerticalAlignment="Top"    
                  Style="{StaticResource RadioButtonStyle}"
-                 IsChecked="{Binding IsGreaterSelected, Mode=TwoWay}"/>
+                 IsChecked="{Binding ServerFilter.IsGreaterSelected, Mode=TwoWay}" Checked="GreaterRadioButton_Checked"/>
 
                     <RadioButton x:Name="EqualRadioButton"
                  Grid.Column="2"
@@ -99,7 +107,7 @@
                  Margin="0 17 22 0"
                  Style="{StaticResource RadioButtonStyle}"
                  VerticalAlignment="Top"
-                 IsChecked="{Binding IsEqualSelected, Mode=TwoWay}"/>
+                 IsChecked="{Binding ServerFilter.IsEqualSelected, Mode=TwoWay}"/>
 
                     <custom:CustomTextBox x:Name="FilterSearchBox" 
                            Grid.Column="3"
@@ -109,13 +117,14 @@
                            VerticalAlignment="Top"
                            Margin="0 10 0 0"
                            Placeholder="Server ID"
-                           Text="{Binding TextBoxFilter, Mode=TwoWay}"/>
+                           Text="{Binding ServerFilter.TextBoxFilter, Mode=TwoWay}"/>
 
                     <custom:CustomButtonIcon x:Name="SearchBtn"
                              Grid.Column="4"
                              Height="35" 
                              Width="35"
-                             Margin="5 0 0 0"
+                             VerticalAlignment="Top"
+                             Margin="5 10 0 0"
                              Style="{StaticResource ButtonIconStyle3}"
                              Icon="Solid_Search"
                              IconHeight="20"
@@ -143,7 +152,7 @@
                            VerticalAlignment="Top"
                            ItemsSource="{Binding TypeCollection}"
                            Margin="12 0 0 0"
-                           SelectedItem="{Binding SelectedTypeFilter, Mode=TwoWay}"
+                           SelectedItem="{Binding ServerFilter.SelectedTypeFilter, Mode=TwoWay}"
                            Style="{StaticResource TypeComboBoxStyle}"
                            Placeholder="Server Type Filter"/>
 
@@ -153,7 +162,7 @@
                 <!--ListView-->
                 <StackPanel Margin="0 10 0 0"
                             Background="{StaticResource Card}"
-                            Height="590">
+                            Height="565">
                     <StackPanel Orientation="Horizontal"
                                 Margin="0 10 0 0"
                                 Height="35">
@@ -207,7 +216,7 @@
                     </Border>
                     <ListView Style="{StaticResource ListViewStyle}"
                             x:Name="ServerListView"
-                            Height="503"
+                            Height="478"
                             Margin="15,0,10,20"
                             Padding="0"
                             Background="Transparent"
