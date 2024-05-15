@@ -5,32 +5,14 @@
     <Name>s</Name>
     <IpAddress>1.1.1.1</IpAddress>
     <ServerType>
-      <Type>WebServer</Type>
-      <ServerTypeImage>/Assets/WebServer.png</ServerTypeImage>
+      <Type>FileServer</Type>
+      <ServerTypeImage>/Assets/FileServer.png</ServerTypeImage>
     </ServerType>
   </ServerViewModel>
   <ServerViewModel>
     <Id>2</Id>
-    <Name>s</Name>
-    <IpAddress>1.1.1.1</IpAddress>
-    <ServerType>
-      <Type>FileServer</Type>
-      <ServerTypeImage>/Assets/FileServer.png</ServerTypeImage>
-    </ServerType>
-  </ServerViewModel>
-  <ServerViewModel>
-    <Id>3</Id>
-    <Name>s</Name>
-    <IpAddress>1.1.1.1</IpAddress>
-    <ServerType>
-      <Type>FileServer</Type>
-      <ServerTypeImage>/Assets/FileServer.png</ServerTypeImage>
-    </ServerType>
-  </ServerViewModel>
-  <ServerViewModel>
-    <Id>4</Id>
-    <Name>s</Name>
-    <IpAddress>1.1.1.1</IpAddress>
+    <Name>d</Name>
+    <IpAddress>3.4.5.6</IpAddress>
     <ServerType>
       <Type>DataBaseServer</Type>
       <ServerTypeImage>/Assets/DataBaseServer.png</ServerTypeImage>

@@ -81,7 +81,7 @@ namespace NetworkService.Repositories
                     read.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log exception here
             }

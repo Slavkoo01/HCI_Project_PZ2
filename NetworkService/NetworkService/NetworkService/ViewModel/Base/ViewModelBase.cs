@@ -16,5 +16,9 @@ namespace NetworkService.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+        
+
+
     }
 }

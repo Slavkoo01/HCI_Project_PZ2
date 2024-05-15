@@ -22,12 +22,23 @@ namespace NetworkService.Views
     /// </summary>
     public partial class EntitiesView : UserControl
     {
-        private EntitiesViewModel _entityVM = new EntitiesViewModel();
+        ListView listview;
+        private EntitiesViewModel _entityVM;
         public EntitiesView()
         {
-            
+            _entityVM = new EntitiesViewModel();
             InitializeComponent();
             DataContext = _entityVM;
+        }
+
+        private void Delete_btn_Click(object sender, RoutedEventArgs e)
+        {
+           var selectedItems = ServerListView.SelectedItems.Cast<ServerViewModel>().ToList();
+            
+            foreach (var selectedItem in selectedItems)
+            {
+                EntitiesViewModel.EntityColection.Remove(selectedItem);
+            }   
         }
     }
 }

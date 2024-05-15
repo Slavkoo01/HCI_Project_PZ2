@@ -80,6 +80,7 @@
     <Compile Include="CustomControls\GraphLayout.xaml.cs">
       <DependentUpon>GraphLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\ListViewSelectedItemsBehavior.cs" />
     <Compile Include="Helper\GlobalVar.cs" />
     <Compile Include="Helper\MyPath.cs" />
     <Compile Include="Model\ServerNode.cs" />
