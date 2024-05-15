@@ -81,6 +81,7 @@
       <DependentUpon>GraphLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\ListViewSelectedItemsBehavior.cs" />
+    <Compile Include="Helper\AnimationHelper.cs" />
     <Compile Include="Helper\GlobalVar.cs" />
     <Compile Include="Helper\LogWriter.cs" />
     <Compile Include="Helper\MyPath.cs" />
