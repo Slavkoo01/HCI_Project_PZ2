@@ -70,7 +70,11 @@ namespace NetworkService.ViewModel.Form
             }
             return FilteredServers;
         }
-
+        public void ResetFilterOnSerach()
+        {
+            _errorViewModel.ClearError(nameof(IdFilter));
+            _errorViewModel.ClearError(nameof(TypeFilter));
+        }
         public ObservableCollection<ServerViewModel> ResetFilter()
         {
             if (_filterFlag)

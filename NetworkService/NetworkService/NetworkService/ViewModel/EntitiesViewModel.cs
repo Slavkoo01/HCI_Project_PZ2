@@ -64,6 +64,7 @@ namespace NetworkService.ViewModel
             if (ServerFilter.IsValid())
             {
                 ListViewCollection = ServerFilter.Filter();
+                ServerFilter.ResetFilterOnSerach();
             }
         }
       
@@ -73,14 +74,6 @@ namespace NetworkService.ViewModel
         }
          #endregion
         
-
-
-
-       
-
-
-        
-
         public EntitiesViewModel() 
         {
             Server = new ServerForm();
