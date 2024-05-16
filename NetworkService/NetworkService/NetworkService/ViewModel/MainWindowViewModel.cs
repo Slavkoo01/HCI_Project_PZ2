@@ -18,7 +18,7 @@ namespace NetworkService.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         LogWriter logger = new LogWriter("log.txt");
-        
+       
         private int _count = EntitiesViewModel.EntityColection.Count;
         public int count { get { return _count; } set { _count = value; OnPropertyChanged(nameof(count)); } }
                                 // Inicijalna vrednost broja objekata u sistemu
@@ -83,7 +83,7 @@ namespace NetworkService.ViewModel
                             DateTime currentDateTime = DateTime.Now;
                             string time = currentDateTime.ToString("HH:mm");
                             EntitiesViewModel.EntityColection[id].NewValue(value, time);
-                              
+                            
                             logger.AppendToLog($"{currentDateTime} - Value: {value} - {EntitiesViewModel.EntityColection[id]}");
                             }
                             catch(Exception)

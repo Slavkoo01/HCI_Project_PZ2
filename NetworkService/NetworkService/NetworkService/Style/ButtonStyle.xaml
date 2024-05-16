@@ -3,6 +3,25 @@
                     xmlns:fa5="http://schemas.fontawesome.com/icons/"
                     xmlns:custom="clr-namespace:NetworkService.CustomControls">
     <!--NETOWRK ENTITIES-->
+    <Style x:Key="CustomRectangleStyle" TargetType="custom:CustomRectangle">
+        <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="5 0 5 72"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="custom:CustomRectangle">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{TemplateBinding Background}"
+                            Height="{TemplateBinding Height}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style x:Key="ButtonIconStyle" TargetType="custom:CustomButtonIcon">
         <Setter Property="Foreground" Value="{StaticResource Neutral}"/>
         <Setter Property="Background" Value="Transparent"/>

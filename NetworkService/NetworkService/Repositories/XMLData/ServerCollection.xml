@@ -9,4 +9,13 @@
       <ServerTypeImage>/Assets/WebServer.png</ServerTypeImage>
     </ServerType>
   </ServerViewModel>
+  <ServerViewModel>
+    <Id>2</Id>
+    <Name>Server_02</Name>
+    <IpAddress>1.1.1.1</IpAddress>
+    <ServerType>
+      <Type>WebServer</Type>
+      <ServerTypeImage>/Assets/WebServer.png</ServerTypeImage>
+    </ServerType>
+  </ServerViewModel>
 </ArrayOfServerViewModel>

@@ -76,6 +76,7 @@
     </ApplicationDefinition>
     <Compile Include="CustomControls\CustomButtonIcon.cs" />
     <Compile Include="CustomControls\CustomComboBox.cs" />
+    <Compile Include="CustomControls\CustomRectangle.cs" />
     <Compile Include="CustomControls\CustomTextBox.cs" />
     <Compile Include="CustomControls\GraphLayout.xaml.cs">
       <DependentUpon>GraphLayout.xaml</DependentUpon>

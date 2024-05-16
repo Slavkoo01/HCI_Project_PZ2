@@ -13,7 +13,6 @@ namespace NetworkService.ViewModel.Form
 {
     public class FilterForm : ViewModelBase, INotifyDataErrorInfo
     {
-        private bool _resetFlag = false;
         private bool _filterFlag = false;
         private string _textBoxFilter;
         private bool _isLesserSelected;

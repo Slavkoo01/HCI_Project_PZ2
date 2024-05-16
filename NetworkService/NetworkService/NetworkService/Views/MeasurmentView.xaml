@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetworkService.Views"
              xmlns:custom="clr-namespace:NetworkService.CustomControls"
-             xmlns:animation="clr-namespace:NetworkService.Helper"
+             xmlns:viewmodel="clr-namespace:NetworkService.ViewModel"
+             
              
              mc:Ignorable="d" 
                      d:DesignHeight="720" d:DesignWidth="1005">
@@ -117,16 +118,16 @@
                     </Grid.ColumnDefinitions>
                     <custom:GraphLayout Grid.ColumnSpan="11"
                                         Margin="20"/>
-                    <Rectangle Fill="{StaticResource Neutral}"
-                               Grid.Column="1"
-                               Width="60"
-                               Height="{Binding SelectedServer.Value1}"
-                               VerticalAlignment="Bottom"
-                              
-                               Margin="5 0 5 72"/>
-
-
-
+                    <custom:CustomRectangle 
+                            x:Name ="customRecG1_1" Grid.Column="1"
+                            Height="{Binding SelectedServer.Value1}"
+                            Background="Transparent"
+                            Style="{StaticResource CustomRectangleStyle}"
+                            HeightChanged ="customRecG1_1_HeightChanged"/>
+                    <custom:CustomRectangle 
+                             x:Name ="customRecG1_2" Grid.Column="1"
+                             Height="{Binding SelectedServer.Value1}"
+                             Style="{StaticResource CustomRectangleStyle}"/>
                     <TextBlock Text="{Binding SelectedServer.Time1}"  
                                Grid.Column="1" Style="{StaticResource HeaderStyle}"
                                VerticalAlignment="Bottom"
@@ -134,12 +135,16 @@
                                Margin="0 0 0 50"
                                FontSize="10"/>
 
-                    <Rectangle Fill="{StaticResource Neutral}"
-                               Grid.Column="3"
-                               Width="60"
-                               Height="{Binding SelectedServer.Value2}"
-                               VerticalAlignment="Bottom"
-                               Margin="5 0 5 72"/>
+                    <custom:CustomRectangle 
+                            x:Name ="customRecG2_1" Grid.Column="3"
+                            Height="{Binding SelectedServer.Value2}"
+                            Background="Transparent"
+                            Style="{StaticResource CustomRectangleStyle}"
+                            HeightChanged ="customRecG2_1_HeightChanged"/>
+                    <custom:CustomRectangle 
+                             x:Name ="customRecG2_2" Grid.Column="3"
+                             Height="{Binding SelectedServer.Value2}"
+                             Style="{StaticResource CustomRectangleStyle}"/>
                     <TextBlock Text="{Binding SelectedServer.Time2}" 
                                Style="{StaticResource HeaderStyle}"  
                                Grid.Column="3"
@@ -148,12 +153,17 @@
                                Margin="0 0 0 50"
                                FontSize="10"/>
 
-                    <Rectangle Fill="{StaticResource Neutral}"
-                               Grid.Column="5"
-                               Width="60"
-                               Height="{Binding SelectedServer.Value3}"
-                               VerticalAlignment="Bottom"
-                               Margin="5 0 5 72"/>
+                    <custom:CustomRectangle 
+                            x:Name ="customRecG3_1" Grid.Column="5"
+                            Height="{Binding SelectedServer.Value3}"
+                            Background="Transparent"
+                            Style="{StaticResource CustomRectangleStyle}"
+                            HeightChanged ="customRecG3_1_HeightChanged"/>
+                    <custom:CustomRectangle 
+                             x:Name ="customRecG3_2" Grid.Column="5"
+                             Height="{Binding SelectedServer.Value3}"
+                             Style="{StaticResource CustomRectangleStyle}"/>
+                    
                     <TextBlock Text="{Binding SelectedServer.Time3}"  
                                Style="{StaticResource HeaderStyle}" 
                                Grid.Column="5"
@@ -161,12 +171,17 @@
                                HorizontalAlignment="Center"
                                Margin="0 0 0 50"
                                FontSize="10"/>
-                    <Rectangle Fill="{StaticResource Neutral}"
-                               Grid.Column="7"
-                               Width="60"
-                               Height="{Binding SelectedServer.Value4}"
-                               VerticalAlignment="Bottom"
-                               Margin="5 0 5 72"/>
+
+                    <custom:CustomRectangle 
+                                x:Name ="customRecG4_1" Grid.Column="7"
+                                Height="{Binding SelectedServer.Value4}"
+                                Background="Transparent"
+                                Style="{StaticResource CustomRectangleStyle}"
+                                HeightChanged ="customRecG4_1_HeightChanged"/>
+                    <custom:CustomRectangle 
+                                 x:Name ="customRecG4_2" Grid.Column="7"
+                                 Height="{Binding SelectedServer.Value4}"
+                                 Style="{StaticResource CustomRectangleStyle}"/>                
                     <TextBlock Text="{Binding SelectedServer.Time4}"  
                                Style="{StaticResource HeaderStyle}" 
                                Grid.Column="7"
@@ -174,12 +189,16 @@
                                HorizontalAlignment="Center"
                                Margin="0 0 0 50"
                                FontSize="10"/>
-                    <Rectangle Fill="{StaticResource Neutral}"
-                               Grid.Column="9"
-                               Width="60"
-                               Height="{Binding SelectedServer.Value5}"
-                               VerticalAlignment="Bottom"
-                               Margin="5 0 5 72"/>
+                    <custom:CustomRectangle 
+                            x:Name ="customRecG5_1" Grid.Column="9"
+                            Height="{Binding SelectedServer.Value5}"
+                            Background="Transparent"
+                            Style="{StaticResource CustomRectangleStyle}"
+                            HeightChanged ="customRecG5_1_HeightChanged"/>
+                    <custom:CustomRectangle 
+                             x:Name ="customRecG5_2" Grid.Column="9"
+                             Height="{Binding SelectedServer.Value5}"
+                             Style="{StaticResource CustomRectangleStyle}"/>
                     <TextBlock Text="{Binding SelectedServer.Time5}" 
                                Style="{StaticResource HeaderStyle}" 
                                Grid.Column="9"
