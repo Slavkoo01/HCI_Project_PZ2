@@ -103,6 +103,22 @@ namespace NetworkService.Views
                 
                 ServerViewModel droppedServer = e.Data.GetData(typeof(ServerViewModel)) as ServerViewModel;
                 MessageBox.Show(droppedServer.ToString());
+
+                
+                    string itemData = e.Data.GetData(DataFormats.Text) as string;
+
+                // Create a UserControl based on the dropped data
+                    UserControl userControl = new DragDropCardView(droppedServer);
+
+                    // Get the drop position relative to the Canvas
+                    Point dropPosition = e.GetPosition(canvas);
+
+                    // Set the position of the UserControl on the Canvas
+                    Canvas.SetLeft(userControl, dropPosition.X);
+                    Canvas.SetTop(userControl, dropPosition.Y);
+
+                    // Add the UserControl to the Canvas
+                    canvas.Children.Add(userControl);
                 
             }
         }
@@ -132,6 +148,7 @@ namespace NetworkService.Views
         {
             if (e.MiddleButton == MouseButtonState.Pressed)
             {
+                Mouse.OverrideCursor = Cursors.Hand;
                 _start = e.GetPosition(scrollViewer);
                 _origin = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
                 canvas.CaptureMouse();
@@ -142,15 +159,19 @@ namespace NetworkService.Views
         {
             if (canvas.IsMouseCaptured)
             {
+                
                 Vector v = _start - e.GetPosition(scrollViewer);
                 scrollViewer.ScrollToHorizontalOffset(_origin.X + v.X);
                 scrollViewer.ScrollToVerticalOffset(_origin.Y + v.Y);
             }
+           
+           
         }
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             canvas.ReleaseMouseCapture();
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void CenterCanvas()

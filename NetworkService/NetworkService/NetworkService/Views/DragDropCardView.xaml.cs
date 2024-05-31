@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkService.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace NetworkService.Views
     /// </summary>
     public partial class DragDropCardView : UserControl
     {
-        public DragDropCardView()
+        public DragDropCardView(ServerViewModel serverViewModel)
         {
             InitializeComponent();
+            DataContext = serverViewModel;
         }
     }
 }
