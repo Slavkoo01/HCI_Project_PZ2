@@ -4,20 +4,97 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:custom="clr-namespace:NetworkService.CustomControls"
              mc:Ignorable="d" 
+             
+             
              d:DesignHeight="200" d:DesignWidth="300">
-    <Border BorderBrush="Black" BorderThickness="1" Background="Black" CornerRadius="10">
-        
+    
+    <Border x:Name="border"
+            BorderThickness="1" 
+            Background="{StaticResource Background}"
+            Height="145"
+            Width="250">
+        <Border.Effect>
+            <DropShadowEffect Color="{StaticResource BackgroundC}" ShadowDepth="15" BlurRadius="20" Opacity="1"/>
+        </Border.Effect>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Image Source="{Binding ServerType.ServerTypeImage}" Width="50" Height="50" />
-            <StackPanel Grid.Column="1">
-                <TextBlock Text="{Binding Name}" Style="{StaticResource font_style}"/>
-                <TextBlock Text="{Binding IpAddress}" Margin="0,5,0,0" Style="{StaticResource font_style}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="Auto"/>
+                <RowDefinition Height ="Auto"/>
+                <RowDefinition Height ="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal"
+                        Background="DarkGoldenrod">
+                <Grid Width="250">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5.5"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource font_style}"
+                           Margin="10 0 0 0"/>
+                    <Button x:Name="closeButton"
+                         Grid.Column="1"
+                         Width="25"
+                         Height="25"
+                         Command="{Binding CloseDragDropCommand}"
+                         BorderThickness="0"
+                         BorderBrush="Transparent"
+                         Background="Transparent"
+                         Style="{StaticResource CloseDragDrop}"/>
+
+
+
+
+                </Grid>
             </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" 
+                        Grid.Row="1"
+                        Margin="10 10 0 0">
+                <Image Source="{Binding ServerType.ServerTypeImage}" Width="50" Height="50" />
+                
+                <StackPanel Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="ID:" Margin="10 0 5 0" Style="{StaticResource font_style}"/>
+                            <TextBlock Text="{Binding Id}" Style="{StaticResource font_style}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="IP:" Margin="10 0 5 0" Style="{StaticResource font_style}"/>
+                            <TextBlock Text="{Binding IpAddress}" Style="{StaticResource font_style}"/>
+                        </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+            <Grid Grid.Row="2">
+                <Border  x:Name="valueBorder"
+                         Margin="0 7 0 0 "
+                         Background="{StaticResource Card}"
+                         CornerRadius="5"
+                         Width="230"
+                         Height="30"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center">
+                    <custom:CustomRectangle x:Name="valuePresenter"
+                                            Content="{Binding LatestValuePercent}"
+                                            FontWeight="Medium"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="White"
+                                            Height="30"
+                                            Width="50"
+                                            FontSize="19"
+                                            IsHitTestVisible="False"
+                                            Background="Transparent"
+                                            ContentChanged="CustomRectangle_ContentChanged"
+                                            BorderThickness="0"/>
+
+                </Border>
+            </Grid>
         </Grid>
+        
     </Border>
 </UserControl>

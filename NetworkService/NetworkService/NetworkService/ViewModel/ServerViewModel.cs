@@ -26,6 +26,8 @@ namespace NetworkService.ViewModel
         [XmlIgnore]
         private ServerTypeModel _serverType;
         [XmlIgnore]
+        private string _latestValuePercent = "0%";
+        [XmlIgnore]
         private int _value1 = 5;
         [XmlIgnore]
         private int _value2 = 5;
@@ -60,6 +62,8 @@ namespace NetworkService.ViewModel
 
 
         [XmlIgnore]
+        public string LatestValuePercent { get { return _latestValuePercent; } set { _latestValuePercent = value; OnPropertyChanged(nameof(LatestValuePercent)); } } 
+        [XmlIgnore]
         public int Value1 { get { return _value1; } set { _value1 = value; OnPropertyChanged(nameof(Value1)); } } 
         [XmlIgnore]
         public int Value2 { get { return _value2; } set { _value2 = value; OnPropertyChanged(nameof(Value2)); } }
@@ -89,6 +93,8 @@ namespace NetworkService.ViewModel
         }
         public void NewValue(int value, string time)
         {
+            LatestValuePercent = value.ToString() + "%";
+
             Value5 = Value4; 
             Value4 = Value3; 
             Value3 = Value2; 

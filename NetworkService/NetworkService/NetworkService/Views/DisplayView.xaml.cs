@@ -24,6 +24,9 @@ namespace NetworkService.Views
     public partial class DisplayView : UserControl
     {
         private DisplayViewModel _displayVM = new DisplayViewModel();
+        public DisplayViewModel DisplayViewModel { get { return _displayVM; } }
+
+        public Canvas Canvas { get { return canvas; } }
 
         private Point _start;
         private Point _origin;
@@ -51,9 +54,48 @@ namespace NetworkService.Views
 
             //Drag and drop
             canvas.Drop += Canvas_Drop;
+            canvas.DragOver += Canvas_DragOver;
             canvas.AllowDrop = true;
             treeView.MouseMove += TreeView_ItemDrag;
 
+            DragDrop.AddGiveFeedbackHandler(this, Canvas_GiveFeedback);
+
+        }
+
+        private void Canvas_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+            Mouse.SetCursor(Cursors.Hand);
+            e.Handled = true;
+        }
+
+        private void Canvas_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(DragDropCardView)))
+            {
+                DragDropCardView draggedControl = e.Data.GetData(typeof(DragDropCardView)) as DragDropCardView;
+                if (draggedControl != null)
+                {
+                    Canvas canvas = sender as Canvas;
+                    Point dropPosition = e.GetPosition(canvas);
+
+                    Point initialMouseOffset = draggedControl.InitialMouseOffset;
+                    double newLeft = dropPosition.X - initialMouseOffset.X;
+                    double newTop = dropPosition.Y - initialMouseOffset.Y;
+
+                  
+                    var parent = VisualTreeHelper.GetParent(draggedControl) as Canvas;
+                    if (parent != null)
+                    {
+                        parent.Children.Remove(draggedControl);
+                    }
+
+                    
+                    canvas.Children.Add(draggedControl);
+                    Canvas.SetLeft(draggedControl, newLeft);
+                    Canvas.SetTop(draggedControl, newTop);
+                }
+
+            }
         }
 
         private void TreeView_ItemDrag(object sender, MouseEventArgs e)
@@ -67,8 +109,8 @@ namespace NetworkService.Views
                 {
                     if (treeViewItem != null)
                     {
-                        ServerViewModel selectedBook = (ServerViewModel)treeViewItem.Header;
-                        DataObject dragData = new DataObject(typeof(ServerViewModel), selectedBook);
+                        ServerViewModel selectedServer = (ServerViewModel)treeViewItem.Header;
+                        DataObject dragData = new DataObject(typeof(ServerViewModel), selectedServer);
                         DragDrop.DoDragDrop(treeViewItem, dragData, DragDropEffects.Move);
 
                     }
@@ -100,40 +142,39 @@ namespace NetworkService.Views
         {
             if (e.Data.GetDataPresent(typeof(ServerViewModel)))
             {
-                
+
                 ServerViewModel droppedServer = e.Data.GetData(typeof(ServerViewModel)) as ServerViewModel;
-                MessageBox.Show(droppedServer.ToString());
 
-                
-                    string itemData = e.Data.GetData(DataFormats.Text) as string;
+                UserControl userControl = new DragDropCardView(droppedServer, this);
 
-                // Create a UserControl based on the dropped data
-                    UserControl userControl = new DragDropCardView(droppedServer);
+                Point dropPosition = e.GetPosition(canvas);
 
-                    // Get the drop position relative to the Canvas
-                    Point dropPosition = e.GetPosition(canvas);
 
-                    // Set the position of the UserControl on the Canvas
-                    Canvas.SetLeft(userControl, dropPosition.X);
-                    Canvas.SetTop(userControl, dropPosition.Y);
+                Canvas.SetLeft(userControl, dropPosition.X);
+                Canvas.SetTop(userControl, dropPosition.Y);
 
-                    // Add the UserControl to the Canvas
-                    canvas.Children.Add(userControl);
-                
+
+                canvas.Children.Add(userControl);
+                _displayVM.RemoveNode(droppedServer);
             }
+            
         }
 
+            #region Canvas Grid
 
-        #region Canvas Grid
 
-        private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
+
+            private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
         {
+            
             var position = e.GetPosition(canvas);
             var transformGroup = (TransformGroup)canvas.RenderTransform;
             var scaleTransform = (ScaleTransform)transformGroup.Children[0];
             double zoom = e.Delta > 0 ? .2 : -.2;
+               
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
+                e.Handled = true;
                 if ((scaleTransform.ScaleX + zoom) >= 1 && (scaleTransform.ScaleX + zoom) <= 3)
                 {
                     scaleTransform.ScaleX += zoom;
@@ -141,6 +182,7 @@ namespace NetworkService.Views
                     scaleTransform.CenterX = position.X;
                     scaleTransform.CenterY = position.Y;
                 }
+               
             }
         }
 
@@ -225,9 +267,6 @@ namespace NetworkService.Views
             DrawGrid();
         }
 
-        private void Grid_MouseMove(object sender, MouseEventArgs e)
-        {
-            
-        }
+        
     }
 }

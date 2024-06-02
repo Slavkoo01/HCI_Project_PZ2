@@ -2,6 +2,44 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa5="http://schemas.fontawesome.com/icons/"
                     xmlns:custom="clr-namespace:NetworkService.CustomControls">
+    <!--CloseButtonStyleDragDropCard-->
+    <Style x:Key="CloseDragDrop" TargetType="Button">
+        <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 5 5 5"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                          BorderThickness="0"
+                          Background="{TemplateBinding Background}"
+                          Height="{TemplateBinding Height}">
+                        <fa5:SvgAwesome Name="icon"
+                                      Icon="Solid_WindowClose"
+                                      Height="25"
+                                      Foreground="{StaticResource Neutral}">
+                        </fa5:SvgAwesome>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderThickness" TargetName="border" Value="1"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" TargetName="icon" Value="{StaticResource Rose}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <!--NETOWRK ENTITIES-->
     <Style x:Key="CustomRectangleStyle" TargetType="custom:CustomRectangle">
         <Setter Property="Foreground" Value="Transparent"/>
@@ -16,6 +54,7 @@
                             BorderThickness="0"
                             Background="{TemplateBinding Background}"
                             Height="{TemplateBinding Height}">
+                        <ItemsPresenter/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

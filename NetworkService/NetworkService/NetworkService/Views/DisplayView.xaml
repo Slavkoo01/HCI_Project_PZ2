@@ -46,7 +46,7 @@
                                            FontSize="20"/>
                                 <HierarchicalDataTemplate.ItemTemplate>
                                     <DataTemplate >
-                                        <Grid Margin="0 5 0 5" Width="210" MouseMove="Grid_MouseMove">
+                                        <Grid Margin="0 5 0 5" Width="210">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>

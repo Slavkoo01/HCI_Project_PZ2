@@ -11,7 +11,8 @@ namespace NetworkService.CustomControls
 {
     public class CustomRectangle : Button
     {
-   
+
+       
         public static readonly RoutedEvent HeightChangedEvent =
             EventManager.RegisterRoutedEvent(
                 "HeightChanged",
@@ -19,20 +20,42 @@ namespace NetworkService.CustomControls
                 typeof(RoutedEventHandler),
                 typeof(CustomRectangle));
 
+        
+        public static readonly RoutedEvent ContentChangedEvent =
+            EventManager.RegisterRoutedEvent(
+                "ContentChanged",
+                RoutingStrategy.Bubble,
+                typeof(RoutedEventHandler),
+                typeof(CustomRectangle));
+
+        
         public event RoutedEventHandler HeightChanged
         {
             add { AddHandler(HeightChangedEvent, value); }
             remove { RemoveHandler(HeightChangedEvent, value); }
         }
 
+        
+        public event RoutedEventHandler ContentChanged
+        {
+            add { AddHandler(ContentChangedEvent, value); }
+            remove { RemoveHandler(ContentChangedEvent, value); }
+        }
+
+        
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
 
             if (e.Property == HeightProperty)
             {
-                RoutedEventArgs args = new RoutedEventArgs(HeightChangedEvent);
-                RaiseEvent(args);
+                RoutedEventArgs heightArgs = new RoutedEventArgs(HeightChangedEvent);
+                RaiseEvent(heightArgs);
+            }
+            else if (e.Property == ContentProperty)
+            {
+                RoutedEventArgs contentArgs = new RoutedEventArgs(ContentChangedEvent);
+                RaiseEvent(contentArgs);
             }
         }
     }

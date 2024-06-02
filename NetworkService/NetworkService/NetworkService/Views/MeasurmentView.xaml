@@ -223,7 +223,7 @@
                                Height="30"
                                Width="30"
                                Margin="70 0 10 0"/>
-                    <TextBlock Text="Under valid Value"
+                    <TextBlock Text="Valid Value"
                                Style="{StaticResource HeaderStyle}" 
                                FontSize="10"
                                FontWeight="Bold"/>
@@ -232,7 +232,7 @@
                                Height="30"
                                Width="30"
                                Margin="70 0 10 0"/>
-                    <TextBlock Text="Valid Value"
+                    <TextBlock Text="Under valid Value"
                                Style="{StaticResource HeaderStyle}" 
                                FontSize="10"
                                FontWeight="Bold"/>

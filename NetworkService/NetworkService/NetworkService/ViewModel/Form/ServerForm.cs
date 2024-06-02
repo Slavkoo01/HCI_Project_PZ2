@@ -77,6 +77,12 @@ namespace NetworkService.ViewModel.Base
                 _errorViewModel.AddError(nameof(Name), "Name is required.");
                 isValid = false;
             }
+            else if (Name.Length > 12)
+            {
+                _errorViewModel.ClearError(nameof(Name));
+                _errorViewModel.AddError(nameof(Name), "Name is too long.");
+                isValid = false;
+            }
             else
             {
                 _errorViewModel.ClearError(nameof(Name));

@@ -40,9 +40,9 @@ namespace NetworkService.Views
         private Color GetColorBasedOnHeight(double height)
         {
             if (height < 267)
-                return ((SolidColorBrush)Application.Current.Resources["Neutral"]).Color;
-            else if (height >= 267 && height <= 437)
                 return ((SolidColorBrush)Application.Current.Resources["Blue"]).Color;
+            else if (height >= 267 && height <= 437)
+                return ((SolidColorBrush)Application.Current.Resources["Neutral"]).Color;
             else
                 return ((SolidColorBrush)Application.Current.Resources["Rose"]).Color;
         }

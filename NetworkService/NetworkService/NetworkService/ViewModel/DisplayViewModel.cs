@@ -42,6 +42,26 @@ namespace NetworkService.ViewModel
                 DisplayNodes.Add(sn);
             }
         }
+        public void AddServer(ServerViewModel server)
+        {
+            foreach (var node in DisplayNodes)
+            {
+                if (server.ServerType.Type.ToString() == node.Type)
+                {
+                    node.ServerViewModels.Add(server);
+                }
+            }
+        }
+        public void RemoveNode(ServerViewModel server)
+        {
+            foreach(var node in DisplayNodes)
+            {
+                if(server.ServerType.Type.ToString() == node.Type)
+                {
+                    node.ServerViewModels.Remove(server);
+                }
+            }
+        }
 
     }
 }
