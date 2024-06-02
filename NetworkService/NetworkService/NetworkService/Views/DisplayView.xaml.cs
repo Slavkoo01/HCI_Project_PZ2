@@ -36,7 +36,8 @@ namespace NetworkService.Views
         {
 
             InitializeComponent();
-            
+            DrawGrid();
+            CenterCanvas();
             DataContext = _displayVM;
 
             TransformGroup transformGroup = new TransformGroup();
@@ -260,13 +261,6 @@ namespace NetworkService.Views
             }
         }
         #endregion
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            CenterCanvas();
-            DrawGrid();
-        }
-
         
     }
 }

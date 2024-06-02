@@ -26,19 +26,11 @@
             <!--Main Frame-->
             <Grid PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown"
                   Margin="75 0 0 0">
-                <ContentControl Content="{Binding CurrentViewModel}">
-                    <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type viewmodels:EntitiesViewModel}">
-                            <views:EntitiesView/>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewmodels:DisplayViewModel}">
-                            <views:DisplayView/>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewmodels:MeasurementViewModel}">
-                            <views:MeasurmentView/>
-                        </DataTemplate>
-                    </ContentControl.Resources>
+                <ContentControl Content="{Binding CurrentView}">
+                    
                 </ContentControl>
+
+
                 <Rectangle x:Name="mainFrmeRectangle" Fill="Black" Opacity="0.3" Visibility="Collapsed"/>
             </Grid>
             <Grid   x:Name="SideMenu"

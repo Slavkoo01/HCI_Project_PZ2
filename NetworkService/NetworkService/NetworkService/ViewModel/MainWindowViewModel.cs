@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace NetworkService.ViewModel
@@ -24,17 +25,21 @@ namespace NetworkService.ViewModel
                                 // Inicijalna vrednost broja objekata u sistemu
                                 // ######### ZAMENITI stvarnim brojem elemenata
                                 //           zavisno od broja entiteta u listi
-        EntitiesViewModel entitiesViewModel = new EntitiesViewModel();
-        DisplayViewModel displayViewModel = new DisplayViewModel(); 
-        MeasurementViewModel measurementViewModel = new MeasurementViewModel();
+        
+
+        public EntitiesView EntitiesView { get; set; } = new EntitiesView();
+        public DisplayView DisplayView { get; set; } = new DisplayView();
+        public MeasurmentView MeasurementView { get; set; } = new MeasurmentView();
         public MainWindowViewModel()
         {
-            CurrentViewModel = entitiesViewModel;
+            
+            CurrentView = EntitiesView;
             createListener(); //Povezivanje sa serverskom aplikacijom           
             NavigateEntitiesCommand = new CommandBase(NavigateToEntities);
             NavigateDisplayCommand = new CommandBase(NavigateToDisplay);
             NavigateMeasurementCommand = new CommandBase(NavigateToMeasurements);
             CloseCommand = new CommandBase(Close);
+            
         }
 
 
@@ -116,33 +121,33 @@ namespace NetworkService.ViewModel
         }
         private void NavigateToEntities(object parameter)
         {
-            CurrentViewModel = entitiesViewModel;
+            CurrentView = EntitiesView;
         }
 
         private void NavigateToDisplay(object parameter)
         {
-            CurrentViewModel = displayViewModel;
-        }
+            CurrentView = DisplayView;
+        }    
+        
 
         private void NavigateToMeasurements(object parameter)
         {
-            CurrentViewModel = measurementViewModel;
+            CurrentView = MeasurementView;
         }
 
-        private ViewModelBase _currentViewModel;
-        public ViewModelBase CurrentViewModel
+        private UserControl _currentView;
+        public UserControl CurrentView
         {
-            get => _currentViewModel;
+            get => _currentView;
             set
             {
-                if (_currentViewModel != value)
+                if (_currentView != value)
                 {
-                    _currentViewModel = value;
-                    OnPropertyChanged(nameof(CurrentViewModel));
+                    _currentView = value;
+                    OnPropertyChanged(nameof(CurrentView));
                 }
             }
         }
-
 
 
 

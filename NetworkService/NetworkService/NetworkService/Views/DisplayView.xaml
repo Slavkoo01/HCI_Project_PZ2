@@ -8,7 +8,6 @@
              xmlns:viewmodel="clr-namespace:NetworkService.ViewModel"
              xmlns:model="clr-namespace:NetworkService.Model"
              mc:Ignorable="d" 
-             Loaded="UserControl_Loaded"
              d:DesignHeight="720" d:DesignWidth="1005"
              >
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
