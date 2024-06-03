@@ -2,6 +2,7 @@
 using NetworkService.Model;
 using NetworkService.ViewModel.Base;
 using NetworkService.ViewModel.Form;
+using NetworkService.Views;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace NetworkService.ViewModel
         #region Properties
         private ServerForm _server;
         private FilterForm _serverFilter;
+        private DisplayViewModel _displayViewModel;
+        private Canvas _canvas;
         private ObservableCollection<ServerViewModel> _listViewCollection;
         
         public ServerForm Server { get { return _server; } set { _server = value; OnPropertyChanged(nameof(Server)); } }
@@ -50,11 +53,42 @@ namespace NetworkService.ViewModel
         public ICommand SubmitCommand => new CommandBase(execute => AddToEntityCollection());
         public ICommand SearchCommand => new CommandBase(execute => ApplyFilters());
         public ICommand ResetCommand => new CommandBase(execute => ResetFilter());
+
+        public void DeleteServerBase(ServerViewModel serverViewModel)
+        {
+            EntityColection.Remove(serverViewModel);
+            _displayViewModel.RemoveNode(serverViewModel);
+
+            RemoveUserControlFromCanvas(serverViewModel);
+        }
+
+        private void RemoveUserControlFromCanvas(ServerViewModel serverViewModel)
+        {
+            UserControl userControlToRemove = FindUserControlByDataContext(serverViewModel);
+            if (userControlToRemove != null)
+            {
+                _canvas.Children.Remove(userControlToRemove);
+            }
+        }
+
+        private UserControl FindUserControlByDataContext(ServerViewModel serverViewModel)
+        {
+            foreach (var child in _canvas.Children)
+            {
+                if (child is UserControl userControl && userControl.DataContext == serverViewModel)
+                {
+                    return userControl;
+                }
+            }
+            return null;
+        }
         private void AddToEntityCollection()
         {
             if (Server.Validate())
             {
-                EntityColection.Add(Server.CreateViewModel());
+                ServerViewModel temp = Server.CreateViewModel();
+                EntityColection.Add(temp);
+                _displayViewModel.AddServer(temp);
                 GlobalVar.IsSaved = false;
                 Server.ResetValues();
             }
@@ -74,8 +108,10 @@ namespace NetworkService.ViewModel
         }
          #endregion
         
-        public EntitiesViewModel() 
+        public EntitiesViewModel(DisplayView displayView) 
         {
+            _canvas = displayView.Canvas;
+            _displayViewModel = displayView.DisplayViewModel;
             Server = new ServerForm();
             ServerFilter = new FilterForm();
             ListViewCollection =  EntityColection;

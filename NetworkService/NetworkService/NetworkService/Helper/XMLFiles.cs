@@ -10,11 +10,21 @@ using System.Xml;
 using NetworkService.ViewModel;
 using NetworkService.Helper;
 using System.Windows;
+using NetworkService.Views;
+using System.Windows.Controls;
 
 namespace NetworkService.Repositories
 {
+    [Serializable]
+    [XmlRoot("UserControls")]
+    public class UserControlInfoCollection
+    {
+        [XmlElement("UserControlInfo")]
+        public List<UserControlInfo> UserControls { get; set; } = new List<UserControlInfo>();
+    }
     public class XMLFiles
     {
+        #region ServerViewModel
         public ObservableCollection<ServerViewModel> serializableObject = EntitiesViewModel.EntityColection;
 
         public void SerializeObject()
@@ -103,7 +113,76 @@ namespace NetworkService.Repositories
 
         }
 
+        #endregion
 
+        #region DragDropCard
+        public static void ExportUserControls(Canvas canvas)
+        {
+            string filePath = "CanvasChildern.xml";
+            var userControlsInfo = new UserControlInfoCollection();
+
+            foreach (var child in canvas.Children)
+            {
+                if (child is DragDropCardView userControl)
+                {
+                    var left = Canvas.GetLeft(userControl);
+                    var top = Canvas.GetTop(userControl);
+                    var ServerId = userControl.ServerViewModel.Id;
+
+                    userControlsInfo.UserControls.Add(new UserControlInfo
+                    {
+
+                        Left = left,
+                        Top = top,
+                        Id = ServerId
+                    }); ;
+                }
+            }
+
+            var serializer = new XmlSerializer(typeof(UserControlInfoCollection));
+            using (var writer = new StreamWriter(filePath))
+            {
+                serializer.Serialize(writer, userControlsInfo);
+            }
+        }
+        public static void LoadUserControls(Canvas canvas, DisplayView displayView)
+        {
+            string filePath = "CanvasChildern.xml";
+            var serializer = new XmlSerializer(typeof(UserControlInfoCollection));
+            UserControlInfoCollection userControlsInfo;
+
+            using (var reader = new StreamReader(filePath))
+            {
+                userControlsInfo = (UserControlInfoCollection)serializer.Deserialize(reader);
+            }
+
+            foreach (var info in userControlsInfo.UserControls)
+            {
+                ServerViewModel tempServer = null;
+
+                foreach (var server in EntitiesViewModel.EntityColection)
+                {
+                    if (server.Id == info.Id)
+                    {
+                        tempServer = server;
+                        break;
+                    }
+                }
+                if (tempServer != null)
+                {
+                    DragDropCardView temp = new DragDropCardView(tempServer, displayView);
+
+                    Canvas.SetLeft(temp, info.Left);
+                    Canvas.SetTop(temp, info.Top);
+
+                    canvas.Children.Add(temp);
+                    displayView.DisplayViewModel.RemoveNode(tempServer);
+
+                }
+
+            }
+        }
+        #endregion
 
     }
 }

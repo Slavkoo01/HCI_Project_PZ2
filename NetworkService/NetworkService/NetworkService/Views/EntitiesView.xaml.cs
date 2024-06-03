@@ -24,10 +24,13 @@ namespace NetworkService.Views
     {
         
         private EntitiesViewModel _entityVM;
-        public EntitiesView()
+        
+        public EntitiesView(DisplayView displayView)
         {
-            _entityVM = new EntitiesViewModel();
             InitializeComponent();
+            _entityVM = new EntitiesViewModel(displayView);
+           
+
             DataContext = _entityVM;
         }
 
@@ -37,7 +40,8 @@ namespace NetworkService.Views
             
             foreach (var selectedItem in selectedItems)
             {
-                EntitiesViewModel.EntityColection.Remove(selectedItem);
+                _entityVM.DeleteServerBase(selectedItem);
+                //EntitiesViewModel.EntityColection.Remove(selectedItem);
             }   
         }
 

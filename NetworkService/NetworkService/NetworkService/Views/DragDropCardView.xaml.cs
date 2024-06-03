@@ -1,8 +1,10 @@
 ﻿using NetworkService.CustomControls;
+using NetworkService.Helper;
 using NetworkService.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -27,6 +30,14 @@ namespace NetworkService.Views
         private ServerViewModel _serverViewModel;
         private DragDropCardViewModel _dragDropCardViewModel;
         private Point _initialMouseOffset;
+
+        static bool isDrawing = false;
+
+        private Canvas _canvas;
+        private Line _tempLine;
+        private NodeLine _nodeLine;
+        public List<NodeLine> NodeLines { get; set; } = new List<NodeLine>(20); 
+        private Ellipse _startEllipse;
         public ServerViewModel ServerViewModel { get { return _serverViewModel; } set { _serverViewModel = value; } }
 
         public Point InitialMouseOffset { get { return _initialMouseOffset; } set {  _initialMouseOffset = value; } }
@@ -35,30 +46,163 @@ namespace NetworkService.Views
         public DragDropCardView(ServerViewModel serverViewModel,DisplayView displayView)
         {
             InitializeComponent();
+            ServerViewModel = serverViewModel;
             _dragDropCardViewModel = new DragDropCardViewModel(this, displayView);
             closeButton.DataContext = _dragDropCardViewModel;
-            ServerViewModel = serverViewModel;
             DataContext = ServerViewModel;
+
+           
             this.MouseDown += UserControl_MouseDown;
-            this.MouseMove += UserControl_MouseMove;
+            cardBar.MouseMove += UserControl_MouseMove;
+            DockLeft.MouseLeftButtonDown += Elipse_MouseLeftButtonDown;
+            DockRight.MouseLeftButtonDown += Elipse_MouseLeftButtonDown;
+            closeButton.Click += RemoveLines;
+
+            _canvas = displayView.Canvas;
         }
 
-       
+        private void RemoveLines(object sender, RoutedEventArgs e)
+        {
+            List<int?> IDs = new List<int?>();
+
+            foreach(NodeLine line in NodeLines)
+            {
+                _canvas.Children.Remove(line.Line);
+                if(line.StartServerId != ServerViewModel.Id)
+                {
+                    IDs.Add(line.StartServerId);
+                }
+                else if(line.EndServerId != ServerViewModel.Id)
+                {
+                    IDs.Add(line.EndServerId);
+                }
+            }
+            foreach(var item in IDs)
+            {
+                MessageBox.Show(item.ToString());
+            }
+        }
+
+        private void Elipse_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if(sender is Ellipse ellipse)
+            {
+                isDrawing = true;
+                _startEllipse = ellipse;
+
+                _tempLine = new Line
+                {
+                    Stroke = ((SolidColorBrush)Application.Current.Resources["Neutral"]),
+                    StrokeThickness = 3
+                };
+                var startPoint = ellipse.TranslatePoint(new Point(ellipse.Width/2, ellipse.Height/2),_canvas);
+                _tempLine.X1 = _tempLine.X2 = startPoint.X;
+                _tempLine.Y1 = _tempLine.Y2 = startPoint.Y;
+
+                _nodeLine = new NodeLine(null, true, ServerViewModel.Id,null);
+
+                if(ellipse.Name == "DockLeft")
+                    _nodeLine.Dock = Helper.Dock.Left;
+                else
+                    _nodeLine.Dock = Helper.Dock.Right;
+
+                _canvas.Children.Insert(79,_tempLine);
+                _canvas.MouseMove += Canvas_MouseMove;
+                _canvas.PreviewMouseLeftButtonUp += Canvas_MouseLeftButtonUp;
+            
+            }
+        }
+        
+        private void Canvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_tempLine != null)
+            {
+                _canvas.MouseMove -= Canvas_MouseMove;
+                _canvas.MouseLeftButtonDown -= Canvas_MouseLeftButtonUp;
+
+                var position = e.GetPosition(_canvas);
+                position.X += 1;
+                position.Y += 1;
+                var hitTestResult = VisualTreeHelper.HitTest(_canvas, position);
+
+
+                if (hitTestResult.VisualHit is Ellipse endEllipse && endEllipse != this.DockLeft && endEllipse != this.DockRight)
+                {
+                    var dragDropCardView = FindParent<DragDropCardView>(endEllipse);
+                    
+
+                    var endPoint = endEllipse.TranslatePoint(new Point(endEllipse.Width / 2, endEllipse.Height / 2), _canvas);
+                    _tempLine.X2 = endPoint.X;
+                    _tempLine.Y2 = endPoint.Y;
+
+                    _nodeLine.Line = _tempLine;
+                    _nodeLine.EndServerId = dragDropCardView.ServerViewModel.Id;
+                    
+                    AddNodeLine(_nodeLine);
+                    _nodeLine = new NodeLine(_tempLine, false, ServerViewModel.Id, dragDropCardView.ServerViewModel.Id);
+                    
+                    if (endEllipse.Name == "DockLeft")
+                        _nodeLine.Dock = Helper.Dock.Left;
+                    else
+                        _nodeLine.Dock = Helper.Dock.Right;
+                    
+                    dragDropCardView.AddNodeLine(_nodeLine);
+                }
+                else
+                {
+                    _canvas.Children.Remove(_tempLine);
+                }
+                isDrawing = false;
+                _nodeLine = null;
+                _tempLine = null;
+                _startEllipse = null;
+            }
+        }
+        private void AddNodeLine(NodeLine nodeLine)
+        {
+            foreach(NodeLine line in NodeLines)
+            {
+                if ((line.StartServerId == nodeLine.StartServerId && line.EndServerId == nodeLine.EndServerId) ||
+                    (line.StartServerId == nodeLine.EndServerId && line.EndServerId == nodeLine.StartServerId)) 
+                {
+                    _canvas.Children.Remove(_tempLine);
+                    return;
+                   
+                }
+            }
+            NodeLines.Add(nodeLine);
+        }
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_tempLine != null)
+            {
+                var position = e.GetPosition(_canvas);
+                _tempLine.X2 = position.X;
+                _tempLine.Y2 = position.Y;
+            }
+        }
+
+
+        #region DragDrop 
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                _initialMouseOffset = e.GetPosition(this);
+                InitialMouseOffset = e.GetPosition(this);
+            }
+        }
+        private void UserControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && !isDrawing)
+            {
+                DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
             }
         }
 
-        private void UserControl_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                    DragDrop.DoDragDrop(this, this, DragDropEffects.Move);            
-            }
-        }
+       
+        #endregion
+
+        #region ValueColors
         private void AnimateBackgroundColor(Border border, Color toColor)
         {
             SolidColorBrush originalBrush = (SolidColorBrush)border.Background;
@@ -93,14 +237,26 @@ namespace NetworkService.Views
             else
             {
                 AnimateForegroundColor(valuePresenter, ((SolidColorBrush)Application.Current.Resources["Neutral"]).Color);
-                return ((SolidColorBrush)Application.Current.Resources["Blue"]).Color;
+                return ((SolidColorBrush)Application.Current.Resources["Rose"]).Color;
             }
         }
         private void CustomRectangle_ContentChanged(object sender, RoutedEventArgs e)
         {
             AnimateBackgroundColor(valueBorder, GetColorBasedOnHeight(ServerViewModel.Value1));
         }
+        #endregion
 
-        
+        private T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+
+            if (parentObject == null) return null;
+
+            if (parentObject is T parent)
+                return parent;
+            else
+                return FindParent<T>(parentObject);
+        }
+
     }
 }

@@ -17,10 +17,8 @@ namespace NetworkService
         protected override void OnStartup(StartupEventArgs e)
         {
             XMLFiles.LoadDataFromXML();
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainWindowViewModel()
-            };
+            MainWindow = new MainWindow();
+            
             
             
             

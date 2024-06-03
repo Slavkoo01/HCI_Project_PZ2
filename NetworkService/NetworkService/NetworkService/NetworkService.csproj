@@ -53,6 +53,8 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Json, Version=7.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -83,6 +85,8 @@
     </Compile>
     <Compile Include="CustomControls\ListViewSelectedItemsBehavior.cs" />
     <Compile Include="Helper\AnimationHelper.cs" />
+    <Compile Include="Helper\NodeLine.cs" />
+    <Compile Include="Helper\UserControlInfo.cs" />
     <Compile Include="Helper\GlobalVar.cs" />
     <Compile Include="Helper\LogWriter.cs" />
     <Compile Include="Helper\MyPath.cs" />

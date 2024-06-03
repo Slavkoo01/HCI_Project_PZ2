@@ -27,12 +27,14 @@ namespace NetworkService.ViewModel
                                 //           zavisno od broja entiteta u listi
         
 
-        public EntitiesView EntitiesView { get; set; } = new EntitiesView();
-        public DisplayView DisplayView { get; set; } = new DisplayView();
-        public MeasurmentView MeasurementView { get; set; } = new MeasurmentView();
+        public DisplayView DisplayView { get; set; } 
+        public MeasurmentView MeasurementView { get; set; } 
+        public EntitiesView EntitiesView { get; set; } 
         public MainWindowViewModel()
         {
-            
+            DisplayView = new DisplayView();
+            EntitiesView = new EntitiesView(DisplayView);
+            MeasurementView = new MeasurmentView();
             CurrentView = EntitiesView;
             createListener(); //Povezivanje sa serverskom aplikacijom           
             NavigateEntitiesCommand = new CommandBase(NavigateToEntities);
@@ -148,7 +150,10 @@ namespace NetworkService.ViewModel
                 }
             }
         }
-
+        public void SaveCanvas()
+        {
+            XMLFiles.ExportUserControls(DisplayView.Canvas);
+        }
 
 
     }

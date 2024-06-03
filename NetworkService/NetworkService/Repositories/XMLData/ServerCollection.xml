@@ -19,21 +19,21 @@
     </ServerType>
   </ServerViewModel>
   <ServerViewModel>
-    <Id>3</Id>
-    <Name>Server_03</Name>
-    <IpAddress>192.168.0.3</IpAddress>
+    <Id>4</Id>
+    <Name>d</Name>
+    <IpAddress>1.1.1.1</IpAddress>
     <ServerType>
-      <Type>DataBaseServer</Type>
-      <ServerTypeImage>/Assets/DataBaseServer.png</ServerTypeImage>
+      <Type>FileServer</Type>
+      <ServerTypeImage>/Assets/FileServer.png</ServerTypeImage>
     </ServerType>
   </ServerViewModel>
   <ServerViewModel>
-    <Id>4</Id>
-    <Name>Server_04</Name>
-    <IpAddress>1.1.1.1</IpAddress>
+    <Id>5</Id>
+    <Name>s</Name>
+    <IpAddress>1.9.2.2</IpAddress>
     <ServerType>
-      <Type>DataBaseServer</Type>
-      <ServerTypeImage>/Assets/DataBaseServer.png</ServerTypeImage>
+      <Type>FileServer</Type>
+      <ServerTypeImage>/Assets/FileServer.png</ServerTypeImage>
     </ServerType>
   </ServerViewModel>
 </ArrayOfServerViewModel>

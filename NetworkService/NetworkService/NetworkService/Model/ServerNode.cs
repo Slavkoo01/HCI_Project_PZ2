@@ -12,12 +12,12 @@ namespace NetworkService.Model
     public class ServerNode : ViewModelBase
     {
         private string _type;
+        private ObservableCollection<ServerViewModel> _serverViewModels;
         public string Type 
         {
             get { return _type; }
             set { _type = value; OnPropertyChanged(nameof(Type)); }
         }
-        private ObservableCollection<ServerViewModel> _serverViewModels;
         public ObservableCollection<ServerViewModel> ServerViewModels 
             { 
                 get { return _serverViewModels;  } 

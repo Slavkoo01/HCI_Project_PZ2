@@ -1,4 +1,6 @@
-﻿using NetworkService.ViewModel;
+﻿using NetworkService.Helper;
+using NetworkService.Repositories;
+using NetworkService.ViewModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -60,6 +62,7 @@ namespace NetworkService.Views
             treeView.MouseMove += TreeView_ItemDrag;
 
             DragDrop.AddGiveFeedbackHandler(this, Canvas_GiveFeedback);
+            XMLFiles.LoadUserControls(Canvas, this);
 
         }
 
@@ -80,22 +83,39 @@ namespace NetworkService.Views
                     Point dropPosition = e.GetPosition(canvas);
 
                     Point initialMouseOffset = draggedControl.InitialMouseOffset;
+
+                   
+                    GeneralTransform transformLeft = draggedControl.DockLeft.TransformToVisual(canvas);
+                    Point canvasPointLeft = transformLeft.Transform(new Point(0, 0));
+
+
+                    GeneralTransform transformRight = draggedControl.DockRight.TransformToVisual(canvas);
+                    Point canvasPointRight = transformRight.Transform(new Point(0, 0)); 
+
                     double newLeft = dropPosition.X - initialMouseOffset.X;
                     double newTop = dropPosition.Y - initialMouseOffset.Y;
 
-                  
                     var parent = VisualTreeHelper.GetParent(draggedControl) as Canvas;
                     if (parent != null)
                     {
                         parent.Children.Remove(draggedControl);
                     }
 
-                    
+                    // Update positions of the connected NodeLines
+                    foreach (var item in draggedControl.NodeLines)
+                    {
+                        if (item.Dock == Helper.Dock.Left) 
+                        {
+                            item.MoveLine(canvasPointLeft.X + (draggedControl.DockLeft.ActualWidth / 2), canvasPointLeft.Y + (draggedControl.DockLeft.ActualHeight / 2));
+                        }
+                        else
+                        item.MoveLine(canvasPointRight.X + (draggedControl.DockLeft.ActualWidth / 2), canvasPointRight.Y + (draggedControl.DockLeft.ActualHeight / 2));
+                    }
+
                     canvas.Children.Add(draggedControl);
                     Canvas.SetLeft(draggedControl, newLeft);
                     Canvas.SetTop(draggedControl, newTop);
                 }
-
             }
         }
 
@@ -176,7 +196,7 @@ namespace NetworkService.Views
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 e.Handled = true;
-                if ((scaleTransform.ScaleX + zoom) >= 1 && (scaleTransform.ScaleX + zoom) <= 3)
+                if ((scaleTransform.ScaleX + zoom) >= 0.25 && (scaleTransform.ScaleX + zoom) <= 3)
                 {
                     scaleTransform.ScaleX += zoom;
                     scaleTransform.ScaleY += zoom;
@@ -232,7 +252,7 @@ namespace NetworkService.Views
         private void DrawGrid()
         {
             SolidColorBrush brush = ((SolidColorBrush)Application.Current.Resources["Background"]);
-            for (int i = 0; i < canvas.Width; i += GridSpacing)
+            for (int i = 0; i <= canvas.Width; i += GridSpacing)
             {
                 Line verticalLine = new Line
                 {
@@ -246,7 +266,7 @@ namespace NetworkService.Views
                 canvas.Children.Add(verticalLine);
             }
 
-            for (int i = 0; i < canvas.Height; i += GridSpacing)
+            for (int i = 0; i <= canvas.Height; i += GridSpacing)
             {
                 Line horizontalLine = new Line
                 {
