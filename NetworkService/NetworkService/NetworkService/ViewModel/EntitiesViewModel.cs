@@ -64,18 +64,19 @@ namespace NetworkService.ViewModel
 
         private void RemoveUserControlFromCanvas(ServerViewModel serverViewModel)
         {
-            UserControl userControlToRemove = FindUserControlByDataContext(serverViewModel);
+            DragDropCardView userControlToRemove = FindUserControlByDataContext(serverViewModel);
             if (userControlToRemove != null)
             {
+                userControlToRemove.RemoveLines();
                 _canvas.Children.Remove(userControlToRemove);
             }
         }
 
-        private UserControl FindUserControlByDataContext(ServerViewModel serverViewModel)
+        private DragDropCardView FindUserControlByDataContext(ServerViewModel serverViewModel)
         {
             foreach (var child in _canvas.Children)
             {
-                if (child is UserControl userControl && userControl.DataContext == serverViewModel)
+                if (child is DragDropCardView userControl && userControl.DataContext == serverViewModel)
                 {
                     return userControl;
                 }
@@ -88,7 +89,7 @@ namespace NetworkService.ViewModel
             {
                 ServerViewModel temp = Server.CreateViewModel();
                 EntityColection.Add(temp);
-                _displayViewModel.AddServer(temp);
+                _displayViewModel.AddNode(temp);
                 GlobalVar.IsSaved = false;
                 Server.ResetValues();
             }

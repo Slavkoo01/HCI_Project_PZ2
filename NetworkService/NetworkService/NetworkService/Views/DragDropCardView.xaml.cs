@@ -42,6 +42,7 @@ namespace NetworkService.Views
 
         public Point InitialMouseOffset { get { return _initialMouseOffset; } set {  _initialMouseOffset = value; } }
 
+        private DisplayView displayView;
 
         public DragDropCardView(ServerViewModel serverViewModel,DisplayView displayView)
         {
@@ -50,24 +51,48 @@ namespace NetworkService.Views
             _dragDropCardViewModel = new DragDropCardViewModel(this, displayView);
             closeButton.DataContext = _dragDropCardViewModel;
             DataContext = ServerViewModel;
-
+            this.displayView = displayView;
            
             this.MouseDown += UserControl_MouseDown;
             cardBar.MouseMove += UserControl_MouseMove;
             DockLeft.MouseLeftButtonDown += Elipse_MouseLeftButtonDown;
             DockRight.MouseLeftButtonDown += Elipse_MouseLeftButtonDown;
-            closeButton.Click += RemoveLines;
+            closeButton.Click += RemoveLinesEvent;
 
             _canvas = displayView.Canvas;
         }
 
-        private void RemoveLines(object sender, RoutedEventArgs e)
+        public void RemoveNodeByLine(Line line)
+        {
+            var itemsToRemove = new List<NodeLine>();
+
+            foreach (NodeLine nodeLine in NodeLines)
+            {
+                if (nodeLine.Line == line)
+                {
+                    itemsToRemove.Add(nodeLine);
+                }
+            }
+
+            foreach (NodeLine nodeLine in itemsToRemove)
+            {
+                NodeLines.Remove(nodeLine);
+            }
+        }
+        private void RemoveLinesEvent(object sender, RoutedEventArgs e)
+        {
+            RemoveLines();
+        }
+
+        public void RemoveLines()
         {
             List<int?> IDs = new List<int?>();
 
             foreach(NodeLine line in NodeLines)
             {
+                //Deletes lines
                 _canvas.Children.Remove(line.Line);
+                //gathers all the ids of cards need to deleatf from
                 if(line.StartServerId != ServerViewModel.Id)
                 {
                     IDs.Add(line.StartServerId);
@@ -77,10 +102,48 @@ namespace NetworkService.Views
                     IDs.Add(line.EndServerId);
                 }
             }
-            foreach(var item in IDs)
+            var itemsToRemove = new List<NodeLine>();
+
+            foreach (NodeLine nodeLine in NodeLines)
             {
-                MessageBox.Show(item.ToString());
+                if (nodeLine.StartServerId == ServerViewModel.Id || nodeLine.EndServerId == ServerViewModel.Id)
+                {
+                    
+                    itemsToRemove.Add(nodeLine);
+                }
             }
+
+            foreach (NodeLine nodeLine in itemsToRemove)
+            {
+                NodeLines.Remove(nodeLine);
+            }
+
+            foreach (var Id in IDs)
+            {
+                foreach (var item in _canvas.Children)
+                {
+                    if (item is DragDropCardView cardToDeleatNodeFrom && cardToDeleatNodeFrom.ServerViewModel.Id == Id)
+                    {
+                        
+                        var itemsToRemoveFromCard = new List<NodeLine>();
+
+                        foreach (NodeLine nodeLine in cardToDeleatNodeFrom.NodeLines)
+                        {
+                            if (nodeLine.StartServerId == ServerViewModel.Id || nodeLine.EndServerId == ServerViewModel.Id)
+                            {
+                                
+                                itemsToRemoveFromCard.Add(nodeLine);
+                            }
+                        }
+                        foreach (NodeLine nodeLine in itemsToRemoveFromCard)
+                        {
+                            
+                            cardToDeleatNodeFrom.NodeLines.Remove(nodeLine);
+                        }
+                    }
+                }
+            }
+            
         }
 
         private void Elipse_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -93,12 +156,11 @@ namespace NetworkService.Views
                 _tempLine = new Line
                 {
                     Stroke = ((SolidColorBrush)Application.Current.Resources["Neutral"]),
-                    StrokeThickness = 3
+                    StrokeThickness = 5
                 };
                 var startPoint = ellipse.TranslatePoint(new Point(ellipse.Width/2, ellipse.Height/2),_canvas);
                 _tempLine.X1 = _tempLine.X2 = startPoint.X;
-                _tempLine.Y1 = _tempLine.Y2 = startPoint.Y;
-
+                _tempLine.Y1 = _tempLine.Y2 = startPoint.Y;       
                 _nodeLine = new NodeLine(null, true, ServerViewModel.Id,null);
 
                 if(ellipse.Name == "DockLeft")

@@ -50,7 +50,10 @@ namespace NetworkService.Helper
                 Line.Y2 = y;
             }
         }
+        public override string ToString()
+        {
+            return $"StartServerId: {StartServerId}\nEndServerId: {EndServerId}\nIsStartPoint: {IsStartPoint}\nDock: {Dock}";
+        }
 
-       
     }
 }

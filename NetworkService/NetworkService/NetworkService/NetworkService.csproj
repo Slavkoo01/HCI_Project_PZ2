@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="CustomControls\ListViewSelectedItemsBehavior.cs" />
     <Compile Include="Helper\AnimationHelper.cs" />
+    <Compile Include="Helper\LineInfo.cs" />
     <Compile Include="Helper\NodeLine.cs" />
     <Compile Include="Helper\UserControlInfo.cs" />
     <Compile Include="Helper\GlobalVar.cs" />

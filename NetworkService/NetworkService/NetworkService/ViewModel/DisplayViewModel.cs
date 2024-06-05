@@ -42,7 +42,7 @@ namespace NetworkService.ViewModel
                 DisplayNodes.Add(sn);
             }
         }
-        public void AddServer(ServerViewModel server)
+        public void AddNode(ServerViewModel server)
         {
             foreach (var node in DisplayNodes)
             {

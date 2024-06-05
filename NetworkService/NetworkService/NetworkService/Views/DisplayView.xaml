@@ -8,6 +8,7 @@
              xmlns:viewmodel="clr-namespace:NetworkService.ViewModel"
              xmlns:model="clr-namespace:NetworkService.Model"
              mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
              d:DesignHeight="720" d:DesignWidth="1005"
              >
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
@@ -78,7 +79,7 @@
             <Grid Grid.Column="2" Name="gridd"
                   Background="{StaticResource Card}">
                 <ScrollViewer Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="700" Width="720">
-                    <Canvas Name="canvas" Background="{StaticResource Card}" Width="2400" Height="2400" >
+                    <Canvas Name="canvas" Background="{StaticResource Card}" Width="2400" Height="2400">
                         
                     </Canvas>
                 </ScrollViewer>

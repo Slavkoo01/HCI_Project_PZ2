@@ -143,6 +143,7 @@
                                 <custom:CustomButtonIcon.ToolTip>
                                     <ToolTip x:Name="tt_entities"
                                          Content="Network Entities"
+                                             Visibility="Hidden"
                                          Style="{StaticResource tt_style}"/>
                                 </custom:CustomButtonIcon.ToolTip>
 

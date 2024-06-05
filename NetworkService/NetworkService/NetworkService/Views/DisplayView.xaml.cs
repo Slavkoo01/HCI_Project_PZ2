@@ -5,12 +5,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -33,15 +36,16 @@ namespace NetworkService.Views
         private Point _start;
         private Point _origin;
         private const int GridSpacing = 60;
-
+        private bool IsLoaded;
+        
         public DisplayView()
         {
+            IsLoaded = false;
 
             InitializeComponent();
             DrawGrid();
             CenterCanvas();
             DataContext = _displayVM;
-
             TransformGroup transformGroup = new TransformGroup();
             transformGroup.Children.Add(new ScaleTransform());
             transformGroup.Children.Add(new TranslateTransform());
@@ -59,11 +63,39 @@ namespace NetworkService.Views
             canvas.Drop += Canvas_Drop;
             canvas.DragOver += Canvas_DragOver;
             canvas.AllowDrop = true;
+            canvas.MouseRightButtonUp += RemoveLineByRightClick;
             treeView.MouseMove += TreeView_ItemDrag;
 
             DragDrop.AddGiveFeedbackHandler(this, Canvas_GiveFeedback);
             XMLFiles.LoadUserControls(Canvas, this);
+            
+            
 
+        }
+
+        
+
+       
+        private void RemoveLineByRightClick(object sender, MouseButtonEventArgs e)
+        {
+            var position = e.GetPosition(canvas);
+            var hitTestResult = VisualTreeHelper.HitTest(canvas, position);
+            if (hitTestResult.VisualHit is Line line && !(line.X1 == 0 || line.Y1 == 0))
+            {
+               
+               canvas.Children.Remove(line);
+               var hitTestDock1 = VisualTreeHelper.HitTest(canvas, new Point(line.X1, line.Y1));
+               var hitTestDock2 = VisualTreeHelper.HitTest(canvas, new Point(line.X2, line.Y2));
+               if(hitTestDock1.VisualHit is Ellipse ellipseDock1 && hitTestDock2.VisualHit is Ellipse ellipseDock2)
+               {
+                   var Card1 = XMLFiles.FindParent<DragDropCardView>(ellipseDock1);
+                   var Card2 = XMLFiles.FindParent<DragDropCardView>(ellipseDock2);
+                    Card1.RemoveNodeByLine(line);
+                    Card2.RemoveNodeByLine(line);
+
+               }
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         private void Canvas_GiveFeedback(object sender, GiveFeedbackEventArgs e)
@@ -143,22 +175,6 @@ namespace NetworkService.Views
             }
         }
 
-        private TreeViewItem FindTreeViewItem(DependencyObject source)
-        {
-            if (source == null)
-                return null;
-
-            DependencyObject parent = VisualTreeHelper.GetParent(source);
-
-            if (parent is TreeViewItem treeViewItem)
-            {
-                return treeViewItem;
-            }
-            else
-            {
-                return FindTreeViewItem(parent);
-            }
-        }
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(ServerViewModel)))
@@ -180,15 +196,33 @@ namespace NetworkService.Views
             }
             
         }
-
-            #region Canvas Grid
-
-
-
-            private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        #region Helping methods
+        private TreeViewItem FindTreeViewItem(DependencyObject source)
         {
-            
-            var position = e.GetPosition(canvas);
+            if (source == null)
+                return null;
+
+            DependencyObject parent = VisualTreeHelper.GetParent(source);
+
+            if (parent is TreeViewItem treeViewItem)
+            {
+                return treeViewItem;
+            }
+            else
+            {
+                return FindTreeViewItem(parent);
+            }
+        }
+        
+        #endregion
+
+        #region Canvas Grid
+
+
+
+        private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+        var position = e.GetPosition(canvas);
             var transformGroup = (TransformGroup)canvas.RenderTransform;
             var scaleTransform = (ScaleTransform)transformGroup.Children[0];
             double zoom = e.Delta > 0 ? .2 : -.2;
@@ -217,7 +251,7 @@ namespace NetworkService.Views
                 canvas.CaptureMouse();
             }
         }
-
+        
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (canvas.IsMouseCaptured)
@@ -226,9 +260,13 @@ namespace NetworkService.Views
                 Vector v = _start - e.GetPosition(scrollViewer);
                 scrollViewer.ScrollToHorizontalOffset(_origin.X + v.X);
                 scrollViewer.ScrollToVerticalOffset(_origin.Y + v.Y);
+                
             }
+            var position = e.GetPosition(canvas);
+            
+            
            
-           
+
         }
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
@@ -280,7 +318,15 @@ namespace NetworkService.Views
                 canvas.Children.Add(horizontalLine);
             }
         }
+
+
         #endregion
-        
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded) 
+            XMLFiles.LoadLines(Canvas);
+            IsLoaded = true;
+        }
     }
 }

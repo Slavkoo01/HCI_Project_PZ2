@@ -21,7 +21,7 @@ namespace NetworkService.ViewModel
         LogWriter logger = new LogWriter("log.txt");
        
         private int _count = EntitiesViewModel.EntityColection.Count;
-        public int count { get { return _count; } set { _count = value; OnPropertyChanged(nameof(count)); } }
+        public int Count { get { return _count; } set { _count = value; OnPropertyChanged(nameof(Count)); } }
                                 // Inicijalna vrednost broja objekata u sistemu
                                 // ######### ZAMENITI stvarnim brojem elemenata
                                 //           zavisno od broja entiteta u listi
@@ -41,6 +41,7 @@ namespace NetworkService.ViewModel
             NavigateDisplayCommand = new CommandBase(NavigateToDisplay);
             NavigateMeasurementCommand = new CommandBase(NavigateToMeasurements);
             CloseCommand = new CommandBase(Close);
+            
             
         }
 
@@ -74,7 +75,8 @@ namespace NetworkService.ViewModel
                              * duzinu liste koja sadrzi sve objekte pod monitoringom, odnosno
                              * njihov ukupan broj (NE BROJATI OD NULE, VEC POSLATI UKUPAN BROJ)
                              * */
-                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(count.ToString());
+                            Count = EntitiesViewModel.EntityColection.Count;
+                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(Count.ToString());
                             stream.Write(data, 0, data.Length);
                         }
                         else
@@ -95,7 +97,7 @@ namespace NetworkService.ViewModel
                             }
                             catch(Exception)
                             {
-                              
+                               
                             }
 
                         }
@@ -153,6 +155,7 @@ namespace NetworkService.ViewModel
         public void SaveCanvas()
         {
             XMLFiles.ExportUserControls(DisplayView.Canvas);
+            XMLFiles.ExportLines(DisplayView.Canvas);
         }
 
 

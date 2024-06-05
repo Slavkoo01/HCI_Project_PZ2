@@ -26,7 +26,7 @@ namespace NetworkService.ViewModel
         private void CloseDragDrop()
         {
             _canvas.Children.Remove(_dragDropCard);
-            _displayViewModel.AddServer(_dragDropCard.ServerViewModel);
+            _displayViewModel.AddNode(_dragDropCard.ServerViewModel);
         }
     }       
 }
