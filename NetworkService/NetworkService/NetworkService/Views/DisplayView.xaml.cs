@@ -155,7 +155,6 @@ namespace NetworkService.Views
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                TreeView treeView = (TreeView)sender;
                 TreeViewItem treeViewItem = FindTreeViewItem(e.OriginalSource as DependencyObject);
 
                 try

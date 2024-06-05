@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using NetworkService.Views.HelpViews;
 
 namespace NetworkService.ViewModel
 {
@@ -29,13 +30,23 @@ namespace NetworkService.ViewModel
 
         public DisplayView DisplayView { get; set; } 
         public MeasurmentView MeasurementView { get; set; } 
-        public EntitiesView EntitiesView { get; set; } 
+        public EntitiesView EntitiesView { get; set; }
+
+        public DisplayHelpView DisplayHelpView { get; set; }
+        public MeasurementHelpView MeasurementHelpView { get; set; }
+        public EntityHelpView EntityHelpView { get; set; }
         public MainWindowViewModel()
         {
             DisplayView = new DisplayView();
             EntitiesView = new EntitiesView(DisplayView);
             MeasurementView = new MeasurmentView();
+
+            DisplayHelpView = new DisplayHelpView();
+            MeasurementHelpView = new MeasurementHelpView();
+            EntityHelpView = new EntityHelpView();
             CurrentView = EntitiesView;
+            CurrentHelpView = EntityHelpView;
+
             createListener(); //Povezivanje sa serverskom aplikacijom           
             NavigateEntitiesCommand = new CommandBase(NavigateToEntities);
             NavigateDisplayCommand = new CommandBase(NavigateToDisplay);
@@ -126,17 +137,20 @@ namespace NetworkService.ViewModel
         private void NavigateToEntities(object parameter)
         {
             CurrentView = EntitiesView;
+            CurrentHelpView = EntityHelpView;
         }
 
         private void NavigateToDisplay(object parameter)
         {
             CurrentView = DisplayView;
+            CurrentHelpView = DisplayHelpView;
         }    
         
 
         private void NavigateToMeasurements(object parameter)
         {
             CurrentView = MeasurementView;
+            CurrentHelpView = MeasurementHelpView;
         }
 
         private UserControl _currentView;
@@ -149,6 +163,19 @@ namespace NetworkService.ViewModel
                 {
                     _currentView = value;
                     OnPropertyChanged(nameof(CurrentView));
+                }
+            }
+        }
+        private UserControl _currentHelpView;
+        public UserControl CurrentHelpView
+        {
+            get => _currentHelpView;
+            set
+            {
+                if (_currentHelpView != value)
+                {
+                    _currentHelpView = value;
+                    OnPropertyChanged(nameof(CurrentHelpView));
                 }
             }
         }

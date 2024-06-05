@@ -59,6 +59,7 @@ namespace NetworkService.ViewModel
                 if(server.ServerType.Type.ToString() == node.Type)
                 {
                     node.ServerViewModels.Remove(server);
+                    break;
                 }
             }
         }

@@ -109,6 +109,15 @@
     <Compile Include="Views\DragDropCardView.xaml.cs">
       <DependentUpon>DragDropCardView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\HelpViews\DisplayHelpView.xaml.cs">
+      <DependentUpon>DisplayHelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpViews\EntityHelpView.xaml.cs">
+      <DependentUpon>EntityHelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpViews\MeasurementHelpView.xaml.cs">
+      <DependentUpon>MeasurementHelpView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MeasurmentView.xaml.cs">
       <DependentUpon>MeasurmentView.xaml</DependentUpon>
     </Compile>
@@ -149,6 +158,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EntitiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HelpViews\DisplayHelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HelpViews\EntityHelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HelpViews\MeasurementHelpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
