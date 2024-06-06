@@ -1,5 +1,7 @@
-﻿using NetworkService.Helper;
+﻿using MVVMLight.Messaging;
+using NetworkService.Helper;
 using NetworkService.ViewModel;
+using Notification.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +25,7 @@ namespace NetworkService.Views
     /// </summary>
     public partial class EntitiesView : UserControl
     {
-        
+        private ToastNotification _toaNotification = new ToastNotification();
         private EntitiesViewModel _entityVM;
         private MainWindow mw;
         public EntitiesView(DisplayView displayView, MainWindow mw)
@@ -39,6 +41,7 @@ namespace NetworkService.Views
             GlobalVar.toolTips.Add(tt_submit);
             GlobalVar.toolTips.Add(tt_reset);
             GlobalVar.toolTips.Add(tt_delete);
+            this.MouseMove += EntitiesView_MouseMove;
         }
 
         
@@ -59,14 +62,45 @@ namespace NetworkService.Views
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-           var selectedItems = ServerListView.SelectedItems.Cast<ServerViewModel>().ToList();
-            
+            var selectedItems = ServerListView.SelectedItems.Cast<ServerViewModel>().ToList();
+            if (selectedItems.Count == 1)
+            {
+            var notification = _toaNotification.CreateDeleteToastNotification(this, "Are you certain you want to delete selected server?");
+            Messenger.Default.Send<NotificationContent>(notification);
+            }
+            else if(selectedItems.Count > 1)
+            {
+                var notification = _toaNotification.CreateDeleteToastNotification(this, "Are you certain you want to delete selected servers?");
+                Messenger.Default.Send<NotificationContent>(notification);
+            }
+            else
+            {
+
+            var notification = _toaNotification.CreateAnouncementToastNotification();
+            Messenger.Default.Send<NotificationContent>(notification);
+            }
+        }
+        public void Delete()
+        {
+            var selectedItems = ServerListView.SelectedItems.Cast<ServerViewModel>().ToList();
+
             foreach (var selectedItem in selectedItems)
             {
                 _entityVM.DeleteServerBase(selectedItem);
-            }   
+            }
         }
 
         
+        private void EntitiesView_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                var hitTestResult = VisualTreeHelper.HitTest(this, e.GetPosition(this));
+                if(hitTestResult == null || !(hitTestResult.VisualHit is ListView)) 
+                {
+                    ServerListView.SelectedItems.Clear();
+                }
+            }
+        }
     }
 }

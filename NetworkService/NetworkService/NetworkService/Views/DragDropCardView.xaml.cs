@@ -1,6 +1,8 @@
-﻿using NetworkService.CustomControls;
+﻿using MVVMLight.Messaging;
+using NetworkService.CustomControls;
 using NetworkService.Helper;
 using NetworkService.ViewModel;
+using Notification.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +32,13 @@ namespace NetworkService.Views
         private ServerViewModel _serverViewModel;
         private DragDropCardViewModel _dragDropCardViewModel;
         private Point _initialMouseOffset;
-
+        private ToastNotification _toaNotification = new ToastNotification();
         static bool isDrawing = false;
 
         private Canvas _canvas;
         private Line _tempLine;
         private NodeLine _nodeLine;
+        public static int checkOneNotification = 1;
         public List<NodeLine> NodeLines { get; set; } = new List<NodeLine>(20); 
         private Ellipse _startEllipse;
         public ServerViewModel ServerViewModel { get { return _serverViewModel; } set { _serverViewModel = value; } }
@@ -52,12 +55,12 @@ namespace NetworkService.Views
             closeButton.DataContext = _dragDropCardViewModel;
             DataContext = ServerViewModel;
             this.displayView = displayView;
+            
            
             this.MouseDown += UserControl_MouseDown;
             cardBar.MouseMove += UserControl_MouseMove;
             DockLeft.MouseLeftButtonDown += Elipse_MouseLeftButtonDown;
             DockRight.MouseLeftButtonDown += Elipse_MouseLeftButtonDown;
-            closeButton.Click += RemoveLinesEvent;
 
             _canvas = displayView.Canvas;
         }
@@ -212,6 +215,8 @@ namespace NetworkService.Views
                 }
                 else
                 {
+                    var notification = _toaNotification.CreateWarningToastNotification("Not a valid spot for creating a line!");
+                    Messenger.Default.Send<NotificationContent>(notification);
                     _canvas.Children.Remove(_tempLine);
                 }
                 isDrawing = false;
@@ -228,6 +233,12 @@ namespace NetworkService.Views
                     (line.StartServerId == nodeLine.EndServerId && line.EndServerId == nodeLine.StartServerId)) 
                 {
                     _canvas.Children.Remove(_tempLine);
+                    if(checkOneNotification % 2 == 0)
+                    {
+                    var notification = _toaNotification.CreateWarningToastNotification("Cards are already connected!");
+                    Messenger.Default.Send<NotificationContent>(notification);
+                    }
+                    checkOneNotification++;
                     return;
                    
                 }

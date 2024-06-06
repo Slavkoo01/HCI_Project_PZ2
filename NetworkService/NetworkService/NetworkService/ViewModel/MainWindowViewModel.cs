@@ -14,6 +14,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using NetworkService.Views.HelpViews;
+using Notification.Wpf;
+using MVVMLight.Messaging;
 
 namespace NetworkService.ViewModel
 {
@@ -24,20 +26,8 @@ namespace NetworkService.ViewModel
         private int _count = EntitiesViewModel.EntityColection.Count;
         public int Count { get { return _count; } set { _count = value; OnPropertyChanged(nameof(Count)); } }
 
-        private bool _isHelpToggleButtonChecked;
-
-        public bool IsHelpToggleButtonChecked
-        {
-            get => _isHelpToggleButtonChecked;
-            set
-            {
-                if (_isHelpToggleButtonChecked != value)
-                {
-                    _isHelpToggleButtonChecked = value;
-                    OnPropertyChanged(nameof(IsHelpToggleButtonChecked));
-                }
-            }
-        }
+       private NotificationManager notificationManager = new NotificationManager();
+        
 
         public DisplayView DisplayView { get; set; } 
         public MeasurmentView MeasurementView { get; set; } 
@@ -46,8 +36,10 @@ namespace NetworkService.ViewModel
         public DisplayHelpView DisplayHelpView { get; set; }
         public MeasurementHelpView MeasurementHelpView { get; set; }
         public EntityHelpView EntityHelpView { get; set; }
+        private MainWindow mw;
         public MainWindowViewModel(MainWindow mw)
         {
+            this.mw = mw;
             DisplayView = new DisplayView(mw);
             EntitiesView = new EntitiesView(DisplayView,mw);
             MeasurementView = new MeasurmentView(mw);
@@ -63,10 +55,13 @@ namespace NetworkService.ViewModel
             NavigateDisplayCommand = new CommandBase(NavigateToDisplay);
             NavigateMeasurementCommand = new CommandBase(NavigateToMeasurements);
             CloseCommand = new CommandBase(Close);
-            
-            
-        }
+            Messenger.Default.Register<NotificationContent>(this, ShowToastNotification);
 
+        }
+        private void ShowToastNotification(NotificationContent notificationContent)
+        {
+            notificationManager.Show(notificationContent, "WindowNotificationArea");
+        }
 
 
         private void createListener()
@@ -149,12 +144,15 @@ namespace NetworkService.ViewModel
         {
             CurrentView = EntitiesView;
             CurrentHelpView = EntityHelpView;
+            mw.tgb_entities_Click(null, new RoutedEventArgs());
+            
         }
 
         private void NavigateToDisplay(object parameter)
         {
             CurrentView = DisplayView;
             CurrentHelpView = DisplayHelpView;
+            mw.tgb_display_Click(null, new RoutedEventArgs());
         }    
         
 
@@ -162,8 +160,8 @@ namespace NetworkService.ViewModel
         {
             CurrentView = MeasurementView;
             CurrentHelpView = MeasurementHelpView;
-        }
-
+            mw.tgb_mesurments_Click(null, new RoutedEventArgs());
+        }   
         private UserControl _currentView;
         public UserControl CurrentView
         {

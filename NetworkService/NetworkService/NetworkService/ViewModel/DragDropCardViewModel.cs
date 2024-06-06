@@ -1,4 +1,7 @@
-﻿using NetworkService.Views;
+﻿using MVVMLight.Messaging;
+using NetworkService.Helper;
+using NetworkService.Views;
+using Notification.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +18,7 @@ namespace NetworkService.ViewModel
         private Canvas _canvas;
         private DragDropCardView _dragDropCard;
         private DisplayViewModel _displayViewModel;
-
+        private ToastNotification _toaNotification = new ToastNotification();
         public DragDropCardViewModel(DragDropCardView dragDropCard, DisplayView displayView)
         {
             _canvas = displayView.Canvas;
@@ -25,7 +28,13 @@ namespace NetworkService.ViewModel
 
         private void CloseDragDrop()
         {
+            var notification = _toaNotification.CreateDeleteCardToastNotification(this,"Are you certain you want to remove this card?");
+            Messenger.Default.Send<NotificationContent>(notification);
+        }
+        public void Delete()
+        {
             _canvas.Children.Remove(_dragDropCard);
+            _dragDropCard.RemoveLines();
             _displayViewModel.AddNode(_dragDropCard.ServerViewModel);
         }
     }       

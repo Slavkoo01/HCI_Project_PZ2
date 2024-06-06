@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:NetworkService.ViewModel"
         xmlns:views="clr-namespace:NetworkService.Views"
         xmlns:custom="clr-namespace:NetworkService.CustomControls"
-        
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
         
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:local="clr-namespace:NetworkService"
@@ -20,6 +20,11 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
+    <Window.InputBindings>
+        <KeyBinding Key="D1" Command="{Binding NavigateEntitiesCommand}"/>
+        <KeyBinding Key="D2" Command="{Binding NavigateDisplayCommand}"/>
+        <KeyBinding Key="D3" Command="{Binding NavigateMeasurementCommand}"/>
+    </Window.InputBindings>
     <Grid x:Name="MainWindowGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -36,11 +41,10 @@
                 BorderBrush="Black"
                 HorizontalAlignment="Left">
 
-
+            
             <Grid x:Name="BG"
-              
-                  Background="{StaticResource Background}">
-
+               Background="{StaticResource Background}">
+               
 
                 <!--Main Frame-->
                 <Grid PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown"
@@ -323,9 +327,19 @@
 
 
                 </Grid>
+                
             </Grid>
 
 
         </Border>
+        
+            
+                <notifications:NotificationArea
+                  Grid.ColumnSpan="2"
+                  x:Name="WindowNotificationArea"
+                  Panel.ZIndex="1000"
+                  MaxItems="3"
+                  Position="BottomRight"/>
+        
     </Grid>
 </Window>

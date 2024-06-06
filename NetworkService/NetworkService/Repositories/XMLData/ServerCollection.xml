@@ -1,24 +1,6 @@
 <?xml version="1.0"?>
 <ArrayOfServerViewModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ServerViewModel>
-    <Id>2</Id>
-    <Name>Server_02</Name>
-    <IpAddress>192.168.0.2</IpAddress>
-    <ServerType>
-      <Type>FileServer</Type>
-      <ServerTypeImage>/Assets/FileServer.png</ServerTypeImage>
-    </ServerType>
-  </ServerViewModel>
-  <ServerViewModel>
-    <Id>3</Id>
-    <Name>Server_03</Name>
-    <IpAddress>192.169.0.3</IpAddress>
-    <ServerType>
-      <Type>FileServer</Type>
-      <ServerTypeImage>/Assets/FileServer.png</ServerTypeImage>
-    </ServerType>
-  </ServerViewModel>
-  <ServerViewModel>
     <Id>4</Id>
     <Name>Server_04</Name>
     <IpAddress>1.1.1.1</IpAddress>
@@ -28,9 +10,18 @@
     </ServerType>
   </ServerViewModel>
   <ServerViewModel>
-    <Id>5</Id>
-    <Name>Server_05</Name>
-    <IpAddress>1.1.1.1</IpAddress>
+    <Id>1</Id>
+    <Name>Server_01</Name>
+    <IpAddress>192.168.0.1</IpAddress>
+    <ServerType>
+      <Type>DataBaseServer</Type>
+      <ServerTypeImage>/Assets/DataBaseServer.png</ServerTypeImage>
+    </ServerType>
+  </ServerViewModel>
+  <ServerViewModel>
+    <Id>3</Id>
+    <Name>Server_03</Name>
+    <IpAddress>192.168.0.3</IpAddress>
     <ServerType>
       <Type>FileServer</Type>
       <ServerTypeImage>/Assets/FileServer.png</ServerTypeImage>

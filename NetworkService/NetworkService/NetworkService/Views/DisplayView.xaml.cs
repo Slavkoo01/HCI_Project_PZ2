@@ -36,12 +36,11 @@ namespace NetworkService.Views
         private Point _start;
         private Point _origin;
         private const int GridSpacing = 60;
-        private bool IsLoaded;
+        private bool Isloaded = false;
         private MainWindow mw;
         
         public DisplayView(MainWindow mw)
         {
-            IsLoaded = false;
             this.mw = mw;
             InitializeComponent();
             DrawGrid();
@@ -325,9 +324,9 @@ namespace NetworkService.Views
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             GlobalVar.IsCanvasLoaded = true;
-            if (!IsLoaded) 
+            if (!Isloaded) 
             XMLFiles.LoadLines(Canvas);
-            IsLoaded = true;
+            Isloaded = true;
         }
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)

@@ -127,7 +127,7 @@ namespace NetworkService
             Close();
         }
 
-        private void tgb_entities_Click(object sender, RoutedEventArgs e)
+        public void tgb_entities_Click(object sender, RoutedEventArgs e)
         {
             pnl_entities.Background = (SolidColorBrush)Application.Current.FindResource("Background");
             pnl_display.Background = (SolidColorBrush)Application.Current.FindResource("Card");
@@ -138,7 +138,7 @@ namespace NetworkService
             tgb_mesurments.Foreground = (SolidColorBrush)Application.Current.FindResource("Neutral");
         }
 
-        private void tgb_display_Click(object sender, RoutedEventArgs e)
+        public void tgb_display_Click(object sender, RoutedEventArgs e)
         {
             pnl_entities.Background = (SolidColorBrush)Application.Current.FindResource("Card");
             pnl_display.Background = (SolidColorBrush)Application.Current.FindResource("Background");
@@ -149,7 +149,7 @@ namespace NetworkService
             tgb_mesurments.Foreground = (SolidColorBrush)Application.Current.FindResource("Neutral");
         }
 
-        private void tgb_mesurments_Click(object sender, RoutedEventArgs e)
+        public void tgb_mesurments_Click(object sender, RoutedEventArgs e)
         {
             pnl_entities.Background = (SolidColorBrush)Application.Current.FindResource("Card");
             pnl_display.Background = (SolidColorBrush)Application.Current.FindResource("Card");

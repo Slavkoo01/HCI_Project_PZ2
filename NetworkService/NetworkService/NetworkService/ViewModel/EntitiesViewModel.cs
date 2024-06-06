@@ -1,9 +1,11 @@
 ﻿using FontAwesome5;
+using MVVMLight.Messaging;
 using NetworkService.Helper;
 using NetworkService.Model;
 using NetworkService.ViewModel.Base;
 using NetworkService.ViewModel.Form;
 using NetworkService.Views;
+using Notification.Wpf;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +26,7 @@ using System.Windows.Input;
 
 
 
+
 namespace NetworkService.ViewModel
 {
     public class EntitiesViewModel : ViewModelBase
@@ -34,7 +37,7 @@ namespace NetworkService.ViewModel
         private DisplayViewModel _displayViewModel;
         private Canvas _canvas;
         private ObservableCollection<ServerViewModel> _listViewCollection;
-       
+        private ToastNotification _toastNotification = new ToastNotification();
         public ServerForm Server { get { return _server; } set { _server = value; OnPropertyChanged(nameof(Server)); } }
         public FilterForm ServerFilter { get { return _serverFilter; } set { _serverFilter = value; OnPropertyChanged(nameof(ServerFilter)); } }
         public ObservableCollection<ServerViewModel> ListViewCollection { get { return _listViewCollection; } set { _listViewCollection = value; OnPropertyChanged(nameof(ListViewCollection)); } }
@@ -59,6 +62,10 @@ namespace NetworkService.ViewModel
         public void DeleteServerBase(ServerViewModel serverViewModel)
         {
             EntityColection.Remove(serverViewModel);
+            if(ServerFilter.FilteredServers != null)
+            {
+                 ServerFilter.FilteredServers.Remove(serverViewModel);
+            }
             _displayViewModel.RemoveNode(serverViewModel);
 
             RemoveUserControlFromCanvas(serverViewModel);
@@ -94,6 +101,11 @@ namespace NetworkService.ViewModel
                 _displayViewModel.AddNode(temp);
                 GlobalVar.IsSaved = false;
                 Server.ResetValues();
+                Messenger.Default.Send<NotificationContent>(_toastNotification.CreateSuccessToastNotification());
+            }
+            else
+            {
+                Messenger.Default.Send<NotificationContent>(_toastNotification.CreateFailToastNotification());
             }
         }
         private void ApplyFilters()
