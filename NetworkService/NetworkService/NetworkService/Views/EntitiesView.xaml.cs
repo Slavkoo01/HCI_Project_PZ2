@@ -26,12 +26,12 @@ namespace NetworkService.Views
     public partial class EntitiesView : UserControl
     {
         private ToastNotification _toaNotification = new ToastNotification();
-        private EntitiesViewModel _entityVM;
+        public EntitiesViewModel _entityVM;
         private MainWindow mw;
         public EntitiesView(DisplayView displayView, MainWindow mw)
         {
             InitializeComponent();
-            _entityVM = new EntitiesViewModel(displayView);
+            _entityVM = new EntitiesViewModel(this,displayView);
             this.mw = mw;   
             HelpButton.Click += HelpButton_Click;
             HelpButton.DataContext = mw.MainWindowViewModel;
@@ -60,7 +60,7 @@ namespace NetworkService.Views
             }
         }
 
-        private void Delete_btn_Click(object sender, RoutedEventArgs e)
+        public void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
             var selectedItems = ServerListView.SelectedItems.Cast<ServerViewModel>().ToList();
             if (selectedItems.Count == 1)

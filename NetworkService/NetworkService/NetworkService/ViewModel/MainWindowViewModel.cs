@@ -138,6 +138,7 @@ namespace NetworkService.ViewModel
                 XMLFiles _serializer = new XMLFiles();
                 _serializer.SerializeObject();
                 GlobalVar.IsSaved = true;
+                mw.tgb_shutdown_Checked();
             }
         }
         private void NavigateToEntities(object parameter)

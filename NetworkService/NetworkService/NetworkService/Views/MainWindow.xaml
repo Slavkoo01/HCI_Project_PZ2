@@ -19,11 +19,13 @@
         Topmost="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        MouseDown="Window_MouseDown">
+        MouseDown="Window_MouseDown"
+        KeyDown="Main_Window_KeyDown">
     <Window.InputBindings>
-        <KeyBinding Key="D1" Command="{Binding NavigateEntitiesCommand}"/>
-        <KeyBinding Key="D2" Command="{Binding NavigateDisplayCommand}"/>
-        <KeyBinding Key="D3" Command="{Binding NavigateMeasurementCommand}"/>
+        <KeyBinding Key="F1" Command="{Binding NavigateEntitiesCommand}"/>
+        <KeyBinding Key="F2" Command="{Binding NavigateDisplayCommand}"/>
+        <KeyBinding Key="F3" Command="{Binding NavigateMeasurementCommand}"/>
+        <KeyBinding Key="Escape" Command="{Binding CloseCommand}" x:Name="CloseHotKey"/>
     </Window.InputBindings>
     <Grid x:Name="MainWindowGrid">
         <Grid.ColumnDefinitions>
@@ -296,7 +298,6 @@
                                            Style="{StaticResource ButtonIconStyle}"
                                            Icon="Solid_PowerOff"
                                            Content="Close App"
-                                           Click="tgb_shutdown_Checked"
                                            MouseEnter="tgb_shutdown_MouseEnter"
                                            MouseLeave="tgb_shutdown_MouseLeave"
                                            IconMargin="23 0 0 0"

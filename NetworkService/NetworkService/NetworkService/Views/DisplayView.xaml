@@ -11,6 +11,7 @@
              Loaded="UserControl_Loaded"
              d:DesignHeight="720" d:DesignWidth="1005"
              >
+
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
         <Grid>
             <Grid.ColumnDefinitions>

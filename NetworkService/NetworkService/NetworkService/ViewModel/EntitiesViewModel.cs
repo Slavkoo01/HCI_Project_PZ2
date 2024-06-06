@@ -38,6 +38,7 @@ namespace NetworkService.ViewModel
         private Canvas _canvas;
         private ObservableCollection<ServerViewModel> _listViewCollection;
         private ToastNotification _toastNotification = new ToastNotification();
+        private EntitiesView ev;
         public ServerForm Server { get { return _server; } set { _server = value; OnPropertyChanged(nameof(Server)); } }
         public FilterForm ServerFilter { get { return _serverFilter; } set { _serverFilter = value; OnPropertyChanged(nameof(ServerFilter)); } }
         public ObservableCollection<ServerViewModel> ListViewCollection { get { return _listViewCollection; } set { _listViewCollection = value; OnPropertyChanged(nameof(ListViewCollection)); } }
@@ -57,7 +58,15 @@ namespace NetworkService.ViewModel
         #region Commands
         public ICommand SubmitCommand => new CommandBase(execute => AddToEntityCollection());
         public ICommand SearchCommand => new CommandBase(execute => ApplyFilters());
-        public ICommand ResetCommand => new CommandBase(execute => ResetFilter());
+        public ICommand ResetCommand => new CommandBase(execute => ResetFilter()); 
+        public ICommand EnterCommand => new CommandBase(execute => AddToEntityCollection());
+        public ICommand BackspaceCommand => new CommandBase(execute => ResetFilter());
+        public ICommand DeleteCommand => new CommandBase(execute => DeleteMethod());
+
+        private void DeleteMethod()
+        {
+            ev.Delete_btn_Click(null, new RoutedEventArgs());
+        }
 
         public void DeleteServerBase(ServerViewModel serverViewModel)
         {
@@ -92,7 +101,7 @@ namespace NetworkService.ViewModel
             }
             return null;
         }
-        private void AddToEntityCollection()
+        public void AddToEntityCollection()
         {
             if (Server.Validate())
             {
@@ -121,10 +130,11 @@ namespace NetworkService.ViewModel
         {
             ListViewCollection = ServerFilter.ResetFilter();
         }
-         #endregion
+        #endregion
         
-        public EntitiesViewModel(DisplayView displayView) 
+        public EntitiesViewModel(EntitiesView ev, DisplayView displayView) 
         {
+            this.ev = ev;
             _canvas = displayView.Canvas;
             _displayViewModel = displayView.DisplayViewModel;
             Server = new ServerForm();

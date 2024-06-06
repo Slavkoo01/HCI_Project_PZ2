@@ -8,9 +8,11 @@
              xmlns:custom="clr-namespace:NetworkService.CustomControls"
              mc:Ignorable="d" 
                   d:DesignHeight="720" d:DesignWidth="1005">
-    <UserControl.Resources>
-        <help:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>
+ 
+        <KeyBinding Key="Backspace" Command="{Binding BackspaceCommand}"/>
+    </UserControl.InputBindings>
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -74,7 +76,6 @@
                         HorizontalAlignment="Center"
                         Icon="Regular_Lightbulb"
                         Margin="0 245 0 0"
-                        Visibility="{Binding IsHelpHelpToggleButtonChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Style="{StaticResource ButtonIconStyle2}"/>
             </StackPanel>
             <!--RightSide-->

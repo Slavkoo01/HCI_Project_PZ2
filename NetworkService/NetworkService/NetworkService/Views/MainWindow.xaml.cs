@@ -120,7 +120,7 @@ namespace NetworkService
             }
         }
 
-        private void tgb_shutdown_Checked(object sender, RoutedEventArgs e)
+        public void tgb_shutdown_Checked()
         {
             pnl_ShutDown.Background = (SolidColorBrush)Application.Current.FindResource("Background");
             MainWindowViewModel.SaveCanvas();
@@ -214,6 +214,14 @@ namespace NetworkService
                 {
                     item.Width = 0;
                 }
+            }
+        }
+
+        private void Main_Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                MainWindowViewModel.EntitiesView._entityVM.AddToEntityCollection();
             }
         }
     }
