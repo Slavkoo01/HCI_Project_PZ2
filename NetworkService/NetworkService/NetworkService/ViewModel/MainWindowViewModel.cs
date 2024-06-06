@@ -23,10 +23,21 @@ namespace NetworkService.ViewModel
        
         private int _count = EntitiesViewModel.EntityColection.Count;
         public int Count { get { return _count; } set { _count = value; OnPropertyChanged(nameof(Count)); } }
-                                // Inicijalna vrednost broja objekata u sistemu
-                                // ######### ZAMENITI stvarnim brojem elemenata
-                                //           zavisno od broja entiteta u listi
-        
+
+        private bool _isHelpToggleButtonChecked;
+
+        public bool IsHelpToggleButtonChecked
+        {
+            get => _isHelpToggleButtonChecked;
+            set
+            {
+                if (_isHelpToggleButtonChecked != value)
+                {
+                    _isHelpToggleButtonChecked = value;
+                    OnPropertyChanged(nameof(IsHelpToggleButtonChecked));
+                }
+            }
+        }
 
         public DisplayView DisplayView { get; set; } 
         public MeasurmentView MeasurementView { get; set; } 
@@ -35,11 +46,11 @@ namespace NetworkService.ViewModel
         public DisplayHelpView DisplayHelpView { get; set; }
         public MeasurementHelpView MeasurementHelpView { get; set; }
         public EntityHelpView EntityHelpView { get; set; }
-        public MainWindowViewModel()
+        public MainWindowViewModel(MainWindow mw)
         {
-            DisplayView = new DisplayView();
-            EntitiesView = new EntitiesView(DisplayView);
-            MeasurementView = new MeasurmentView();
+            DisplayView = new DisplayView(mw);
+            EntitiesView = new EntitiesView(DisplayView,mw);
+            MeasurementView = new MeasurmentView(mw);
 
             DisplayHelpView = new DisplayHelpView();
             MeasurementHelpView = new MeasurementHelpView();

@@ -1,4 +1,5 @@
-﻿using NetworkService.Model;
+﻿using FontAwesome5;
+using NetworkService.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,11 @@ namespace NetworkService.ViewModel.Form
         private bool _isEqualSelected;
         private Types? _selectedTypeFilter;
         private ObservableCollection<ServerViewModel> _filteredServers;
+        private EFontAwesomeIcon _resetIcon = EFontAwesomeIcon.Solid_Undo;
+        private string _tTResetText = "Reset filter";
 
+        public string TTResetText { get { return _tTResetText; } set { if (_tTResetText != value) { _tTResetText = value; OnPropertyChanged(nameof(TTResetText));} } }
+        public EFontAwesomeIcon ResetIcon { get { return _resetIcon; } set { if (_resetIcon != value) { _resetIcon = value; OnPropertyChanged(nameof(ResetIcon));} } }
         private string _idFilter;
         public string IdFilter { get { return _idFilter; } set {  _idFilter = value; OnPropertyChanged(nameof(IdFilter)); } }
 
@@ -41,7 +46,8 @@ namespace NetworkService.ViewModel.Form
         {
             _filterFlag = true;
             FilteredServers.Clear();
-
+            TTResetText = "Return Collection";
+            ResetIcon = EFontAwesomeIcon.Solid_ArrowLeft;
             var filteredList = EntitiesViewModel.EntityColection.Where(server =>
             {
                 bool idCondition = true;
@@ -80,8 +86,12 @@ namespace NetworkService.ViewModel.Form
             if (_filterFlag)
             {              
                 _filterFlag = !_filterFlag;
+                TTResetText = "Reset filter";
+                ResetIcon = EFontAwesomeIcon.Solid_Undo;
                 return EntitiesViewModel.EntityColection;
-            }           
+            }   
+            
+                
                 IsGreaterSelected = IsLesserSelected = IsEqualSelected = false;
                 TextBoxFilter = string.Empty;
                 SelectedTypeFilter = null;

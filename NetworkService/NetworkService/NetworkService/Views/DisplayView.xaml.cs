@@ -37,11 +37,12 @@ namespace NetworkService.Views
         private Point _origin;
         private const int GridSpacing = 60;
         private bool IsLoaded;
+        private MainWindow mw;
         
-        public DisplayView()
+        public DisplayView(MainWindow mw)
         {
             IsLoaded = false;
-
+            this.mw = mw;
             InitializeComponent();
             DrawGrid();
             CenterCanvas();
@@ -68,8 +69,8 @@ namespace NetworkService.Views
 
             DragDrop.AddGiveFeedbackHandler(this, Canvas_GiveFeedback);
             XMLFiles.LoadUserControls(Canvas, this);
-            
-            
+
+            GlobalVar.buttons.Add(HelpButton);
 
         }
 
@@ -323,9 +324,24 @@ namespace NetworkService.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            GlobalVar.IsCanvasLoaded = true;
             if (!IsLoaded) 
             XMLFiles.LoadLines(Canvas);
             IsLoaded = true;
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (GlobalVar.IsHelpOpen) 
+            {
+                mw.CloseHelpAnimation();
+                GlobalVar.IsHelpOpen = !GlobalVar.IsHelpOpen;
+            }
+            else
+            {
+                mw.OpenHelpAnimation();
+                GlobalVar.IsHelpOpen = !GlobalVar.IsHelpOpen;
+            }
         }
     }
 }

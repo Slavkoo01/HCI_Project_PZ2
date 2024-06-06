@@ -1,4 +1,5 @@
-﻿using NetworkService.ViewModel;
+﻿using NetworkService.Helper;
+using NetworkService.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,10 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,14 +25,55 @@ namespace NetworkService
     /// </summary>
     public partial class MainWindow : Window
     {
+        private double _expendedWindowWidth = 1580;
+        private double _windowWidth = 1080;
+        private bool IsWindowLoaded = false;
+        private double width = 140;
         public MainWindowViewModel MainWindowViewModel { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel = new MainWindowViewModel();
+            MainWindowViewModel = new MainWindowViewModel(this);
             DataContext = MainWindowViewModel;
+            setVisibilityies();
+            this.Loaded += MainWindow_Loaded;
+            tgb_entities_Click(null,new RoutedEventArgs());
             
+
         }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            IsWindowLoaded = true;
+            if (IsWindowLoaded)
+            {
+                tgb_help.IsChecked = true;
+            }
+        }
+
+        public void OpenHelpAnimation()
+        {
+            DoubleAnimation widthAnimation = new DoubleAnimation
+            {
+                From = _windowWidth,
+                To = _expendedWindowWidth,
+                Duration = TimeSpan.FromSeconds(.2) 
+            };
+
+            this.BeginAnimation(Window.WidthProperty, widthAnimation);
+        }
+        public void CloseHelpAnimation()
+        {
+            DoubleAnimation widthAnimation = new DoubleAnimation
+            {
+                From = _expendedWindowWidth,
+                To = _windowWidth,
+                Duration = TimeSpan.FromSeconds(.2)
+            };
+
+            this.BeginAnimation(Window.WidthProperty, widthAnimation);
+        }
+
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             // Set tooltip visibility
@@ -124,6 +168,53 @@ namespace NetworkService
         private void tgb_shutdown_MouseLeave(object sender, MouseEventArgs e)
         {
             tgb_shutdown.Foreground = (SolidColorBrush)Application.Current.FindResource("Neutral");
-        }      
+        }
+        private void setVisibilityies()
+        {
+            tt_entities.Width = 0;
+            tt_display.Width = 0;
+            tt_measurments.Width = 0;
+            tt_help.Width = 0;
+            tt_shutdown.Width = 0;
+        }
+        private void tgb_help_Checked(object sender, RoutedEventArgs e)
+        {
+            if (IsWindowLoaded)
+            {
+                tt_entities.Width = 175;
+                tt_display.Width = 175;
+                tt_measurments.Width = 175;
+                tt_help.Width = 175;
+                tt_shutdown.Width = 175;
+                foreach (var item in GlobalVar.buttons)
+                {
+                    item.Width = width;
+                }
+                foreach (var item in GlobalVar.toolTips)
+                {
+                    item.Width = 175;
+                }
+            }
+        }
+        private void tgb_help_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+            if (IsWindowLoaded)
+            {
+                tt_entities.Width = 0;
+                tt_display.Width = 0;
+                tt_measurments.Width = 0;
+                tt_help.Width = 0;
+                tt_shutdown.Width = 0;
+                foreach(var item in GlobalVar.buttons)
+                {
+                    item.Width = 0;
+                }
+                foreach (var item in GlobalVar.toolTips)
+                {
+                    item.Width = 0;
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using NetworkService.Helper;
+﻿using FontAwesome5;
+using NetworkService.Helper;
 using NetworkService.Model;
 using NetworkService.ViewModel.Base;
 using NetworkService.ViewModel.Form;
@@ -12,6 +13,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +34,7 @@ namespace NetworkService.ViewModel
         private DisplayViewModel _displayViewModel;
         private Canvas _canvas;
         private ObservableCollection<ServerViewModel> _listViewCollection;
-        
+       
         public ServerForm Server { get { return _server; } set { _server = value; OnPropertyChanged(nameof(Server)); } }
         public FilterForm ServerFilter { get { return _serverFilter; } set { _serverFilter = value; OnPropertyChanged(nameof(ServerFilter)); } }
         public ObservableCollection<ServerViewModel> ListViewCollection { get { return _listViewCollection; } set { _listViewCollection = value; OnPropertyChanged(nameof(ListViewCollection)); } }

@@ -71,7 +71,8 @@
                                              HorizontalAlignment="Center"
                                              Icon="Regular_Lightbulb"
                                              Style="{StaticResource ButtonIconStyle2}"
-                                             Background="{StaticResource Background}"/>
+                                             Background="{StaticResource Background}"
+                                             Click="HelpButton_Click"/>
                 </Grid>
             </StackPanel>
 

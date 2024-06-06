@@ -1,4 +1,5 @@
-﻿using NetworkService.ViewModel;
+﻿using NetworkService.Helper;
+using NetworkService.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,14 +25,36 @@ namespace NetworkService.Views
     {
         
         private EntitiesViewModel _entityVM;
-        
-        public EntitiesView(DisplayView displayView)
+        private MainWindow mw;
+        public EntitiesView(DisplayView displayView, MainWindow mw)
         {
             InitializeComponent();
             _entityVM = new EntitiesViewModel(displayView);
-           
-
+            this.mw = mw;   
+            HelpButton.Click += HelpButton_Click;
+            HelpButton.DataContext = mw.MainWindowViewModel;
             DataContext = _entityVM;
+            GlobalVar.buttons.Add(HelpButton);
+            GlobalVar.toolTips.Add(tt_search);
+            GlobalVar.toolTips.Add(tt_submit);
+            GlobalVar.toolTips.Add(tt_reset);
+            GlobalVar.toolTips.Add(tt_delete);
+        }
+
+        
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (GlobalVar.IsHelpOpen)
+            {
+                mw.CloseHelpAnimation();
+                GlobalVar.IsHelpOpen = !GlobalVar.IsHelpOpen;
+            }
+            else
+            {
+                mw.OpenHelpAnimation();
+                GlobalVar.IsHelpOpen = !GlobalVar.IsHelpOpen;
+            }
         }
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
@@ -41,13 +64,9 @@ namespace NetworkService.Views
             foreach (var selectedItem in selectedItems)
             {
                 _entityVM.DeleteServerBase(selectedItem);
-                //EntitiesViewModel.EntityColection.Remove(selectedItem);
             }   
         }
 
-        private void GreaterRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

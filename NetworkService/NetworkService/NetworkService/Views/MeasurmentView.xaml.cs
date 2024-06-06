@@ -1,4 +1,5 @@
 ﻿using NetworkService.CustomControls;
+using NetworkService.Helper;
 using NetworkService.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,18 @@ namespace NetworkService.Views
     public partial class MeasurmentView : UserControl
     {
         private MeasurementViewModel _measurementVM = new MeasurementViewModel();
-        public MeasurmentView()
+        private MainWindow mw;
+        public MeasurmentView(MainWindow mw)
         {
             InitializeComponent();
             DataContext = _measurementVM;
+            this.mw = mw;
+            HelpButton.Click += HelpButton_Click;
+            GlobalVar.buttons.Add(HelpButton);
         }
+
+        
+
         private double _previousHeight1 = 5; 
         private double _previousHeight2 = 5; 
         private double _previousHeight3 = 5; 
@@ -122,6 +130,19 @@ namespace NetworkService.Views
             customRecG5_2.BeginAnimation(CustomRectangle.HeightProperty, animation);
 
             AnimateBackgroundColor(customRecG5_2, GetColorBasedOnHeight(customRec.Height));
+        }
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (GlobalVar.IsHelpOpen)
+            {
+                mw.CloseHelpAnimation();
+                GlobalVar.IsHelpOpen = !GlobalVar.IsHelpOpen;
+            }
+            else
+            {
+                mw.OpenHelpAnimation();
+                GlobalVar.IsHelpOpen = !GlobalVar.IsHelpOpen;
+            }
         }
     }
 }

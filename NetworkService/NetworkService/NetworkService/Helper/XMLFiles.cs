@@ -197,21 +197,24 @@ namespace NetworkService.Repositories
         #region CanvasLines 
         public static void ExportLines(Canvas canvas)
         {
-            string filePath = "CanvasLines.xml";
-            var lineInfoCollection = new LineInfoCollection();
-
-            foreach (var child in canvas.Children)
+            if (GlobalVar.IsCanvasLoaded)
             {
-                if (child is Line line && !(line.X1 == 0 || line.Y1 == 0))
+                string filePath = "CanvasLines.xml";
+                var lineInfoCollection = new LineInfoCollection();
+
+                foreach (var child in canvas.Children)
                 {
-                    lineInfoCollection.Lines.Add(new LineInfo(line.X1,line.Y1, line.X2, line.Y2));
+                    if (child is Line line && !(line.X1 == 0 || line.Y1 == 0))
+                    {
+                        lineInfoCollection.Lines.Add(new LineInfo(line.X1,line.Y1, line.X2, line.Y2));
+                    }
                 }
-            }
 
-            var serializer = new XmlSerializer(typeof(LineInfoCollection));
-            using (var writer = new StreamWriter(filePath))
-            {
-                serializer.Serialize(writer, lineInfoCollection);
+                var serializer = new XmlSerializer(typeof(LineInfoCollection));
+                using (var writer = new StreamWriter(filePath))
+                {
+                    serializer.Serialize(writer, lineInfoCollection);
+                }
             }
         }
         public static void LoadLines(Canvas canvas)

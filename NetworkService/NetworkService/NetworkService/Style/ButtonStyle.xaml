@@ -89,6 +89,11 @@
                                    Foreground="{TemplateBinding Foreground}"/>
                         </StackPanel>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -120,7 +125,7 @@
                             <Setter Property="BorderThickness" TargetName="OutterBorder" Value="4"/>
                             <Setter Property="BorderThickness" TargetName="InnerBorder" Value="1"/>
                             <Setter Property="BorderBrush" TargetName="InnerBorder" Value="{StaticResource Neutral}"/>
-
+                            <Setter Property="Cursor" Value="Hand"/>
 
                             <Setter Property="Effect">
                                 <Setter.Value>
@@ -187,7 +192,7 @@
                             <Setter Property="IconHeight" Value="28"/>
                             <Setter Property="IconMargin" Value="25 0 0 0"/>
                             <Setter Property="BorderBrush" TargetName="InnerBorder" Value="{StaticResource Neutral}"/>
-
+                            <Setter Property="Cursor" Value="Hand"/>
 
                             <Setter Property="Effect">
                                 <Setter.Value>
@@ -257,7 +262,7 @@
                             <Setter Property="IconHeight" Value="15"/>
                             <Setter Property="IconMargin" Value="5 0 0 0"/>
                             <Setter Property="BorderBrush" TargetName="InnerBorder" Value="{StaticResource Neutral}"/>
-
+                            <Setter Property="Cursor" Value="Hand"/>
 
                             <Setter Property="Effect">
                                 <Setter.Value>

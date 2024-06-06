@@ -18,7 +18,9 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
 
     </Style>
+
     
+
     <Style x:Key="font_style" TargetType="TextBlock">
 
         <Setter Property="FontFamily"

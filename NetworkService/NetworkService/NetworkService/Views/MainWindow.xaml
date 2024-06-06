@@ -1,4 +1,5 @@
-﻿<Window x:Class="NetworkService.MainWindow"
+﻿<Window x:Name="Main_Window"
+        x:Class="NetworkService.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +12,7 @@
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:local="clr-namespace:NetworkService"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1580"
+        Height="720" Width="1080"
         HorizontalAlignment="Left"
         Background="{StaticResource Background}"
         ResizeMode="NoResize"
@@ -19,7 +20,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
-        <Grid x:Name="MainWindowGrid">
+    <Grid x:Name="MainWindowGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -31,21 +32,21 @@
 
             </ContentControl>
         </Border>
-            <Border Height="720" Width="1080"
+        <Border Height="720" Width="1080"
                 BorderBrush="Black"
                 HorizontalAlignment="Left">
-        
-        
+
+
             <Grid x:Name="BG"
               
                   Background="{StaticResource Background}">
-           
-            
+
+
                 <!--Main Frame-->
                 <Grid PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown"
                       Margin="75 0 0 0">
                     <ContentControl Content="{Binding CurrentView}">
-                    
+
                     </ContentControl>
 
 
@@ -65,7 +66,7 @@
                         <!--// Grid for the Menu Toggle Button //-->
 
                         <Grid Grid.Row="0">
-                       
+
 
                             <!--// Menu title text //-->
 
@@ -253,33 +254,34 @@
                                     Width="230"
                                     Height="50"
                                     Margin="0 0 0 10">
-                            <ToggleButton x:Name="tgb_help"
+                                <ToggleButton x:Name="tgb_help"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"                          
                                    Background="Transparent"
                                    Style="{StaticResource Help_btn}" 
-                               
+                                   Checked="tgb_help_Checked"
+                                   Unchecked="tgb_help_Unchecked"
                                    Foreground="{StaticResource Neutral}">
-                                <ToggleButton.ToolTip>
-                                    <ToolTip x:Name="tt_help"
+                                    <ToggleButton.ToolTip>
+                                        <ToolTip x:Name="tt_help"
                                      Content="Toggle Help"
                                      Style="{StaticResource tt_style}"/>
-                                </ToggleButton.ToolTip>
+                                    </ToggleButton.ToolTip>
 
-                            </ToggleButton>
-                            <StackPanel.Style>
-                                <Style TargetType="StackPanel">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource Background}" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </StackPanel.Style>
-                        </StackPanel>
-                    
-                        <!--ShutDown-->
-                        <StackPanel x:Name="pnl_ShutDown"
+                                </ToggleButton>
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource Background}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                            </StackPanel>
+
+                            <!--ShutDown-->
+                            <StackPanel x:Name="pnl_ShutDown"
                                     Orientation="Horizontal"
                                     Width="230"
                                     Height="50"
@@ -296,34 +298,34 @@
                                            IconMargin="23 0 0 0"
                                            TextMargin="33 0 0 0"
                                            Foreground="{StaticResource Neutral}">
-                                       
+
                                     <custom:CustomButtonIcon.ToolTip>
                                         <ToolTip x:Name="tt_shutdown"
                                              Content="Close App"
                                              Style="{StaticResource tt_style}"/>
                                     </custom:CustomButtonIcon.ToolTip>
                                 </custom:CustomButtonIcon>
-                            <StackPanel.Style>
-                                <Style TargetType="StackPanel">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource Background}" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </StackPanel.Style>
-                        </StackPanel>
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource Background}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                            </StackPanel>
                         </Grid>
 
 
                     </Grid>
-                
+
 
 
                 </Grid>
             </Grid>
 
-        
+
         </Border>
     </Grid>
 </Window>

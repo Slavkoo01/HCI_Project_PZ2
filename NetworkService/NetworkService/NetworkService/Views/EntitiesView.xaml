@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:help="clr-namespace:NetworkService.Helper"
              xmlns:custom="clr-namespace:NetworkService.CustomControls"
              mc:Ignorable="d" 
                   d:DesignHeight="720" d:DesignWidth="1005">
+    <UserControl.Resources>
+        <help:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -51,7 +55,16 @@
 
                         <Button x:Name="SubmitButton" Content="Submit"
                                 Style="{StaticResource ButtonStyle}"
-                                Command="{Binding SubmitCommand}"/>
+                                Command="{Binding SubmitCommand}">
+                            <Button.ToolTip>
+                                <ToolTip x:Name="tt_submit"
+                                     Content="Submits Form"
+                                     Placement="Bottom"
+                                     PlacementRectangle="-33 35 0 0"
+                                     Style="{StaticResource tt_style}"  />
+
+                            </Button.ToolTip>
+                        </Button>
 
 
                     </StackPanel>
@@ -61,6 +74,7 @@
                         HorizontalAlignment="Center"
                         Icon="Regular_Lightbulb"
                         Margin="0 245 0 0"
+                        Visibility="{Binding IsHelpHelpToggleButtonChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Style="{StaticResource ButtonIconStyle2}"/>
             </StackPanel>
             <!--RightSide-->
@@ -99,7 +113,7 @@
                  Margin="0,17,10,0"
                  VerticalAlignment="Top"    
                  Style="{StaticResource RadioButtonStyle}"
-                 IsChecked="{Binding ServerFilter.IsGreaterSelected, Mode=TwoWay}" Checked="GreaterRadioButton_Checked"/>
+                 IsChecked="{Binding ServerFilter.IsGreaterSelected, Mode=TwoWay}"/>
 
                     <RadioButton x:Name="EqualRadioButton"
                  Grid.Column="2"
@@ -129,7 +143,16 @@
                              Icon="Solid_Search"
                              IconHeight="20"
                              Command="{Binding SearchCommand}"
-                             IconMargin="7 0 0 0"/>
+                             IconMargin="7 0 0 0">
+                                <Button.ToolTip>
+                                    <ToolTip x:Name="tt_search"
+                                         Content="Search by filter"
+                                             Height="37"
+                                         PlacementRectangle="20 -7 0 0"
+                                         Style="{StaticResource tt_style}"  />
+
+                                </Button.ToolTip>
+                    </custom:CustomButtonIcon>
 
                     <custom:CustomButtonIcon x:Name="ResetBtn"
                              Margin="5 0 0 0"
@@ -139,10 +162,19 @@
                              Height="35" 
                              Width="35"
                              Style="{StaticResource ButtonIconStyle3}"
-                             Icon="Solid_Undo"
+                             Icon="{Binding ServerFilter.ResetIcon}"
                              IconHeight="20"
                              Command="{Binding ResetCommand}"
-                             IconMargin="7 0 0 0"/>
+                             IconMargin="7 0 0 0">
+                        <Button.ToolTip>
+                                <ToolTip x:Name="tt_reset"
+                                 Content="{Binding ServerFilter.TTResetText}"
+                                 Height="37"
+                                 PlacementRectangle="20 -7 0 0"
+                                 Style="{StaticResource tt_style}"  />
+
+                            </Button.ToolTip>
+                            </custom:CustomButtonIcon>
 
                     <custom:CustomComboBox x:Name="FilterComboBox"
                            Grid.Row="1"
@@ -182,7 +214,17 @@
                                 IconHeight="20"
                                 IconMargin="8 0 0 0"  
                                 Click="Delete_btn_Click"
-                                Style="{StaticResource ButtonIconStyle3}"/>
+                                Style="{StaticResource ButtonIconStyle3}">
+                            <Button.ToolTip>
+                                <ToolTip x:Name="tt_delete"
+                                 Content="Delete selected entities"
+                                 FontSize="15"
+                                 Height="37"
+                                 PlacementRectangle="20 -7 0 0"
+                                 Style="{StaticResource tt_style}"  />
+
+                            </Button.ToolTip>
+                        </custom:CustomButtonIcon>
                     </StackPanel>
                     <Border BorderThickness="0 0 0 2"
                             BorderBrush="{StaticResource Neutral}"
