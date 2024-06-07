@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkService.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,10 @@ namespace NetworkService.Views.HelpViews
     /// </summary>
     public partial class DisplayHelpView : UserControl
     {
+     
         public DisplayHelpView()
         {
+            DataContext = this;
             InitializeComponent();
         }
     }
