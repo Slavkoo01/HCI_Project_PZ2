@@ -63,7 +63,8 @@
                         Width="75"
                         Background="{StaticResource Card}">
 
-                    <Grid MouseEnter="StackPanel_MouseEnter">
+                    <Grid x:Name="MenuSideBar" 
+                        MouseEnter="StackPanel_MouseEnter">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>

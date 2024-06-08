@@ -10,7 +10,6 @@
                   d:DesignHeight="720" d:DesignWidth="1005">
     <UserControl.InputBindings>
         <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>
- 
         <KeyBinding Key="Backspace" Command="{Binding BackspaceCommand}"/>
     </UserControl.InputBindings>
     <Border BorderBrush="{StaticResource Background}" BorderThickness="10">

@@ -29,6 +29,7 @@ namespace NetworkService
         private double _windowWidth = 1080;
         private bool IsWindowLoaded = false;
         private double width = 140;
+        private bool isOpened = false;
         public MainWindowViewModel MainWindowViewModel { get; set; }
         public MainWindow()
         {
@@ -38,7 +39,7 @@ namespace NetworkService
             setVisibilityies();
             this.Loaded += MainWindow_Loaded;
             tgb_entities_Click(null,new RoutedEventArgs());
-            
+           
 
         }
 
@@ -53,6 +54,7 @@ namespace NetworkService
 
         public void OpenHelpAnimation()
         {
+            isOpened = true;
             DoubleAnimation widthAnimation = new DoubleAnimation
             {
                 From = _windowWidth,
@@ -64,6 +66,7 @@ namespace NetworkService
         }
         public void CloseHelpAnimation()
         {
+            isOpened = false;
             DoubleAnimation widthAnimation = new DoubleAnimation
             {
                 From = _expendedWindowWidth,
@@ -105,6 +108,7 @@ namespace NetworkService
         private void Tg_Btn_Checked(object sender, RoutedEventArgs e)
         {
             mainFrmeRectangle.Visibility = Visibility.Visible;
+            
         }
 
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -194,6 +198,7 @@ namespace NetworkService
                 {
                     item.Width = 175;
                 }
+               
             }
         }
         private void tgb_help_Unchecked(object sender, RoutedEventArgs e)
@@ -213,6 +218,11 @@ namespace NetworkService
                 foreach (var item in GlobalVar.toolTips)
                 {
                     item.Width = 0;
+                }
+                if (isOpened)
+                {
+                    CloseHelpAnimation();
+                    GlobalVar.IsHelpOpen = false;
                 }
             }
         }
