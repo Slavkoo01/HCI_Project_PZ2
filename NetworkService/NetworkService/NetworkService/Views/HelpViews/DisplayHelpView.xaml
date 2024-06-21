@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="NetworkService.Views.HelpViews.DisplayHelpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetworkService.Views.HelpViews"
+             xmlns:views="clr-namespace:NetworkService.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="500">
+    <Border Height="720" Width="500"
+        Background="{StaticResource Card}">
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" Width="485"
+              Margin="-10 0 0 0"
+              Background="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Network Display Help" Style="{StaticResource BigText}"/>
+
+              <TextBlock Style="{StaticResource NormalText}">
+            <Run Text="Precice" FontWeight="Bold" Foreground="{StaticResource Yellow}"/><LineBreak/><LineBreak/>
+            <Run Text="Taster:"></Run><LineBreak/>
+            <Run Text="F1" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+            <Run Text="-> prebacuje vas na"></Run>
+            <Run Text="Network Entity" Foreground="{StaticResource Yellow}"></Run><LineBreak/>
+            
+            <Run Text="F2" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+            <Run Text="-> prebacuje vas na"></Run>
+            <Run Text="Network Display" Foreground="{StaticResource Yellow}"></Run><LineBreak/>
+            
+            <Run Text="F3" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+            <Run Text="-> prebacuje vas na"></Run>
+            <Run Text="Network Measurement" Foreground="{StaticResource Yellow}"></Run><LineBreak/>
+            
+            <Run Text="Enter" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+            <Run Text="-> dodaje server u tabelu"></Run><LineBreak/>
+            
+            <Run Text="Delete" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+            <Run Text="-> brise oznacene servere iz liste"></Run><LineBreak/>
+            
+            <Run Text="BackSpace" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+            <Run Text="-> ponistava filter"></Run><LineBreak/>
+            <Run Text="_________________________________________________________________________"></Run><LineBreak/>
+                </TextBlock>
+
+            <TextBlock Style="{StaticResource NormalText}">
+            <Run Text="Ova stranica služi za prikaz vec dodatih server i stavljanje istih&#10;na radnu povrsinu i manipulaciju."/><LineBreak/><LineBreak/>
+            <Run Text="Network Display Lista" FontWeight="Bold" Foreground="{StaticResource Yellow}"/><LineBreak/><LineBreak/>
+            <Run Text="+" Foreground="{StaticResource Yellow}" FontSize="15" FontWeight="Bold"/>
+            <Run Text="prosiruje listu i prikazuje servere istog tipa."/><LineBreak/><LineBreak/>
+            
+            <Run Text="-" Foreground="{StaticResource Yellow}" FontSize="15" FontWeight="Bold"/>
+            <Run Text="skuplja listu."/><LineBreak/><LineBreak/>
+            
+            <Run Text="Prevlacenje:" Foreground="{StaticResource Blue}" FontWeight="Bold"/>
+            <Run Text="Centriranjem kurora ne neki od servera iz prosirene&#10;liste i pritiskom levog klika ulazite u akciju Drag and Drop kojom &#10;mozete taj isti server da prevucete na radnu povrsinu." /><LineBreak/>
+            
+            
+            <Run Text="_________________________________________________________________________"></Run>
+
+                </TextBlock>
+                <Image Source="../../Assets/CardPreview.png"/>
+                <TextBlock Style="{StaticResource NormalText}">
+                        <Run Text="Kartica" FontWeight="Bold" Foreground="{StaticResource Yellow}"/><LineBreak/><LineBreak/>
+                        <Run Text="Prikaz" Foreground="{StaticResource Blue}" FontWeight="Bold"/><LineBreak/>
+                        <Run Text="Server Name -> Ime servera"/><LineBreak/>
+                        <Run Text="ID -> Identifikacioni broj servera"/><LineBreak/>
+                        <Run Text="IP -> IP adresa servera"/><LineBreak/>
+                        <Run Text="Tip Servera -> prikazan u vidu slike"/><LineBreak/>
+                        <Run Text="0% -> Trenutna okupiranost datog servera u procentima"/><LineBreak/>
+                        <Run Text="Od 0% od 45% -> Server nije dovoljno iskoristen i oznaceno je &#10;plavom bojom"/><LineBreak/>
+                        <Run Text="Od 45% od 75% -> Server jeste dovoljno iskoristen i oznaceno je &#10;sivom bojom"/><LineBreak/>
+                        <Run Text="Od 75% od 100% -> Server jeste previse iskoristen i oznacen je &#10;crvenom bojom"/><LineBreak/>
+                        <LineBreak/><LineBreak/>
+            
+                        <Run Text="X" Foreground="{StaticResource Blue}" FontWeight="Bold"/>
+                        <Run Text="dugme ce da zatvori karticu na radnoj povrsini i da obrise sve linije"/>
+                        <LineBreak/><LineBreak/>
+             
+                        <Run Text="Kruzici" Foreground="{StaticResource Blue}" FontWeight="Bold"/>
+                        <Run Text="su mjesta odakle crtamo linije, pritiskom lijevog tastera na &#10;misu i prevlacenjem do kruzica neke druge kartice."/>
+                        <LineBreak/><LineBreak/>
+    
+                        <Run Text="_________________________________________________________________________"></Run>
+
+                </TextBlock>
+                <TextBlock Style="{StaticResource NormalText}">
+                        <Run Text="Radna Povrsina" FontWeight="Bold" Foreground="{StaticResource Yellow}"/><LineBreak/><LineBreak/>
+                        <Run Text="Komande" Foreground="{StaticResource Blue}" FontWeight="Bold"/><LineBreak/>
+                        <Run Text="Taster:"></Run><LineBreak/>
+                        <Run Text="MouseWheelUp" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                        <Run Text="-> pomjera radnu povrsinu prema gore"></Run><LineBreak/>
+                        <Run Text="MouseWheelDown" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                        <Run Text="-> pomjera radnu povrsinu prema dole"></Run><LineBreak/>
+                        <Run Text="Ctrl + MouseWheelUp" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                        <Run Text="-> zoomira radnu povrsinu"></Run><LineBreak/>
+                        <Run Text="Ctrl + MouseWheelDown" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                        <Run Text="-> odzoomira radnu povrsinu"></Run><LineBreak/>
+                        <Run Text="MouseWeel" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                        <Run Text="-> omogucava pomjeranje unutar radne povrsine"></Run><LineBreak/>
+                        <Run Text="RightMouseClick" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                        <Run Text="-> omogucava brisanje linije na koju je postavljen&#10;kursor"></Run><LineBreak/>
+                       
+    
+                        <Run Text="_________________________________________________________________________"></Run>
+
+                </TextBlock>
+                
+               
+            </StackPanel>
+        </ScrollViewer>
+
+    </Border>
+</UserControl>

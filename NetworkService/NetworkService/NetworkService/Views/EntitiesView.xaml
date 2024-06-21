@@ -1,0 +1,278 @@
+﻿<UserControl x:Class="NetworkService.Views.EntitiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:help="clr-namespace:NetworkService.Helper"
+             xmlns:custom="clr-namespace:NetworkService.CustomControls"
+             mc:Ignorable="d" 
+                  d:DesignHeight="720" d:DesignWidth="1005">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>
+        <KeyBinding Key="Backspace" Command="{Binding BackspaceCommand}"/>
+    </UserControl.InputBindings>
+    <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Grid Height="55"
+                      Margin="0 0 0 10"
+                      Background="{StaticResource Card}">
+                    <TextBlock Text="Network Entities"
+                           Style="{StaticResource FramTitle}"/>
+                </Grid>
+                <Grid Height="340"
+                      Background="{StaticResource Card}">
+                    <StackPanel>
+                        <custom:CustomTextBox x:Name="IdTextBox"
+                                              Text="{Binding Server.Id, UpdateSourceTrigger=PropertyChanged}"
+                                              Margin="0 15 0 25"
+                                              Style="{StaticResource TextBoxStyle}" 
+                                              Placeholder="ID"/>
+
+                        <custom:CustomTextBox x:Name="NameTextBox"
+                                              Text="{Binding Server.Name}"
+                                              Style="{StaticResource TextBoxStyle}"
+                                              Margin="0 0 0 25"
+                                              Placeholder="Name"/>
+                        <custom:CustomTextBox x:Name="IpTextBox"
+                                              Text="{Binding Server.IpAddress}"
+                                              Style="{StaticResource TextBoxStyle}"
+                                              Margin="0 0 0 25"
+                                              Placeholder="IP"/>
+                        <custom:CustomComboBox x:Name="ServerTypeComboBox"
+                                               SelectedItem="{Binding Server.ServerType}"
+                                               Margin="0 0 0 25"
+                                               ItemsSource="{Binding TypeCollection}"
+                                               Style="{StaticResource TypeComboBoxStyle}"
+                                               Placeholder="Server Type">
+
+                        </custom:CustomComboBox>
+
+                        <Button x:Name="SubmitButton" Content="Submit"
+                                Style="{StaticResource ButtonStyle}"
+                                Command="{Binding SubmitCommand}">
+                            <Button.ToolTip>
+                                <ToolTip x:Name="tt_submit"
+                                     Content="Submits Form"
+                                     Placement="Bottom"
+                                     PlacementRectangle="-33 35 0 0"
+                                     Style="{StaticResource tt_style}"  />
+
+                            </Button.ToolTip>
+                        </Button>
+
+
+                    </StackPanel>
+
+                </Grid>
+                <custom:CustomButtonIcon x:Name="HelpButton" Content="Help"
+                        HorizontalAlignment="Center"
+                        Icon="Regular_Lightbulb"
+                        Margin="0 245 0 0"
+                        Style="{StaticResource ButtonIconStyle2}"/>
+            </StackPanel>
+            <!--RightSide-->
+            <StackPanel Grid.Column="2">
+                <!--Filter-->
+                <Grid Background="{StaticResource Card}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="70"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding ServerFilter.TypeFilter}"
+                               Style="{StaticResource ValidationTextBlock}" 
+                               Margin="15,14,0,0" 
+                               VerticalAlignment="Top" Grid.Row="1"/>
+                    <TextBlock Text="{Binding ServerFilter.IdFilter}"
+                               Style="{StaticResource ValidationTextBlock}" 
+                               Margin="15,18,0,0" 
+                               VerticalAlignment="Top"/>
+                    <RadioButton x:Name="LesserRadioButton"
+                 Grid.Column="0"
+                 Content="Lesser"
+                 Margin="12,17,10,0"
+                 Style="{StaticResource RadioButtonStyle}"
+                 IsChecked="{Binding ServerFilter.IsLesserSelected, Mode=TwoWay}" VerticalAlignment="Top"/>
+
+                    <RadioButton x:Name="GreaterRadioButton"
+                 Grid.Column="1"
+                 Content="Greater"
+                 Margin="0,17,10,0"
+                 VerticalAlignment="Top"    
+                 Style="{StaticResource RadioButtonStyle}"
+                 IsChecked="{Binding ServerFilter.IsGreaterSelected, Mode=TwoWay}"/>
+
+                    <RadioButton x:Name="EqualRadioButton"
+                 Grid.Column="2"
+                 Content="Equal"
+                 Margin="0 17 22 0"
+                 Style="{StaticResource RadioButtonStyle}"
+                 VerticalAlignment="Top"
+                 IsChecked="{Binding ServerFilter.IsEqualSelected, Mode=TwoWay}"/>
+
+                    <custom:CustomTextBox x:Name="FilterSearchBox" 
+                           Grid.Column="3"
+                           Style="{StaticResource TextBoxStyle}"
+                           Height="35"
+                           Width="125"
+                           VerticalAlignment="Top"
+                           Margin="0 10 0 0"
+                           Placeholder="Server ID"
+                           Text="{Binding ServerFilter.TextBoxFilter, Mode=TwoWay}"/>
+
+                    <custom:CustomButtonIcon x:Name="SearchBtn"
+                             Grid.Column="4"
+                             Height="35" 
+                             Width="35"
+                             VerticalAlignment="Top"
+                             Margin="5 10 0 0"
+                             Style="{StaticResource ButtonIconStyle3}"
+                             Icon="Solid_Search"
+                             IconHeight="20"
+                             Command="{Binding SearchCommand}"
+                             IconMargin="7 0 0 0">
+                                <Button.ToolTip>
+                                    <ToolTip x:Name="tt_search"
+                                         Content="Search by filter"
+                                             Height="37"
+                                         PlacementRectangle="20 -7 0 0"
+                                         Style="{StaticResource tt_style}"  />
+
+                                </Button.ToolTip>
+                    </custom:CustomButtonIcon>
+
+                    <custom:CustomButtonIcon x:Name="ResetBtn"
+                             Margin="5 0 0 0"
+                             VerticalAlignment="Top"
+                             Grid.Column="4"
+                             Grid.Row="1"
+                             Height="35" 
+                             Width="35"
+                             Style="{StaticResource ButtonIconStyle3}"
+                             Icon="{Binding ServerFilter.ResetIcon}"
+                             IconHeight="20"
+                             Command="{Binding ResetCommand}"
+                             IconMargin="7 0 0 0">
+                        <Button.ToolTip>
+                                <ToolTip x:Name="tt_reset"
+                                 Content="{Binding ServerFilter.TTResetText}"
+                                 Height="37"
+                                 PlacementRectangle="20 -7 0 0"
+                                 Style="{StaticResource tt_style}"  />
+
+                            </Button.ToolTip>
+                            </custom:CustomButtonIcon>
+
+                    <custom:CustomComboBox x:Name="FilterComboBox"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="4"
+                           Height="35"
+                           Width="404"
+                           VerticalAlignment="Top"
+                           ItemsSource="{Binding TypeCollection}"
+                           Margin="12 0 0 0"
+                           SelectedItem="{Binding ServerFilter.SelectedTypeFilter, Mode=TwoWay}"
+                           Style="{StaticResource TypeComboBoxStyle}"
+                           Placeholder="Server Type Filter"/>
+
+                </Grid>
+
+
+                <!--ListView-->
+                <StackPanel Margin="0 10 0 0"
+                            Background="{StaticResource Card}"
+                            Height="565">
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0 10 0 0"
+                                Height="35">
+
+                        <TextBlock Text="Entities Table"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Margin="12 0 0 0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource Neutral}"/>
+                        <custom:CustomButtonIcon x:Name="Delete_btn"
+                                Height="35"
+                                Width="35"
+                                Margin="330 0 0 0"
+                                Icon="Solid_TrashAlt"
+                                BorderThickness="1"
+                                IconHeight="20"
+                                IconMargin="8 0 0 0"  
+                                Click="Delete_btn_Click"
+                                Style="{StaticResource ButtonIconStyle3}">
+                            <Button.ToolTip>
+                                <ToolTip x:Name="tt_delete"
+                                 Content="Delete selected entities"
+                                 FontSize="15"
+                                 Height="37"
+                                 PlacementRectangle="20 -7 0 0"
+                                 Style="{StaticResource tt_style}"  />
+
+                            </Button.ToolTip>
+                        </custom:CustomButtonIcon>
+                    </StackPanel>
+                    <Border BorderThickness="0 0 0 2"
+                            BorderBrush="{StaticResource Neutral}"
+                            Margin="16 10 31 0">
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15*" />
+                                <ColumnDefinition Width="30*" />
+                                <ColumnDefinition Width="30*" />
+                                <ColumnDefinition Width="25*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                   Text="ID"
+                                   Margin="5 0 0 0"
+                                   Style="{StaticResource HeaderStyle}"
+                                   FontWeight="Medium"/>
+                            <TextBlock Grid.Column="1"
+                                   Text="Name"
+                                   Style="{StaticResource HeaderStyle}"
+                                   FontWeight="Medium"/>
+                            <TextBlock Grid.Column="2" 
+                                   Text="IpAddress"
+                                   Style="{StaticResource HeaderStyle}"
+                                   FontWeight="Medium"/>
+                            <TextBlock Grid.Column="3"
+                                   Text="ServerType"
+                                   Margin="-7 0 0 0"
+                                   Style="{StaticResource HeaderStyle}"
+                                   FontWeight="Medium"/>
+                        </Grid>
+                    </Border>
+                    <ListView Style="{StaticResource ListViewStyle}"
+                            x:Name="ServerListView"
+                            Height="478"
+                            Margin="15,0,10,20"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            ItemsSource="{Binding ListViewCollection}"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"                            
+                            SelectionMode="Extended">
+
+
+                    </ListView>
+
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

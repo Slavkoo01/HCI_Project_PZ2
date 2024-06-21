@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="NetworkService.Views.DisplayView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:custom="clr-namespace:NetworkService.CustomControls"
+             xmlns:viewmodel="clr-namespace:NetworkService.ViewModel"
+             xmlns:model="clr-namespace:NetworkService.Model"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="720" d:DesignWidth="1005"
+             >
+
+    <Border BorderBrush="{StaticResource Background}" BorderThickness="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="255"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--LeftSide-->
+            <!--Title-->
+                <StackPanel>
+                <Grid Height="55"
+                      Margin="0 0 0 0"
+                      Background="{StaticResource Card}">
+                    <TextBlock Text="Network Display"
+                               Style="{StaticResource FramTitle}"/>
+                </Grid>
+            <!--Trreview-->
+                <Grid Height="635"
+                      Margin="0 10 0 0"
+                      Background="{StaticResource Card}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <TreeView ItemsSource="{Binding DisplayNodes}"
+                              Background="{StaticResource Card}"
+                              Style="{StaticResource TreeViewStyle}"
+                              Name="treeView">
+                        
+                            <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding ServerViewModels}">
+                                <TextBlock Text="{Binding Type}" Style="{StaticResource HeaderStyle}"
+                                           FontSize="20"/>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate >
+                                        <Grid Margin="0 5 0 5" Width="210">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Source="{Binding ServerType.ServerTypeImage}" Width="64" Height="64" Margin="0,0,5,0"/>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="{Binding Name}" Margin="0 0 0 5" Style="{StaticResource HeaderStyle}"/>
+                                                <TextBlock Text="{Binding IpAddress}" Margin="0 0 0 5" Style="{StaticResource HeaderStyle}"/>
+                                                <TextBlock Text="{Binding ServerType.Type}" Margin="0 0 0 5" Style="{StaticResource HeaderStyle}"/>
+
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+
+                    <!--HelpBtn-->
+                    <custom:CustomButtonIcon x:Name="HelpButton" Content="Help"
+                                             Grid.Row="1"
+                                             HorizontalAlignment="Center"
+                                             Icon="Regular_Lightbulb"
+                                             Style="{StaticResource ButtonIconStyle2}"
+                                             Background="{StaticResource Background}"
+                                             Click="HelpButton_Click"/>
+                </Grid>
+            </StackPanel>
+
+
+            <Grid Grid.Column="2" Name="gridd"
+                  Background="{StaticResource Card}">
+                <ScrollViewer Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="700" Width="720">
+                    <Canvas Name="canvas" Background="{StaticResource Card}" Width="2400" Height="2400">
+                        
+                    </Canvas>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

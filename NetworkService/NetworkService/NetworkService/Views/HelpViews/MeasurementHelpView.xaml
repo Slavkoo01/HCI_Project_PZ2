@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="NetworkService.Views.HelpViews.MeasurementHelpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetworkService.Views.HelpViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="500">
+    <Border Height="720" Width="500"
+        Background="{StaticResource Card}">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Width="485"
+                  Margin="-10 0 0 0"
+                  Background="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Network Measurement Help" Style="{StaticResource BigText}"/>
+
+                <TextBlock Style="{StaticResource NormalText}">
+                <Run Text="Precice" FontWeight="Bold" Foreground="{StaticResource Yellow}"/><LineBreak/><LineBreak/>
+                <Run Text="Taster:"></Run><LineBreak/>
+                <Run Text="F1" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                <Run Text="-> prebacuje vas na"></Run>
+                <Run Text="Network Entity" Foreground="{StaticResource Yellow}"></Run><LineBreak/>
+
+                <Run Text="F2" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                <Run Text="-> prebacuje vas na"></Run>
+                <Run Text="Network Display" Foreground="{StaticResource Yellow}"></Run><LineBreak/>
+
+                <Run Text="F3" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                <Run Text="-> prebacuje vas na"></Run>
+                <Run Text="Network Measurement" Foreground="{StaticResource Yellow}"></Run><LineBreak/>
+
+                <Run Text="Enter" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                <Run Text="-> dodaje server u tabelu"></Run><LineBreak/>
+
+                <Run Text="Delete" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                <Run Text="-> brise oznacene servere iz liste"></Run><LineBreak/>
+
+                <Run Text="BackSpace" FontWeight="Bold" Foreground="{StaticResource Blue}"></Run>
+                <Run Text="-> ponistava filter"></Run><LineBreak/>
+                <Run Text="_________________________________________________________________________"></Run><LineBreak/>
+                    
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource NormalText}">
+                        <Run Text="Ova stranica služi za prikaz vec dodatih server i prikazivanje njihovih&#10;trenutnih i prethodnih vrednosti iskoristenosti servera u procentima"/><LineBreak/><LineBreak/>
+                        <Run Text="Network Measurement Lista" FontWeight="Bold" Foreground="{StaticResource Yellow}"/><LineBreak/><LineBreak/>
+                        <Run Text="Odabir" Foreground="{StaticResource Blue}" FontSize="15" FontWeight="Bold"/>
+                        <Run Text="pritiskom lijevog tastera misa na neki od vec dodatih&#10;servera na grafiku ce se prikazati pravougaonici koji predstavljaju&#10;iskoristenost servera u procentima i mjenjaju se u realnom vremenu&#10;&#10;Boja pravougaonika predstavlja da li se vrednost oznacenog servera&#10;u datom vremenu prikazanom na ispod pravougaonika, nalazi u &#10;nedovoljno iskoristenom stanju, optimalno iskoristenom stanju ili&#10;u previse iskoristenom stanju."/><LineBreak/><LineBreak/>
+
+                        
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="5 10 0 0 ">
+                    <Rectangle Fill="{StaticResource Rose}" Height="30" Width="30"/>
+                    <TextBlock Text="Previse iskoristen server" Style="{StaticResource NormalText}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5 10 0 0 ">
+                    <Rectangle Fill="{StaticResource Blue}" Height="30" Width="30"/>
+                    <TextBlock Text="Nedovoljno iskoristen server" Style="{StaticResource NormalText}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5 10 0 0 ">
+                    <Rectangle Fill="{StaticResource Neutral}" Height="30" Width="30"/>
+                    <TextBlock Text="Optimalna iskoristenost servera" Style="{StaticResource NormalText}"></TextBlock>
+                </StackPanel>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Border>
+</UserControl>

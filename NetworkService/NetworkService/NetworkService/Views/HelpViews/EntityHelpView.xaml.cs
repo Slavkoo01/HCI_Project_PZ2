@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NetworkService
+namespace NetworkService.Views.HelpViews
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EntityHelpView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EntityHelpView : UserControl
     {
-        public MainWindow()
+        public EntityHelpView()
         {
             InitializeComponent();
         }

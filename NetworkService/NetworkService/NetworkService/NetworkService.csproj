@@ -35,8 +35,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontAwesome5, Version=2.1.11.0, Culture=neutral, PublicKeyToken=9cfaf01297a008f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome5.2.1.11\lib\net472\FontAwesome5.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome5.Net, Version=2.1.11.0, Culture=neutral, PublicKeyToken=9cfaf01297a008f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome5.2.1.11\lib\net472\FontAwesome5.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="MVVMLight.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MVVMLight.Messaging.1.0.0.0\lib\net40\MVVMLight.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Notification.Wpf, Version=8.0.0.0, Culture=neutral, PublicKeyToken=1acac493089262b5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Notification.Wpf.8.0.0\lib\net47\Notification.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Json, Version=7.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,8 +79,105 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\CustomButtonIcon.cs" />
+    <Compile Include="CustomControls\CustomComboBox.cs" />
+    <Compile Include="CustomControls\CustomRectangle.cs" />
+    <Compile Include="CustomControls\CustomTextBox.cs" />
+    <Compile Include="CustomControls\GraphLayout.xaml.cs">
+      <DependentUpon>GraphLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ListViewSelectedItemsBehavior.cs" />
+    <Compile Include="Helper\AnimationHelper.cs" />
+    <Compile Include="Helper\LineInfo.cs" />
+    <Compile Include="Helper\NodeLine.cs" />
+    <Compile Include="Helper\ToastNotification.cs" />
+    <Compile Include="Helper\UserControlInfo.cs" />
+    <Compile Include="Helper\GlobalVar.cs" />
+    <Compile Include="Helper\LogWriter.cs" />
+    <Compile Include="Helper\MyPath.cs" />
+    <Compile Include="Model\ServerNode.cs" />
+    <Compile Include="Model\ServerTypeModel.cs" />
+    <Compile Include="Model\Server.cs" />
+    <Compile Include="Helper\XMLFiles.cs" />
+    <Compile Include="ViewModel\Base\CommandBase.cs" />
+    <Compile Include="ViewModel\DragDropCardViewModel.cs" />
+    <Compile Include="ViewModel\Form\FilterForm.cs" />
+    <Compile Include="ViewModel\Form\ServerForm.cs" />
+    <Compile Include="ViewModel\DisplayViewModel.cs" />
+    <Compile Include="ViewModel\EntitiesViewModel.cs" />
+    <Compile Include="ViewModel\ServerViewModel.cs" />
+    <Compile Include="ViewModel\Base\ErrorViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="ViewModel\MeasurementViewModel.cs" />
+    <Compile Include="ViewModel\Base\ViewModelBase.cs" />
+    <Compile Include="Views\DragDropCardView.xaml.cs">
+      <DependentUpon>DragDropCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpViews\DisplayHelpView.xaml.cs">
+      <DependentUpon>DisplayHelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpViews\EntityHelpView.xaml.cs">
+      <DependentUpon>EntityHelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpViews\MeasurementHelpView.xaml.cs">
+      <DependentUpon>MeasurementHelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MeasurmentView.xaml.cs">
+      <DependentUpon>MeasurmentView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CustomControls\GraphLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\RadioButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ScrollBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\TextBlockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\TreeViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DragDropCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EntitiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HelpViews\DisplayHelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HelpViews\EntityHelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HelpViews\MeasurementHelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -64,10 +185,40 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\DisplayView.xaml.cs">
+      <DependentUpon>DisplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EntitiesView.xaml.cs">
+      <DependentUpon>EntitiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Style\Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ListViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ToggleButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ToolTipStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MeasurmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -87,6 +238,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -96,8 +248,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Views\" />
+    <Resource Include="Assets\DataBaseServer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\FileServer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\WebServer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\tgBtn_default.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\tgBtn_MouseOver.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\EntityHelp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\CardPreview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
